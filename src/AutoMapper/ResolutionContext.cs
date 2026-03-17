@@ -74,7 +74,7 @@ public sealed class ResolutionContext : IInternalRuntimeMapper
         Type sourceType, Type destinationType, MemberMap memberMap) => _mapper.Map(source, destination, context, sourceType, destinationType, memberMap);
     internal object CreateInstance(Type type) => ServiceCtor()(type) ?? throw new AutoMapperMappingException("Cannot create an instance of type " + type);
     private Func<Type, object> ServiceCtor() => _options?.ServiceCtor ?? _mapper.ServiceCtor;
-    internal object GetDestination(object source, Type destinationType) => InstanceCache.GetValueOrDefault(new(source, destinationType));
+    internal object GetDestination(object source, Type destinationType) => InstanceCache.TryGetValue(new ContextCacheKey(source, destinationType), out var dest) ? dest : null;
     internal void CacheDestination(object source, Type destinationType, object destination) => InstanceCache[new(source, destinationType)] = destination;
     internal void IncrementTypeDepth(TypeMap typeMap) => TypeDepth[typeMap.Types]++;
     internal void DecrementTypeDepth(TypeMap typeMap) => TypeDepth[typeMap.Types]--;

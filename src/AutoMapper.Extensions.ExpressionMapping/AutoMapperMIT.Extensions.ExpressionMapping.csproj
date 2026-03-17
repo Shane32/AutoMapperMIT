@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Summary>Expression mapping (OData) extensions for AutoMapper</Summary>
     <Description>Expression mapping (OData) extensions for AutoMapper</Description>
-		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0;net10.0;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>

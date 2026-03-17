@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoMapper.Collection\AutoMapper.Collection.csproj" />
-    <ProjectReference Include="..\AutoMapper.Extensions.ExpressionMapping\AutoMapper.Extensions.ExpressionMapping.csproj" />
+    <ProjectReference Include="..\AutoMapper.Collection\AutoMapperMIT.Collection.csproj" />
+    <ProjectReference Include="..\AutoMapper.Extensions.ExpressionMapping\AutoMapperMIT.Extensions.ExpressionMapping.csproj" />
   </ItemGroup>
 
   <ItemGroup>

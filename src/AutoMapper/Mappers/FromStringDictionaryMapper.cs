@@ -81,4 +81,5 @@ public sealed class FromStringDictionaryMapper : IObjectMapper
             }
         }
     }
+    public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
 }

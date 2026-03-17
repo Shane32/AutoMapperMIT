@@ -108,7 +108,7 @@ public sealed class ProfileMap
     {
         if (_typeDetails == null)
         {
-            return _runtimeTypeDetails.Value.GetOrAdd(type, (type, profile) => new(type, profile), this);
+            return _runtimeTypeDetails.Value.GetOrAdd(type, t => new TypeDetails(t, this));
         }
         if (_typeDetails.TryGetValue(type, out var typeDetails))
         {
@@ -227,7 +227,7 @@ public sealed class ProfileMap
         closedMap.CloseGenerics(openMapConfig, closedTypes);
         return closedMap;
     }
-    public TypeMapConfiguration GetGenericMap(TypePair genericPair) => _openTypeMapConfigs.GetValueOrDefault(genericPair);
+    public TypeMapConfiguration GetGenericMap(TypePair genericPair) => _openTypeMapConfigs.TryGetValue(genericPair, out var config) ? config : null;
     private void ApplyBaseMaps(TypeMap derivedMap, TypeMap currentMap, IGlobalConfiguration configuration)
     {
         foreach (var baseMap in configuration.GetIncludedTypeMaps(currentMap.IncludedBaseTypes))

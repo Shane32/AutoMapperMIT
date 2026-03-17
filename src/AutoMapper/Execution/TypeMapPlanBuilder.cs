@@ -427,14 +427,20 @@ public interface IValueResolver
     Expression GetExpression(IGlobalConfiguration configuration, MemberMap memberMap, Expression source, Expression destination, Expression destinationMember);
     MemberInfo GetSourceMember(MemberMap memberMap);
     Type ResolvedType { get; }
+#if !NETSTANDARD2_0
     string SourceMemberName => null;
     LambdaExpression ProjectToExpression => null;
     IValueResolver CloseGenerics(TypeMap typeMap) => this;
+#else
+    string SourceMemberName { get; }
+    LambdaExpression ProjectToExpression { get; }
+    IValueResolver CloseGenerics(TypeMap typeMap);
+#endif
 }
 public class MemberPathResolver(MemberInfo[] members) : IValueResolver
 {
     private readonly MemberInfo[] _members = members;
-    public Type ResolvedType => _members?[^1].GetMemberType();
+    public Type ResolvedType => _members?[_members.Length - 1].GetMemberType();
     public Expression GetExpression(IGlobalConfiguration configuration, MemberMap memberMap, Expression source, Expression destination, Expression destinationMember)
     {
         var expression = _members.Chain(source);
@@ -444,6 +450,7 @@ public class MemberPathResolver(MemberInfo[] members) : IValueResolver
     public LambdaExpression ProjectToExpression => _members.Lambda();
     public IValueResolver CloseGenerics(TypeMap typeMap) => _members[0].DeclaringType.ContainsGenericParameters ?
         new MemberPathResolver(ReflectionHelper.GetMemberPath(typeMap.SourceType, Array.ConvertAll(_members, m => m.Name), typeMap)) : this;
+    public string SourceMemberName => null;
 }
 public abstract class LambdaValueResolver(LambdaExpression lambda)
 {
@@ -455,6 +462,9 @@ public class FuncResolver(LambdaExpression lambda) : LambdaValueResolver(lambda)
     public Expression GetExpression(IGlobalConfiguration configuration, MemberMap memberMap, Expression source, Expression destination, Expression destinationMember) =>
         configuration.ConvertReplaceParameters(Lambda, [source, destination, destinationMember, ContextParameter]);
     public MemberInfo GetSourceMember(MemberMap _) => null;
+    public string SourceMemberName => null;
+    public LambdaExpression ProjectToExpression => null;
+    public IValueResolver CloseGenerics(TypeMap typeMap) => this;
 }
 public class ExpressionResolver(LambdaExpression lambda) : LambdaValueResolver(lambda), IValueResolver
 {
@@ -471,6 +481,8 @@ public class ExpressionResolver(LambdaExpression lambda) : LambdaValueResolver(l
     }
     public MemberInfo GetSourceMember(MemberMap _) => Lambda.GetMember();
     public LambdaExpression ProjectToExpression => Lambda;
+    public string SourceMemberName => null;
+    public IValueResolver CloseGenerics(TypeMap typeMap) => this;
 }
 [EditorBrowsable(EditorBrowsableState.Never)]
 public abstract class ValueResolverConfig(Type concreteType, Type interfaceType, Expression instance, string sourceMemberName)
@@ -481,7 +493,7 @@ public abstract class ValueResolverConfig(Type concreteType, Type interfaceType,
     public LambdaExpression SourceMemberLambda { get; init; }
     protected ValueResolverConfig(object instance, Type interfaceType, string sourceMemberName) : this(null, interfaceType, Constant(instance), sourceMemberName) { }
     public string SourceMemberName { get; } = sourceMemberName;
-    public Type ResolvedType => InterfaceType.GenericTypeArguments[^1];
+    public Type ResolvedType => InterfaceType.GenericTypeArguments[InterfaceType.GenericTypeArguments.Length - 1];
 }
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class ValueConverter : ValueResolverConfig, IValueResolver
@@ -508,6 +520,8 @@ public class ValueConverter : ValueResolverConfig, IValueResolver
         { SourceMemberName: { } } => null,
         _ => memberMap.SourceMembers.Length == 1 ? memberMap.SourceMembers[0] : null
     };
+    public LambdaExpression ProjectToExpression => null;
+    public IValueResolver CloseGenerics(TypeMap typeMap) => this;
 }
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class ClassValueResolver : ValueResolverConfig, IValueResolver
@@ -542,6 +556,8 @@ public class ClassValueResolver : ValueResolverConfig, IValueResolver
         return Call(ToType(resolverInstance, iValueResolver), "Resolve", parameters);
     }
     public MemberInfo GetSourceMember(MemberMap _) => SourceMemberLambda?.GetMember();
+    public LambdaExpression ProjectToExpression => null;
+    public IValueResolver CloseGenerics(TypeMap typeMap) => this;
 }
 public abstract class TypeConverter
 {

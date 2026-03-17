@@ -15,6 +15,7 @@
   <Project Path="src/AutoMapper.Collection.EntityFramework/AutoMapperMIT.Collection.EntityFramework.csproj" />
   <Project Path="src/AutoMapper.Collection.EntityFrameworkCore.Tests/AutoMapperMIT.Collection.EntityFrameworkCore.Tests.csproj" />
   <Project Path="src/AutoMapper.Collection.EntityFrameworkCore/AutoMapperMIT.Collection.EntityFrameworkCore.csproj" />
+  <Project Path="src/AutoMapper.Collection.LinqToSQL/AutoMapper.Collection.LinqToSQL.csproj" />
   <Project Path="src/AutoMapper.Collection.Tests/AutoMapperMIT.Collection.Tests.csproj" />
   <Project Path="src/AutoMapper.Collection/AutoMapperMIT.Collection.csproj" />
   <Project Path="src/AutoMapper.DI.Tests/AutoMapperMIT.DI.Tests.csproj" />

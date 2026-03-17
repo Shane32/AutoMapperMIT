@@ -8,7 +8,12 @@ public static class ObjectFactory
     public static object CreateInstance(Type type) => CtorCache.GetOrAdd(type)();
     private static Func<object> GenerateConstructor(Type type) =>
         Lambda<Func<object>>(GenerateConstructorExpression(type, null).ToObject()).Compile();
-    public static object CreateInterfaceProxy(Type interfaceType) => CreateInstance(ProxyGenerator.GetProxyType(interfaceType));
+    public static object CreateInterfaceProxy(Type interfaceType) =>
+#if !NETSTANDARD2_0
+        CreateInstance(ProxyGenerator.GetProxyType(interfaceType));
+#else
+        throw new NotSupportedException("Interface proxy creation is not supported in netstandard2.0");
+#endif
     public static Expression GenerateConstructorExpression(Type type, IGlobalConfiguration configuration) => type switch
     {
         { IsValueType: true } => configuration.Default(type),
@@ -19,7 +24,7 @@ public static class ObjectFactory
     };
     private static Expression CallConstructor(Type type, IGlobalConfiguration configuration)
     {
-        var defaultCtor = type.GetConstructor(Internal.TypeExtensions.InstanceFlags, []);
+        var defaultCtor = type.GetConstructor(Internal.TypeExtensions.InstanceFlags, null, Type.EmptyTypes, null);
         if (defaultCtor != null)
         {
             return New(defaultCtor);

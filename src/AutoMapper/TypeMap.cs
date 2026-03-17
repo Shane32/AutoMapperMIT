@@ -72,7 +72,7 @@ public sealed class TypeMap
     public ProfileMap Profile { get; }
     public LambdaExpression CustomMapExpression => TypeConverter?.ProjectToExpression;
     public LambdaExpression CustomCtorFunction { get => _details?.CustomCtorFunction; set => Details.CustomCtorFunction = value; }
-    public LambdaExpression CustomCtorExpression => CustomCtorFunction is { Parameters: [_] } ? CustomCtorFunction : null;
+    public LambdaExpression CustomCtorExpression => CustomCtorFunction?.Parameters?.Count == 1 ? CustomCtorFunction : null;
     public bool IncludeAllDerivedTypes { get => (_details?.IncludeAllDerivedTypes).GetValueOrDefault(); set => Details.IncludeAllDerivedTypes = value; }
     public MemberList ConfiguredMemberList
     {

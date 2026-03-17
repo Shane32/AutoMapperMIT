@@ -20,4 +20,5 @@ public sealed class ConversionOperatorMapper : IObjectMapper
         var conversionOperator = GetConversionOperator(sourceExpression.Type, destExpression.Type);
         return Call(conversionOperator, ToType(sourceExpression, conversionOperator.FirstParameterType()));
     }
+    public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
 }

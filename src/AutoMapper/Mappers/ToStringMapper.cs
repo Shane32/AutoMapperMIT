@@ -8,4 +8,5 @@ public sealed class ToStringMapper : IObjectMapper
         var toStringCall = Call(sourceExpression, ObjectToString);
         return sourceType.IsEnum ? StringToEnumMapper.CheckEnumMember(sourceExpression, sourceType, toStringCall) : toStringCall;
     }
+    public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
 }

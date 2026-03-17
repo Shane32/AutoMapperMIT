@@ -2,6 +2,7 @@ using System.Reflection.Emit;
 
 namespace AutoMapper.Execution;
 
+#if !NETSTANDARD2_0
 public static class ProxyGenerator
 {
     private static readonly MethodInfo DelegateCombine = typeof(Delegate).GetMethod(nameof(Delegate.Combine), [typeof(Delegate), typeof(Delegate)]);
@@ -180,6 +181,7 @@ public readonly record struct TypeDescription(Type Type, PropertyDescription[] A
     }
     public bool Equals(TypeDescription other) => Type == other.Type && AdditionalProperties.SequenceEqual(other.AdditionalProperties);
 }
+#endif
 [DebuggerDisplay("{Name}-{Type.Name}")]
 public readonly record struct PropertyDescription(string Name, Type Type, bool CanWrite = true)
 {

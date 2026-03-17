@@ -43,5 +43,5 @@ public sealed class LowerUnderscoreNamingConvention : INamingConvention
 {
     public static readonly LowerUnderscoreNamingConvention Instance = new();
     public string SeparatorCharacter => "_";
-    public string[] Split(string input) => input.Split('_', StringSplitOptions.RemoveEmptyEntries);
+    public string[] Split(string input) => input.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
 }

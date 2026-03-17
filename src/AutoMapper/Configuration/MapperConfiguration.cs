@@ -92,8 +92,10 @@ public sealed class MapperConfiguration : IGlobalConfiguration
         {
             profile.Clear();
         }
+#if !NETSTANDARD2_0
         _configuredMaps.TrimExcess();
         _resolvedMaps.TrimExcess();
+#endif
         _typeMapsPath = null;
         _sourceMembers = null;
         _expressions = null;
@@ -125,7 +127,8 @@ public sealed class MapperConfiguration : IGlobalConfiguration
                 GetDerivedTypeMaps(typeMap, derivedMaps);
                 foreach (var derivedMap in derivedMaps)
                 {
-                    _resolvedMaps.TryAdd(new(derivedMap.SourceType, typeMap.DestinationType), derivedMap);
+                    if (!_resolvedMaps.ContainsKey(new(derivedMap.SourceType, typeMap.DestinationType)))
+                        _resolvedMaps[new(derivedMap.SourceType, typeMap.DestinationType)] = derivedMap;
                 }
             }
             foreach (var typeMap in _configuredMaps.Values)
@@ -274,7 +277,7 @@ public sealed class MapperConfiguration : IGlobalConfiguration
     TypeMap IGlobalConfiguration.FindTypeMapFor<TSource, TDestination>() => FindTypeMapFor(typeof(TSource), typeof(TDestination));
     TypeMap IGlobalConfiguration.FindTypeMapFor(TypePair typePair) => FindTypeMapFor(typePair);
     TypeMap FindTypeMapFor(Type sourceType, Type destinationType) => FindTypeMapFor(new(sourceType, destinationType));
-    TypeMap FindTypeMapFor(TypePair typePair) => _configuredMaps.GetValueOrDefault(typePair);
+    TypeMap FindTypeMapFor(TypePair typePair) => _configuredMaps.TryGetValue(typePair, out var tm) ? tm : null;
     TypeMap IGlobalConfiguration.ResolveTypeMap(Type sourceType, Type destinationType) => ResolveTypeMap(new(sourceType, destinationType));
     TypeMap IGlobalConfiguration.ResolveTypeMap(TypePair typePair) => ResolveTypeMap(typePair);
     TypeMap ResolveTypeMap(TypePair typePair)

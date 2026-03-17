@@ -16,4 +16,5 @@ public sealed class EnumToEnumMapper : IObjectMapper
         statements.Add(Condition(tryParse, result, Convert(sourceExpression, destinationType)));
         return Block(variables, statements);
     }
+    public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
 }

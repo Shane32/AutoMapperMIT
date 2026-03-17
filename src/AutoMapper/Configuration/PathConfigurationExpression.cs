@@ -66,6 +66,7 @@ public sealed class PathConfigurationExpression<TSource, TDestination, TMember>(
     public LambdaExpression SourceExpression => _sourceExpression;
     public LambdaExpression GetDestinationExpression() => _destinationExpression;
     public IPropertyMapConfiguration Reverse() => Create(_sourceExpression, _destinationExpression);
+    public bool Ignored => false;
     public void Condition(Func<ConditionParameters<TSource, TDestination, TMember>, bool> condition) =>
         PathMapActions.Add(pm =>
         {

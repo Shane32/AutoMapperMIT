@@ -23,7 +23,11 @@ public interface IObjectMapper
     /// <returns>Map expression</returns>
     Expression MapExpression(IGlobalConfiguration configuration, ProfileMap profileMap,
         MemberMap memberMap, Expression sourceExpression, Expression destExpression);
+#if !NETSTANDARD2_0
     TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
+#else
+    TypePair? GetAssociatedTypes(TypePair initialTypes);
+#endif
 }
 /// <summary>
 /// Base class for simple object mappers that don't want to use expressions.
@@ -63,4 +67,5 @@ public abstract class ObjectMapper<TSource, TDestination> : IObjectMapper
             Constant(sourceExpression.Type),
             Constant(destExpression.Type),
             ContextParameter);
+    public virtual TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
 }

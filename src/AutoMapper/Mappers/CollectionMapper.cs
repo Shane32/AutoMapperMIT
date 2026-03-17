@@ -107,7 +107,11 @@ public sealed class CollectionMapper : IObjectMapper
                             return;
                         }
                         destinationElementType = GetEnumerableElementType(destinationType);
+#if !NETSTANDARD2_0
                         destinationCollectionType = destinationType.IsGenericType(typeof(IReadOnlySet<>)) ? typeof(HashSet<>) : typeof(ICollection<>);
+#else
+                        destinationCollectionType = typeof(ICollection<>);
+#endif
                         destinationCollectionType = destinationCollectionType.MakeGenericType(destinationElementType);
                         destExpression = Convert(mustUseDestination ? destExpression : Null, destinationCollectionType);
                         addMethod = destinationCollectionType.GetMethod("Add");

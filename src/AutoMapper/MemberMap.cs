@@ -91,7 +91,10 @@ public class MemberMap : IValueResolver
     Expression IValueResolver.GetExpression(IGlobalConfiguration configuration, MemberMap memberMap, Expression source, Expression destination, Expression destinationMember) =>
         ChainSourceMembers(configuration, source, destinationMember);
     MemberInfo IValueResolver.GetSourceMember(MemberMap memberMap) => SourceMembers[0];
-    Type IValueResolver.ResolvedType => SourceMembers[^1].GetMemberType();
+    Type IValueResolver.ResolvedType => SourceMembers[SourceMembers.Length - 1].GetMemberType();
+    string IValueResolver.SourceMemberName => null;
+    LambdaExpression IValueResolver.ProjectToExpression => null;
+    IValueResolver IValueResolver.CloseGenerics(TypeMap typeMap) => this;
 }
 public readonly record struct ValueTransformerConfiguration(Type ValueType, LambdaExpression TransformerExpression)
 {

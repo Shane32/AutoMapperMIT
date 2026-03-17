@@ -19,6 +19,7 @@ using Microsoft.Extensions.Options;
 /// After calling AddAutoMapper you can resolve an <see cref="IMapper" /> instance from a scoped service provider, or as a dependency
 /// To use <see cref="AutoMapper.QueryableExtensions.Extensions.ProjectTo{TDestination}(IQueryable,IConfigurationProvider, System.Linq.Expressions.Expression{System.Func{TDestination, object}}[])" /> you can resolve the <see cref="IConfigurationProvider"/> instance directly for from an <see cref="IMapper" /> instance.
 /// </summary>
+[CLSCompliant(false)]
 public static class ServiceCollectionExtensions
 {
     static readonly Type[] AmTypes = [typeof(IValueResolver<,,>), typeof(IMemberValueResolver<,,,>), typeof(ITypeConverter<,>), typeof(IValueConverter<,>), typeof(IMappingAction<,>)];

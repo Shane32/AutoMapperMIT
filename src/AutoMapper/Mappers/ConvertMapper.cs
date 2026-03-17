@@ -10,4 +10,5 @@ public sealed class ConvertMapper : IObjectMapper
         var convertMethod = typeof(Convert).GetMethod("To" + destExpression.Type.Name, [sourceExpression.Type]);
         return Call(convertMethod, sourceExpression);
     }
+    public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
 }

@@ -145,8 +145,8 @@ public sealed class Mapper : IMapper, IInternalRuntimeMapper
     public Mapper(IConfigurationProvider configuration) : this(configuration, configuration.Internal().ServiceCtor) { }
     public Mapper(IConfigurationProvider configuration, Factory serviceCtor)
     {
-        ArgumentNullException.ThrowIfNull(configuration);
-        ArgumentNullException.ThrowIfNull(serviceCtor);
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
+        if (serviceCtor is null) throw new ArgumentNullException(nameof(serviceCtor));
         _configuration = (IGlobalConfiguration)configuration;
         _serviceCtor = serviceCtor;
         _defaultContext = new(this);
