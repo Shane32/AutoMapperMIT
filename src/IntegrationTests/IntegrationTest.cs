@@ -27,7 +27,9 @@ public class DropCreateDatabaseAlways<TContext> : IInitializer where TContext : 
 }
 public abstract class LocalDbContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(
-        @$"Data Source=(localdb)\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database={GetType()};Connection Timeout=300",
-        o => o.EnableRetryOnFailure(maxRetryCount: 10).CommandTimeout(120));
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var dbName = GetType().FullName!.Replace('+', '_').Replace('.', '_');
+        optionsBuilder.UseSqlite($"Data Source={Path.Combine(Path.GetTempPath(), dbName)}.db");
+    }
 }
