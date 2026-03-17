@@ -108,7 +108,11 @@ public sealed class ProfileMap
     {
         if (_typeDetails == null)
         {
+#if NETSTANDARD2_0
             return _runtimeTypeDetails.Value.GetOrAdd(type, t => new TypeDetails(t, this));
+#else
+            return _runtimeTypeDetails.Value.GetOrAdd(type, (type, profile) => new(type, profile), this);
+#endif
         }
         if (_typeDetails.TryGetValue(type, out var typeDetails))
         {
