@@ -50,7 +50,11 @@ public sealed class ProjectionBuilder : IProjectionBuilder
         return (typeMap, PolymorphicMaps(typeMap));
     }
     TypeMap[] PolymorphicMaps(TypeMap typeMap) => _configuration.GetIncludedTypeMaps(typeMap.IncludedDerivedTypes
+#if NET6_0_OR_GREATER
+        .Where(tp => tp.SourceType != typeMap.SourceType && !tp.DestinationType.IsAbstract).DistinctBy(tp => tp.SourceType).ToArray());
+#else
         .Where(tp => tp.SourceType != typeMap.SourceType && !tp.DestinationType.IsAbstract).GroupBy(tp => tp.SourceType).Select(g => g.First()).ToArray());
+#endif
     public QueryExpressions CreateProjection(in ProjectionRequest request, LetPropertyMaps letPropertyMaps)
     {
         var (typeMap, polymorphicMaps) = PolymorphicMaps(request);

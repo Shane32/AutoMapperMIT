@@ -127,8 +127,12 @@ public sealed class MapperConfiguration : IGlobalConfiguration
                 GetDerivedTypeMaps(typeMap, derivedMaps);
                 foreach (var derivedMap in derivedMaps)
                 {
+#if NETSTANDARD2_0
                     if (!_resolvedMaps.ContainsKey(new(derivedMap.SourceType, typeMap.DestinationType)))
                         _resolvedMaps[new(derivedMap.SourceType, typeMap.DestinationType)] = derivedMap;
+#else
+                    _resolvedMaps.TryAdd(new(derivedMap.SourceType, typeMap.DestinationType), derivedMap);
+#endif
                 }
             }
             foreach (var typeMap in _configuredMaps.Values)

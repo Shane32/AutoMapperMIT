@@ -35,8 +35,7 @@ namespace AutoMapper.Mappers
             var toSourceExpression = this.GetEquivalentExpression(sourceExpression.Type, destExpressArgType, configurationProvider);
             return Call(null, MapMethodInfo.MakeGenericMethod(sourceExpression.Type, destExpressArgType), sourceExpression, Constant(toSourceExpression));
         }
-#if NETSTANDARD2_0
-        public AutoMapper.Internal.TypePair? GetAssociatedTypes(AutoMapper.Internal.TypePair initialTypes) => null;
-#endif
+
+        public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
     }
 }

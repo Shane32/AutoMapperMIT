@@ -37,7 +37,11 @@ public sealed class TypeDetails(Type type, ProfileMap config)
             }
             foreach (var member in accessors)
             {
+#if NETSTANDARD2_0
                 if (!_nameToMember.ContainsKey(member.Name)) _nameToMember[member.Name] = member;
+#else
+                _nameToMember.TryAdd(member.Name, member);
+#endif
                 if (Config.Postfixes.Count == 0 && Config.Prefixes.Count == 0)
                 {
                     continue;
@@ -59,7 +63,11 @@ public sealed class TypeDetails(Type type, ProfileMap config)
         {
             foreach (var memberName in PossibleNames(member.Name, Config.Prefixes, Config.Postfixes))
             {
+#if NETSTANDARD2_0
                 if (!_nameToMember.ContainsKey(memberName)) _nameToMember[memberName] = member;
+#else
+                _nameToMember.TryAdd(memberName, member);
+#endif
             }
         }
         IEnumerable<MemberInfo> GetNoArgExtensionMethods(IEnumerable<MethodInfo> sourceExtensionMethodSearch)

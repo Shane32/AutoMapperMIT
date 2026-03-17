@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Collection updating support for EntityFrameworkCore with AutoMapper. Extends DBSet&lt;T&gt; with Persist&lt;TDto&gt;().InsertUpdate(dto) and Persist&lt;TDto&gt;().Delete(dto).  Will find the matching object and will Insert/Update/Delete.</Description>
     <Authors>Tyler Carlson</Authors>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
     <AssemblyName>AutoMapper.Collection.EntityFrameworkCore</AssemblyName>
     <RootNamespace>AutoMapper.Collection.EntityFrameworkCore</RootNamespace>
     <PackageId>AutoMapperMIT.Collection.EntityFrameworkCore</PackageId>
@@ -22,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper.Collection\AutoMapperMIT.Collection.csproj" />
     <ProjectReference Include="..\AutoMapper.Extensions.ExpressionMapping\AutoMapperMIT.Extensions.ExpressionMapping.csproj" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
   </ItemGroup>
 
 </Project>

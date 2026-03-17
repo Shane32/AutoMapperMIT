@@ -105,8 +105,7 @@ namespace AutoMapper.Mappers
             var collectionMapperExpression = _collectionMapper.MapExpression(configurationProvider, profileMap, memberMap, sourceExpression, destExpression);
             return Condition(notNull, map, Convert(collectionMapperExpression, destExpression.Type));
         }
-#if NETSTANDARD2_0
-        public AutoMapper.Internal.TypePair? GetAssociatedTypes(AutoMapper.Internal.TypePair initialTypes) => null;
-#endif
+
+        public TypePair? GetAssociatedTypes(TypePair initialTypes) => null;
     }
 }
