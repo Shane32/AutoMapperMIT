@@ -10,7 +10,6 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>AutoMapperMIT</PackageId>
-    <PackageProjectUrl>https://automapper.org</PackageProjectUrl>
     <PackageReadmeFile>README.AutoMapper.md</PackageReadmeFile>
     <IsPackable>true</IsPackable>
   </PropertyGroup>

@@ -7,7 +7,6 @@
     <AssemblyName>AutoMapper.Collection</AssemblyName>
     <RootNamespace>AutoMapper.Collection</RootNamespace>
     <PackageId>AutoMapperMIT.Collection</PackageId>
-    <PackageProjectUrl>https://github.com/AutoMapper/Automapper.Collection</PackageProjectUrl>
     <PackageReadmeFile>README.Collection.md</PackageReadmeFile>
     <AssemblyOriginatorKeyFile>../Key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>

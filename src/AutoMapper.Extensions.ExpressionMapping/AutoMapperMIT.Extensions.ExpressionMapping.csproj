@@ -10,7 +10,6 @@
     <RootNamespace>AutoMapper.Extensions.ExpressionMapping</RootNamespace>
     <PackageId>AutoMapperMIT.Extensions.ExpressionMapping</PackageId>
     <PackageReleaseNotes>Marking obsolete methods and classes.</PackageReleaseNotes>
-    <PackageProjectUrl>https://automapper.org</PackageProjectUrl>
     <PackageReadmeFile>README.ExpressionMapping.md</PackageReadmeFile>
     <WarningsAsErrors>true</WarningsAsErrors>
     <IsPackable>true</IsPackable>
