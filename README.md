@@ -13,16 +13,12 @@ This repository is a monorepo combining the latest MIT-licensed versions (as of 
 
 > **Note:** All packages in this repo are published under the **`AutoMapperMIT`** prefix to distinguish them from the original `AutoMapper` NuGet packages.
 
----
-
 ## Original Repositories
 
 - [AutoMapper/AutoMapper.Archive](https://github.com/AutoMapper/AutoMapper.Archive)
 - [AutoMapper/AutoMapper.Collection](https://github.com/AutoMapper/AutoMapper.Collection)
 - [AutoMapper/AutoMapper.Collection.EFCore](https://github.com/AutoMapper/AutoMapper.Collection.EFCore)
 - [AutoMapper/AutoMapper.Extensions.ExpressionMapping](https://github.com/AutoMapper/AutoMapper.Extensions.ExpressionMapping)
-
----
 
 ## Target Frameworks
 
@@ -34,16 +30,12 @@ While the original projects only targeted recent frameworks, the packages in thi
 
 > **Note:** Testing is performed only on currently supported .NET Core frameworks.
 
----
-
 ## Documentation
 
 - **AutoMapperMIT** — [README](README.AutoMapper.md) · [Documentation Index](docs/source/index.md)
 - **AutoMapperMIT.Collection** and **AutoMapperMIT.Collection.EntityFramework** — [README](README.Collection.md)
 - **AutoMapperMIT.Collection.EntityFrameworkCore** — [README](README.EFCore.md)
 - **AutoMapperMIT.Extensions.ExpressionMapping** — [README](README.ExpressionMapping.md)
-
----
 
 ## License
 
@@ -54,3 +46,8 @@ These projects are licensed under the [MIT License](LICENSE.txt).
 - Copyright &copy; 2018 AutoMapper
 
 The git histories from all original repositories have been preserved in this monorepo for license traceability.
+
+## Credits
+
+Glory to Jehovah, Lord of Lords and King of Kings, creator of Heaven and Earth, who through his Son Jesus Christ,
+has reedemed me to become a child of God. -Shane32
