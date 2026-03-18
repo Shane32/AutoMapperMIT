@@ -6,7 +6,7 @@ public ref struct TypeMapPlanBuilder(IGlobalConfiguration configuration, TypeMap
     static readonly MethodInfo DecTypeDepthInfo = typeof(ResolutionContext).GetInstanceMethod(nameof(ResolutionContext.DecrementTypeDepth));
     static readonly MethodInfo CacheDestinationMethod = typeof(ResolutionContext).GetInstanceMethod(nameof(ResolutionContext.CacheDestination));
     static readonly MethodInfo GetDestinationMethod = typeof(ResolutionContext).GetInstanceMethod(nameof(ResolutionContext.GetDestination));
-    const int DefaultReferenceTypeMaxDepth = 32;
+    const int DefaultReferenceTypeMaxDepth = 64;
     readonly IGlobalConfiguration _configuration = configuration;
     readonly ParameterExpression _destination = Variable(typeMap.DestinationType, "typeMapDestination");
     readonly ParameterExpression _initialDestination = Parameter(typeMap.DestinationType, "destination");
