@@ -6,7 +6,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public class Source
             {
-                
+
             }
 
             public class Destination
@@ -23,7 +23,7 @@ namespace AutoMapper.UnitTests.Bug
             [Fact]
             public void Should_show_configuration_error()
             {
-                typeof (AutoMapperConfigurationException).ShouldBeThrownBy(AssertConfigurationIsValid);
+                typeof(AutoMapperConfigurationException).ShouldBeThrownBy(AssertConfigurationIsValid);
             }
         }
     }

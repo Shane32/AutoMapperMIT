@@ -51,7 +51,7 @@ public class ProjectToAbstractType : IntegrationTest<ProjectToAbstractType.Datab
     [Fact]
     public void Should_project_to_abstract_type()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             _destinations = ProjectTo<ITypeA>(context.EntityA).ToArray();
         }
@@ -158,7 +158,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public Calendar(string name, Guid businessUnitId, ICalendar reference, DateTime? validFrom, DateTime? validTo)
         {
-            if(businessUnitId == Guid.Empty) throw new ArgumentException();
+            if (businessUnitId == Guid.Empty) throw new ArgumentException();
 
             Name = name;
             BusinessUnitId = businessUnitId;
@@ -229,7 +229,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
 
         public IEnumerable<ICalendarDay> GetCalendarDays(ICalendar calendar)
         {
-            if(calendar == null)
+            if (calendar == null)
                 throw new ArgumentNullException();
 
             return Days.Where(d => d.Calendar == calendar);
@@ -303,7 +303,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
     [Fact]
     public void Should_project_to_abstract_type()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var domainCalendars = ProjectTo<ICalendar>(context.Calendars).ToList();
             domainCalendars.Count.ShouldBe(2);

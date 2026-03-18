@@ -17,7 +17,7 @@ public class OpenGenericsWithAs : AutoMapperSpecBase
         public T Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap(typeof(Source), typeof(Target<>));
         cfg.CreateMap(typeof(Source), typeof(ITarget<>)).As(typeof(Target<>));
@@ -71,17 +71,17 @@ public class OpenGenericsWithInclude : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<BarBase, BarModelBase>()
-            .ForMember(d=>d.Ignored, o=>o.Ignore())
-            .ForMember(d=>d.MappedFrom, o=>o.MapFrom(_=>"mappedFrom"))
+            .ForMember(d => d.Ignored, o => o.Ignore())
+            .ForMember(d => d.MappedFrom, o => o.MapFrom(_ => "mappedFrom"))
             .Include(typeof(Bar<>), typeof(BarModel<>));
         cfg.CreateMap<Person, PersonModel>();
-        cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>)).ForMember("DerivedMember", o=>o.MapFrom("Id"));
+        cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>)).ForMember("DerivedMember", o => o.MapFrom("Id"));
     });
 
     [Fact]
     public void Should_work()
     {
-        var person = new Person { Name = "Jack", BarList = { new Bar<string>{ Id = 1, Value = "One" }, new Bar<string>{ Id = 2, Value = "Two" } } };
+        var person = new Person { Name = "Jack", BarList = { new Bar<string> { Id = 1, Value = "One" }, new Bar<string> { Id = 2, Value = "Two" } } };
 
         var personMapped = Mapper.Map<PersonModel>(person);
 
@@ -137,7 +137,7 @@ public class OpenGenericsWithIncludeBase : AutoMapperSpecBase
     {
         cfg.CreateMap(typeof(BarBase), typeof(BarModelBase))
             .ForMember("Ignored", o => o.Ignore())
-            .ForMember("MappedFrom", o => o.MapFrom(_=>"mappedFrom"));
+            .ForMember("MappedFrom", o => o.MapFrom(_ => "mappedFrom"));
         cfg.CreateMap<Person, PersonModel>();
         cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
             .ForMember("DerivedMember", o => o.MapFrom("Id"))

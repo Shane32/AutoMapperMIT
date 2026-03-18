@@ -1,4 +1,5 @@
 namespace AutoMapper.UnitTests.InterfaceMapping;
+
 public class InterfaceWithObjectProperty : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<ISourceModel, IDestModel>());
@@ -73,9 +74,9 @@ public class InterfaceInheritance : AutoMapperSpecBase
 }
 public class MapToInterface : NonValidatingSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<object, IEnumerable<object>>());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<object, IEnumerable<object>>());
     [Fact]
-    public void Should_throw() => new Action(()=>Mapper.Map<IEnumerable<object>>(new object())).ShouldThrow<AutoMapperMappingException>().Message.ShouldStartWith(
+    public void Should_throw() => new Action(() => Mapper.Map<IEnumerable<object>>(new object())).ShouldThrow<AutoMapperMappingException>().Message.ShouldStartWith(
         "Cannot create interface System.Collections.Generic.IEnumerable`1[System.Object]");
 }
 public class GenericsAndInterfaces : AutoMapperSpecBase
@@ -119,7 +120,7 @@ public class GenericsAndInterfaces : AutoMapperSpecBase
     [Fact]
     public void ShouldMapToNewObject()
     {
-        var destination = (IMyInterface<ContainerClass>) Mapper.Map(source, typeof(MyClass<ContainerClass>), typeof(IMyInterface<ContainerClass>));
+        var destination = (IMyInterface<ContainerClass>)Mapper.Map(source, typeof(MyClass<ContainerClass>), typeof(IMyInterface<ContainerClass>));
         destination.Container.MyProperty.ShouldBe(3);
     }
 }
@@ -170,16 +171,16 @@ public class When_mapping_generic_interface : AutoMapperSpecBase
         List<T> Items { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         cfg.CreateMap(typeof(IList<>), typeof(IDestinationBase<>))
                 .ForMember(nameof(IDestinationBase<Object>.Items), p_Expression => p_Expression.MapFrom(p_Source => p_Source))
-                .ForMember("PropertyToMap", o=>o.Ignore())
+                .ForMember("PropertyToMap", o => o.Ignore())
                 .AsProxy());
 
     [Fact]
     public void Should_work()
     {
-        var source = new Source<String>{"Cat", "Dog"};
+        var source = new Source<String> { "Cat", "Dog" };
         source.PropertyToMap = "Hello World";
         var destination = Mapper.Map<IDestinationBase<string>>(source);
         destination.PropertyToMap.ShouldBeNull();
@@ -205,7 +206,7 @@ public class When_mapping_an_interface_with_getter_only_member : AutoMapperSpecB
         public int Id { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<ISource, IDestination>().AsProxy());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<ISource, IDestination>().AsProxy());
 
     [Fact]
     public void ShouldMapOk()
@@ -234,7 +235,7 @@ public class When_mapping_base_interface_members
     [Fact]
     public void Should_find_inherited_members_by_name()
     {
-        new MapperConfiguration(c=>c.CreateMap<ISource, ITarget>().ForMember("BaseId", opt => opt.Ignore()));
+        new MapperConfiguration(c => c.CreateMap<ISource, ITarget>().ForMember("BaseId", opt => opt.Ignore()));
     }
 }
 
@@ -338,7 +339,7 @@ public class When_mapping_an_interface_to_an_abstract_type : AutoMapperSpecBase
     {
         var model = new ModelObject
         {
-            Child = new SubChildModelObject {ChildProperty = "child property value"}
+            Child = new SubChildModelObject { ChildProperty = "child property value" }
         };
         _result = Mapper.Map<ModelObject, DtoObject>(model);
     }
@@ -357,7 +358,7 @@ public class When_mapping_an_interface_to_an_abstract_type : AutoMapperSpecBase
     [Fact]
     public void Should_map_Child_to_SubDtoChildObject_type()
     {
-        _result.Child.ShouldBeOfType(typeof (SubDtoChildObject));
+        _result.Child.ShouldBeOfType(typeof(SubDtoChildObject));
     }
 
     [Fact]
@@ -384,7 +385,7 @@ public class When_mapping_a_concrete_type_to_an_interface_type : AutoMapperSpecB
         string Value3 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>cfg.CreateMap<Source, IDestination>().AsProxy()
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, IDestination>().AsProxy()
         .ForMember(x => x.Value2, o => o.MapFrom(x => x.Value1))
         .ForMember(x => x.Value3, o => o.Ignore())
         .AfterMap((_, d) =>
@@ -394,7 +395,7 @@ public class When_mapping_a_concrete_type_to_an_interface_type : AutoMapperSpecB
 
     protected override void Because_of()
     {
-        _result = Mapper.Map<Source, IDestination>(new Source {Value = 5, Value1 = 50});
+        _result = Mapper.Map<Source, IDestination>(new Source { Value = 5, Value1 = 50 });
     }
 
     [Fact]
@@ -435,7 +436,7 @@ public class When_mapping_an_interface_type_to_a_concrete_type_and_reverse : Aut
     [Fact]
     public void Should_not_convert_to_interface()
     {
-        Should.Throw<AutoMapperMappingException>(() => Mapper.Map<Destination, ISource>(new Destination {Value = 5}))
+        Should.Throw<AutoMapperMappingException>(() => Mapper.Map<Destination, ISource>(new Destination { Value = 5 }))
             .Message.ShouldStartWith("Cannot create interface " + typeof(ISource).FullName);
     }
 }
@@ -447,7 +448,7 @@ public class When_mapping_an_interface_type_to_an_interface_type_and_reverse : A
         int Value { get; set; }
     }
 
-    public class Source: ISource
+    public class Source : ISource
     {
         public int Value { get; set; }
     }
@@ -463,14 +464,14 @@ public class When_mapping_an_interface_type_to_an_interface_type_and_reverse : A
     [Fact]
     public void Should_create_an_implementation_of_the_destination_interface()
     {
-        var destination = Mapper.Map<ISource, IDestination>(new Source {Value = 5});
+        var destination = Mapper.Map<ISource, IDestination>(new Source { Value = 5 });
         destination.Value.ShouldBe(5);
     }
 
     [Fact]
     public void Should_map_implementation_of_the_interface_to_the_proxied_implementation()
     {
-        var destination = Mapper.Map<ISource, IDestination>(new Source {Value = 5});
+        var destination = Mapper.Map<ISource, IDestination>(new Source { Value = 5 });
         var reversed = Mapper.Map<IDestination, ISource>(destination);
 
         reversed.ShouldNotBeOfType<Source>();
@@ -496,14 +497,14 @@ public class When_mapping_a_concrete_type_to_an_interface_type_and_reverse : Aut
     [Fact]
     public void Should_create_an_implementation_of_the_destination_interface()
     {
-        var destination = Mapper.Map<Source, IDestination>(new Source {Value = 5});
+        var destination = Mapper.Map<Source, IDestination>(new Source { Value = 5 });
         destination.Value.ShouldBe(5);
     }
 
     [Fact]
     public void Should_map_implementation_of_the_interface_to_the_class()
     {
-        var destination = Mapper.Map<Source, IDestination>(new Source {Value = 5});
+        var destination = Mapper.Map<Source, IDestination>(new Source { Value = 5 });
         var reversed = Mapper.Map<IDestination, Source>(destination);
 
         reversed.Value.ShouldBe(5);
@@ -530,7 +531,7 @@ public class When_mapping_a_concrete_type_to_an_interface_type_that_derives_from
 
     protected override void Because_of()
     {
-        _result = Mapper.Map<Source, IDestination>(new Source {Value = 5});
+        _result = Mapper.Map<Source, IDestination>(new Source { Value = 5 });
     }
 
     [Fact]
@@ -550,7 +551,8 @@ public class When_mapping_a_concrete_type_to_an_interface_type_that_derives_from
     public void Should_notify_property_changes()
     {
         var count = 0;
-        _result.PropertyChanged += (o, e) => {
+        _result.PropertyChanged += (o, e) =>
+        {
             count++;
             o.ShouldBeSameAs(_result);
             e.PropertyName.ShouldBe("Value");
@@ -577,7 +579,8 @@ public class When_mapping_a_concrete_type_to_an_interface_type_that_derives_from
         _count.ShouldBe(1);
     }
 
-    private void MyHandler(object sender, PropertyChangedEventArgs e) {
+    private void MyHandler(object sender, PropertyChangedEventArgs e)
+    {
         _count++;
     }
 }
@@ -619,7 +622,7 @@ public class When_mapping_a_derived_interface_to_an_derived_concrete_type : Auto
 
     protected override void Because_of()
     {
-        _result = Mapper.Map<ISource, Destination>(new Source {Id = 7, SecondId = 42});
+        _result = Mapper.Map<ISource, Destination>(new Source { Id = 7, SecondId = 42 });
     }
 
     [Fact]
@@ -682,7 +685,7 @@ public class When_mapping_a_derived_interface_to_an_derived_concrete_type_with_r
 
     protected override void Because_of()
     {
-        _result = Mapper.Map<ISource, Destination>(new Source {Id = 7, SecondId = 42});
+        _result = Mapper.Map<ISource, Destination>(new Source { Id = 7, SecondId = 42 });
     }
 
     [Fact]
@@ -725,7 +728,7 @@ public class When_mapping_to_a_type_with_explicitly_implemented_interface_member
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value = 10});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value = 10 });
     }
 
     [Fact]

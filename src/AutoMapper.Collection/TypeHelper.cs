@@ -46,7 +46,7 @@
             throw new ArgumentException($"Unable to find the element type for type '{enumerableType}'.",
                 nameof(enumerableType));
         }
-        
+
         private static Type GetIEnumerableType(Type enumerableType)
         {
             try

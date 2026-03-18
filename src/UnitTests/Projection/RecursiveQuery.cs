@@ -12,7 +12,7 @@ public class RecursiveQuery : AutoMapperSpecBase
         public int Id { get; set; }
         public Destination Parent { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
         c.CreateProjection<Source, Destination>();
         c.Internal().RecursiveQueriesMaxDepth = 1;

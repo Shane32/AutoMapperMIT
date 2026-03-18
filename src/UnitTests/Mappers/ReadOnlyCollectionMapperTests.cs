@@ -122,10 +122,10 @@
             {
                 _sourceAsEnumerable = new SourceAsEnumerable()
                 {
-                    ValueInt = new List<int>() {1, 2, 3},
-                    ValueString = new List<string>() {"a", "b", "c"},
-                    ValueIUser = new List<IUser>() {new UserSource("z", 21)},
-                    ValueUser = new List<UserSource>() {new UserSource("y", 20), new UserSource("x", 19)},
+                    ValueInt = new List<int>() { 1, 2, 3 },
+                    ValueString = new List<string>() { "a", "b", "c" },
+                    ValueIUser = new List<IUser>() { new UserSource("z", 21) },
+                    ValueUser = new List<UserSource>() { new UserSource("y", 20), new UserSource("x", 19) },
                 };
                 var config = new MapperConfiguration(cfg =>
                 {
@@ -271,7 +271,7 @@
                 public UserSource(string name, int age)
                 {
                     Name = name;
-                    ((IUser) this).Age = age;
+                    ((IUser)this).Age = age;
                 }
 
                 public string Name { get; set; }

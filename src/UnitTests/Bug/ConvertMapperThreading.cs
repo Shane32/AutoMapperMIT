@@ -23,11 +23,11 @@ public class ConvertMapperThreading
         {
             await Task.WhenAll(tasks);
         }
-        catch(AggregateException ex)
+        catch (AggregateException ex)
         {
             ex.Handle(e =>
             {
-                if(e is InvalidOperationException)
+                if (e is InvalidOperationException)
                 {
                     throw e;
                 }

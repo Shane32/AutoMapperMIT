@@ -288,7 +288,7 @@ public class MaxExecutionPlanDepthWithPreserveReferences : AutoMapperSpecBase
         cfg.CreateMap<Source5, Destination5>().PreserveReferences();
         cfg.CreateMap<Source6, Destination6>().PreserveReferences();
     });
-   
+
     [Fact]
     public void Should_set_inline_accordingly()
     {

@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class IncludedMappingShouldInheritBaseMappings : NonValidatingSpecBase
 {
 
@@ -200,15 +201,15 @@ public class IncludedMappingShouldInheritBaseMappings : NonValidatingSpecBase
 
         var mapper = config.CreateMapper();
         var dto = mapper.Map<DtoSubObject>(new ModelSubObject
-                                                               {
-                                                                   DifferentBaseString = "123",
-                                                                   SubString = "456"
-                                                               });
+        {
+            DifferentBaseString = "123",
+            SubString = "456"
+        });
 
         "789".ShouldBe(dto.BaseString);
         "456".ShouldBe(dto.SubString);
     }
-    
+
     [Fact]
     public void more_specific_map_should_override_base_mapping()
     {
@@ -222,10 +223,10 @@ public class IncludedMappingShouldInheritBaseMappings : NonValidatingSpecBase
         });
         var mapper = config.CreateMapper();
         var dto = mapper.Map<ModelSubObject, DtoSubObject>(new ModelSubObject
-                                                               {
-                                                                   DifferentBaseString = "123",
-                                                                   SubString = "456"
-                                                               });
+        {
+            DifferentBaseString = "123",
+            SubString = "456"
+        });
 
         "789".ShouldBe(dto.BaseString);
         "456".ShouldBe(dto.SubString);
@@ -310,7 +311,7 @@ public class IncludedMappingShouldInheritBaseMappings : NonValidatingSpecBase
 
         dto.ShouldBeOfType<DtoSubObject>();
     }
-    
+
     [Fact]
     public void include_should_allow_automapper_to_select_more_specific_included_type()
     {
@@ -432,7 +433,7 @@ public class OverrideDifferentMapFrom : AutoMapperSpecBase
     class DestinationDerived : Destination
     {
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom((s, d) => 1));
         cfg.CreateMap<Source, DestinationDerived>().IncludeBase<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(s => 2));

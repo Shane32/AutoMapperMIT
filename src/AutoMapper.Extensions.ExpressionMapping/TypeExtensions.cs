@@ -30,7 +30,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
                                                                        ?? propertyInfo?.GetSetMethod(true)?.IsStatic
                                                                        ?? false;
 
-        public static bool IsStatic(this MemberInfo memberInfo) => (memberInfo as FieldInfo).IsStatic() 
+        public static bool IsStatic(this MemberInfo memberInfo) => (memberInfo as FieldInfo).IsStatic()
                                                                    || (memberInfo as PropertyInfo).IsStatic()
                                                                    || ((memberInfo as MethodInfo)?.IsStatic
                                                                        ?? false);

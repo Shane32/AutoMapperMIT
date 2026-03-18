@@ -33,7 +33,7 @@ public class OverrideDestinationMappingsTest : IntegrationTest<OverrideDestinati
 
     private static Entity LoadEntity()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             return context.Entity.Include(e => e.Child).First();
         }

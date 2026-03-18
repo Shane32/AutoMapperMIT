@@ -16,16 +16,20 @@ public class ExpandCollectionsOverride : IntegrationTest<ExpandCollectionsOverri
     });
 
     [Fact]
-    public void Should_notexpand_courseName() {
-        using (var context = new ClientContext()) {
+    public void Should_notexpand_courseName()
+    {
+        using (var context = new ClientContext())
+        {
             _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses).FirstOrDefault();
         }
         _course.CourseName.ShouldBeNull();
     }
 
     [Fact]
-    public void Should_expand_courseName() {
-        using (var context = new ClientContext()) {
+    public void Should_expand_courseName()
+    {
+        using (var context = new ClientContext())
+        {
             _course = ProjectTo<TrainingCourseDetailDto>(context.TrainingCourses).FirstOrDefault();
         }
         _course.CourseName.ShouldBe("Course 1");
@@ -88,7 +92,7 @@ public class ExpandCollectionsOverride : IntegrationTest<ExpandCollectionsOverri
         public virtual IList<TrainingContentDto> Content { get; set; }
     }
 
-    public class TrainingCourseDetailDto : TrainingCourseDto 
+    public class TrainingCourseDetailDto : TrainingCourseDto
     {
     }
 

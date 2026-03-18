@@ -19,11 +19,11 @@ public class DeepInheritanceIssue
             cfg.CreateMap<CSrc, CDest>();
         });
 
-        var expectedCSrc = new CSrc() {StringA = "A", StringB = "B", StringC = "C"};
-        var expectedBSrc = new BSrc() {StringA = "A", StringB = "B"};
+        var expectedCSrc = new CSrc() { StringA = "A", StringB = "B", StringC = "C" };
+        var expectedBSrc = new BSrc() { StringA = "A", StringB = "B" };
 
-        var expectedContCSrc = new ContainsASrc() {A = expectedCSrc};
-        var expectedContBSrc = new ContainsASrc() {A = expectedBSrc};
+        var expectedContCSrc = new ContainsASrc() { A = expectedCSrc };
+        var expectedContBSrc = new ContainsASrc() { A = expectedBSrc };
 
         var mapper = config.CreateMapper();
         var actualContCDest = mapper.Map<ContainsASrc, ContainsADest>(expectedContCSrc);

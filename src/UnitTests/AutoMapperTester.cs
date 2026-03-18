@@ -17,7 +17,7 @@ public class AutoMapperTester : IDisposable
 
     public void Dispose()
     {
-        
+
     }
 
     public class ModelType

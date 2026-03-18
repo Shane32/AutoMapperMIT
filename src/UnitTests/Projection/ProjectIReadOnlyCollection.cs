@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectIReadOnlyCollection
 {
     private MapperConfiguration _config;

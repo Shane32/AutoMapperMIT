@@ -61,7 +61,7 @@ public class SourceValidationWithInheritance : AutoMapperSpecBase
     public void Validate() => AssertConfigurationIsValid();
 }
 
-public class SourceValidationWithIgnore: AutoMapperSpecBase
+public class SourceValidationWithIgnore : AutoMapperSpecBase
 {
     public abstract class FormElement2
     {
@@ -112,7 +112,7 @@ public class SourceValidationWithIgnore: AutoMapperSpecBase
             .Include<FieldControl2, FormElementDTO2>();
 
         cfg.CreateMap<FieldControl2, FormElementDTO2>(MemberList.Source)
-            .ForSourceMember(src => src.Misspelled, o=>o.DoNotValidate())
+            .ForSourceMember(src => src.Misspelled, o => o.DoNotValidate())
             .Include<TextBoxControl2, FormElementDTO2>();
 
         cfg.CreateMap<TextBoxControl2, FormElementDTO2>(MemberList.Source)

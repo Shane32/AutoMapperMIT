@@ -31,6 +31,6 @@ namespace AutoMapper.Extensions.ExpressionMapping
 
         public bool ContainsKey(TKey key) => _dictionary.ContainsKey(key);
 
-        public ICollection<TKey> Keys => _dictionary.Keys;        
+        public ICollection<TKey> Keys => _dictionary.Keys;
     }
 }

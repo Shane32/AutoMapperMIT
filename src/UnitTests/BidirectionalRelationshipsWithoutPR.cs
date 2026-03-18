@@ -34,14 +34,14 @@ public class CyclesWithInheritance : AutoMapperSpecBase
     {
         public FlowNodeModel Node;
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<FlowChart, FlowChartModel>();
         cfg.CreateMap<FlowNode, FlowNodeModel>()
             .Include<FlowStep, FlowNodeModel>()
             .Include<FlowDecision, FlowNodeModel>()
             .Include(typeof(FlowSwitch<>), typeof(FlowNodeModel))
-            .ForMember(d=>d.Connections, o=>o.Ignore());
+            .ForMember(d => d.Connections, o => o.Ignore());
         cfg.CreateMap<FlowStep, FlowNodeModel>().ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.Next }));
         cfg.CreateMap<FlowDecision, FlowNodeModel>().ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.True, s.False }));
         cfg.CreateMap(typeof(FlowSwitch<>), typeof(FlowNodeModel));
@@ -155,7 +155,7 @@ public class When_the_same_map_is_used_again : AutoMapperSpecBase
         public int Value;
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<Source, Destination>();
         cfg.CreateMap<InnerSource, InnerDestination>();
@@ -281,7 +281,7 @@ public class When_the_source_has_cyclical_references_with_ForPath : AutoMapperSp
     {
         cfg.CreateMap<Article, ArticleViewModel>();
         cfg.CreateMap<Supplier, SupplierViewModel>();
-        cfg.CreateMap<Contact, ContactViewModel>().ForPath(d=>d.Suppliers1, o=>o.MapFrom(s=>s.Suppliers));
+        cfg.CreateMap<Contact, ContactViewModel>().ForPath(d => d.Suppliers1, o => o.MapFrom(s => s.Suppliers));
     });
 
     [Fact]
@@ -327,7 +327,7 @@ public class When_the_source_has_cyclical_references_with_ignored_ForPath : Auto
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap<Supplier, SupplierViewModel>().ForPath(d=>d.Contact.Supplier1, o=>
+        cfg.CreateMap<Supplier, SupplierViewModel>().ForPath(d => d.Contact.Supplier1, o =>
         {
             o.MapFrom(s => s.Contact.Supplier);
             o.Ignore();
@@ -525,12 +525,12 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_on
     protected override void Because_of()
     {
         var foo = new Foo
+        {
+            Bar = new Bar
             {
-                Bar = new Bar
-                    {
-                        Value = "something"
-                    }
-            };
+                Value = "something"
+            }
+        };
         foo.Bar.Foo = foo;
         _dto = Mapper.Map<Foo, FooDto>(foo);
     }
@@ -669,8 +669,8 @@ public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Parent)) return false;
-            return Equals((Parent) obj);
+            if (obj.GetType() != typeof(Parent)) return false;
+            return Equals((Parent)obj);
         }
 
         public override int GetHashCode()
@@ -704,8 +704,8 @@ public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Child)) return false;
-            return Equals((Child) obj);
+            if (obj.GetType() != typeof(Child)) return false;
+            return Equals((Child)obj);
         }
 
         public override int GetHashCode()

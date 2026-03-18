@@ -22,7 +22,7 @@ public class When_value_types_are_the_source_of_map_cycles : AutoMapperSpecBase
         public Destination Parent { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<Source, Destination>().MaxDepth(2);
         cfg.CreateMap<InnerSource, InnerDestination>();
@@ -105,7 +105,7 @@ public class When_destination_type_is_a_value_type : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value1 = 4, Value2 = "hello"});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value1 = 4, Value2 = "hello" });
     }
 
     [Fact]
@@ -177,13 +177,13 @@ public class When_destination_type_is_a_nullable_value_type : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<string, int>().ConvertUsing((string s) => System.Convert.ToInt32(s));
-        cfg.CreateMap<string, int?>().ConvertUsing((string s) => (int?) System.Convert.ToInt32(s));
+        cfg.CreateMap<string, int?>().ConvertUsing((string s) => (int?)System.Convert.ToInt32(s));
         cfg.CreateMap<Source, Destination>();
     });
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value1 = "10", Value2 = "20"});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value1 = "10", Value2 = "20" });
     }
 
     [Fact]

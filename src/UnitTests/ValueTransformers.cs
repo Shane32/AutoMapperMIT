@@ -302,7 +302,7 @@
         protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         {
             cfg.CreateMap<SourceBase, DestBase>().Include<Source, Dest>().ForMember(d => d.Value, o => o.AddTransform(dest => dest + " was cool"));
-            cfg.CreateMap<Source, Dest>().ForMember(d=>d.Value, o=>o.AddTransform(dest => dest + " and now is straight up dope"));
+            cfg.CreateMap<Source, Dest>().ForMember(d => d.Value, o => o.AddTransform(dest => dest + " and now is straight up dope"));
         });
 
         [Fact]
@@ -331,8 +331,8 @@
             public int? NotNull { get; set; }
             public int? Null { get; set; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => 
-            cfg.CreateMap<Source, Dest>().AddTransform<int>(source=>source+1).AddTransform<int?>(source => source == null ? null : source + 2));
+        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
+            cfg.CreateMap<Source, Dest>().AddTransform<int>(source => source + 1).AddTransform<int?>(source => source == null ? null : source + 2));
         [Fact]
         public void Should_transform_value()
         {

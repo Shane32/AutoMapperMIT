@@ -11,7 +11,7 @@
             public class Destination
             {
                 private static int _callCount = 0;
-                
+
                 public Destination()
                 {
                     _callCount++;
@@ -34,8 +34,8 @@
             [Fact]
             public void Should_call_ctor_once()
             {
-                var source = new Source {Value = 5};
-                var dest = new Destination {Value = 7};
+                var source = new Source { Value = 5 };
+                var dest = new Destination { Value = 7 };
 
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
                 config.CreateMapper().Map(source, dest);

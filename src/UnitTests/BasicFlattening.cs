@@ -224,7 +224,7 @@ public class FlatteningWithSourceValidation : NonValidatingSpecBase
         public string Name { get; set; }
         public string AddressCity { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source).ForMember(d=>d.Id, o=>o.MapFrom(s=>s.AnotherId)));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source).ForMember(d => d.Id, o => o.MapFrom(s => s.AnotherId)));
     [Fact]
     public void Should_validate() =>
         new Action(AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>().Errors.Single().UnmappedPropertyNames.Single().ShouldBe(nameof(Address.Id));

@@ -29,7 +29,7 @@ namespace AutoMapper.UnitTests.Bug
             {
             }
 
-            public interface IMapToElementWritable 
+            public interface IMapToElementWritable
             {
                 string Prop { get; set; }
             }

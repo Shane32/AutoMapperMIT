@@ -40,19 +40,19 @@ public class LazyCollectionMapping
     [Fact]
     public void OneTimeEnumerator_should_throw_exception_if_enumerating_twice()
     {
-        IEnumerable<string> enumerable = Create(new[] {"one", "two", "three"});
-        
+        IEnumerable<string> enumerable = Create(new[] { "one", "two", "three" });
+
         enumerable.Count().ShouldBe(3);
 
-        typeof (NotSupportedException).ShouldBeThrownBy(() => enumerable.Count());
+        typeof(NotSupportedException).ShouldBeThrownBy(() => enumerable.Count());
     }
-    
+
     [Fact]
     public void Should_not_enumerate_twice()
     {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
 
-        var source = new Source {Collection = Create(new[] {"one", "two", "three"})};
+        var source = new Source { Collection = Create(new[] { "one", "two", "three" }) };
         var enumerable = config.CreateMapper().Map(source, new Destination());
 
         enumerable.Collection.Count().ShouldBe(3);

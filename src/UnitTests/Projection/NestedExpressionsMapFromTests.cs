@@ -8,7 +8,7 @@
 
             public NestedExpressionMapFromTests()
             {
-                _config = new MapperConfiguration(cfg => 
+                _config = new MapperConfiguration(cfg =>
                     cfg.CreateProjection<Parent, ParentDto>()
                         .ForMember(dest => dest.TotalSum, opt => opt.MapFrom(p => p.Children.Sum(child => child.Value))));
             }

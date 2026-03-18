@@ -15,7 +15,7 @@ public class ProjectUsingTheQueriedEntity : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateProjection<Source, Destination>().ConvertUsing(s => new Destination {Number = 23 + s.Number});
+        cfg.CreateProjection<Source, Destination>().ConvertUsing(s => new Destination { Number = 23 + s.Number });
     });
 
     protected override void Because_of()

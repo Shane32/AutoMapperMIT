@@ -140,7 +140,7 @@ public class ShouldUseConstructorDefault : AutoMapperSpecBase
         public int A { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => 
+    protected override MapperConfiguration CreateConfiguration() =>
         new MapperConfiguration(cfg => { cfg.CreateMap<Source, Destination>(); });
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
@@ -167,7 +167,7 @@ public class ShouldIgnoreExplicitStaticConstructor : NonValidatingSpecBase
         public string A { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => 
+    protected override MapperConfiguration CreateConfiguration() =>
         new MapperConfiguration(cfg => { cfg.CreateMap<Source, Destination>(); });
 
     [Fact]
@@ -195,7 +195,7 @@ public class ShouldIgnoreImplicitStaticConstructor : NonValidatingSpecBase
         public string A { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => 
+    protected override MapperConfiguration CreateConfiguration() =>
         new MapperConfiguration(cfg => { cfg.CreateMap<Source, Destination>(); });
 
     [Fact]

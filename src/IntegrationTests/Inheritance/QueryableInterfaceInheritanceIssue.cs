@@ -27,7 +27,7 @@ public class QueryableInterfaceInheritanceIssue : IntegrationTest<QueryableInter
     {
         protected override void Seed(ClientContext context)
         {
-            context.Entities.AddRange(new[] { new QueryableInterfaceImpl { Id = "One" }, new QueryableInterfaceImpl { Id = "Two" }});
+            context.Entities.AddRange(new[] { new QueryableInterfaceImpl { Id = "One" }, new QueryableInterfaceImpl { Id = "Two" } });
         }
     }
 

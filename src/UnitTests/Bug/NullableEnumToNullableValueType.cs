@@ -34,5 +34,5 @@ public class NullableEnumToNullableValueType
 
             destination.Dummy.ShouldBeNull();
         }
-    } 
+    }
 }

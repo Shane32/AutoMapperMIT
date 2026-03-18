@@ -105,7 +105,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
             }
         }
 
-        protected static MemberExpression GetMemberExpressionFromMemberMaps(string fullName, Expression visitedParentExpr) 
+        protected static MemberExpression GetMemberExpressionFromMemberMaps(string fullName, Expression visitedParentExpr)
             => ExpressionHelpers.MemberAccesses(fullName, visitedParentExpr);
 
         private static Expression GetMemberExpressionFromCustomExpression(PropertyMapInfo lastWithCustExpression,
@@ -150,7 +150,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
             return mappedType == Enum.GetUnderlyingType(initialType);
         }
 
-        protected static Expression GetMemberExpressionFromCustomExpression(List<PropertyMapInfo> propertyMapInfoList, PropertyMapInfo lastWithCustExpression, Expression mappedParentExpr) 
+        protected static Expression GetMemberExpressionFromCustomExpression(List<PropertyMapInfo> propertyMapInfoList, PropertyMapInfo lastWithCustExpression, Expression mappedParentExpr)
             => GetMemberExpressionFromCustomExpression
             (
                 lastWithCustExpression,
@@ -312,7 +312,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
                 if (sourceMember == null)
                     return list;
 
-                DeclaringMemberKey declaringMemberKey = new                (
+                DeclaringMemberKey declaringMemberKey = new(
                     GetParentMember(propertyMap),
                     BuildParentFullName(propertyMap)
                 );
@@ -626,7 +626,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
             }
         }
 
-        private static bool GenericTypeDefinitionsAreEquivalent(Type typeSource, Type typeDestination) 
+        private static bool GenericTypeDefinitionsAreEquivalent(Type typeSource, Type typeDestination)
             => typeSource.IsGenericType() && typeDestination.IsGenericType() && typeSource.GetGenericTypeDefinition() == typeDestination.GetGenericTypeDefinition();
 
         protected void FindDestinationFullName(Type typeSource, Type typeDestination, string sourceFullName, List<PropertyMapInfo> propertyMapInfoList)
@@ -652,7 +652,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
             bool BothTypesAreAnonymous()
                 => IsAnonymousType(typeSource) && IsAnonymousType(typeDestination);
 
-            TypeMap GetTypeMap() => BothTypesAreAnonymous() 
+            TypeMap GetTypeMap() => BothTypesAreAnonymous()
                 ? anonymousTypesConfigurationProvider.CheckIfTypeMapExists(sourceType: typeDestination, destinationType: typeSource)
                 : ConfigurationProvider.CheckIfTypeMapExists(sourceType: typeDestination, destinationType: typeSource);
             //The destination becomes the source because to map a source expression to a destination expression,

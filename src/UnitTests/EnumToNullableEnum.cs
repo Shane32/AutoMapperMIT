@@ -22,7 +22,7 @@ public class EnumToNullableEnum : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source{ EnumValue = SomeEnum.Bar });
+        _destination = Mapper.Map<Source, Destination>(new Source { EnumValue = SomeEnum.Bar });
     }
 
     [Fact]

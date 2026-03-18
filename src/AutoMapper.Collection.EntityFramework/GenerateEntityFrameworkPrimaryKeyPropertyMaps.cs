@@ -14,7 +14,7 @@ namespace AutoMapper.EntityFramework
     {
         private readonly TDatabaseContext _context = new TDatabaseContext();
         private readonly MethodInfo _createObjectSetMethodInfo = typeof(ObjectContext).GetMethod("CreateObjectSet", Type.EmptyTypes);
-        
+
         public IEnumerable<PropertyMap> GeneratePropertyMaps(TypeMap typeMap)
         {
             var propertyMaps = typeMap.PropertyMaps;

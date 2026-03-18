@@ -17,7 +17,7 @@ namespace AutoMapper.UnitTests
 
             protected override MapperConfiguration CreateConfiguration() => new(cfg =>
             {
-                cfg.CreateMap(typeof (Source), typeof (Destination)).ReverseMap();
+                cfg.CreateMap(typeof(Source), typeof(Destination)).ReverseMap();
             });
 
             protected override void Because_of()
@@ -51,7 +51,7 @@ namespace AutoMapper.UnitTests
 
             protected override MapperConfiguration CreateConfiguration() => new(cfg =>
             {
-                cfg.CreateMap(typeof (Source), typeof (Dest))
+                cfg.CreateMap(typeof(Source), typeof(Dest))
                     .ForMember("Ignored", opt => opt.Ignore())
                     .ReverseMap();
             });
@@ -95,7 +95,7 @@ namespace AutoMapper.UnitTests
                 //Arrange
                 var config = new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap(typeof (Foo), typeof (Foo2)).ReverseMap();
+                    cfg.CreateMap(typeof(Foo), typeof(Foo2)).ReverseMap();
                 });
                 var typeMap = config.GetAllTypeMaps()
                           .First(x => x.SourceType == typeof(Foo2) && x.DestinationType == typeof(Foo));

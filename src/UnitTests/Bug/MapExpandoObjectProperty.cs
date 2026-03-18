@@ -23,6 +23,6 @@ public class MapExpandoObjectProperty : AutoMapperSpecBase
     public void Should_work()
     {
         dynamic baseSettings = new ExpandoObject();
-        var settings = Mapper.Map<To>(new From { ExpandoObject = baseSettings});
+        var settings = Mapper.Map<To>(new From { ExpandoObject = baseSettings });
     }
 }

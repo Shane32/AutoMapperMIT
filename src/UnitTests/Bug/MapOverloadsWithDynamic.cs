@@ -19,7 +19,7 @@ public class MapOverloadsWithDynamic : AutoMapperSpecBase
         public SubSetting SubSettings { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => {});
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
 
     protected override void Because_of()
     {

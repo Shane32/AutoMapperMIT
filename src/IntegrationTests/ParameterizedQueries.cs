@@ -56,7 +56,7 @@ public class ParameterizedQueries : IntegrationTest<ParameterizedQueries.Databas
             dtos.All(dto => dto.UserName == username).ShouldBeTrue();
 
             username = "Joe";
-            query = ProjectTo<EntityDto>(db.Entities, new Dictionary<string, object> { { "username", username }});
+            query = ProjectTo<EntityDto>(db.Entities, new Dictionary<string, object> { { "username", username } });
             dtos = await query.ToListAsync();
             constantVisitor = new ConstantVisitor();
             constantVisitor.Visit(query.Expression);

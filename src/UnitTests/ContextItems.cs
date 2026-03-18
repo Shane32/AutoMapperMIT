@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class When_mapping_with_context_state
 {
     public class Source
@@ -27,13 +28,13 @@ public class When_mapping_with_context_state
 }
 public class Context_try_get_items : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<int, int>().ConvertUsing((s, _, c) => 
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<int, int>().ConvertUsing((s, _, c) =>
         c.TryGetItems(out var items) ? (int)items["override"] : s));
     [Fact]
     public void Should_not_throw()
     {
         Map<int>(42).ShouldBe(42);
-        Mapper.Map<int>(42, o=>o.Items["override"] = 43).ShouldBe(43);
+        Mapper.Map<int>(42, o => o.Items["override"] = 43).ShouldBe(43);
     }
 }
 public class When_mapping_with_contextual_values
@@ -215,7 +216,7 @@ public class When_mapping_nested_context_items : AutoMapperSpecBase
                     {
                         Id = fromCar.Id,
                         Name = fromCar.Name,
-                        Door = (Door) ctx.Items["Door"]
+                        Door = (Door)ctx.Items["Door"]
                     };
                 }
 

@@ -1,4 +1,5 @@
 namespace AutoMapper.Execution;
+
 public ref struct TypeMapPlanBuilder(IGlobalConfiguration configuration, TypeMap typeMap)
 {
     static readonly MethodInfo MappingError = typeof(TypeMapPlanBuilder).GetStaticMethod(nameof(MemberMappingError));
@@ -280,7 +281,7 @@ public ref struct TypeMapPlanBuilder(IGlobalConfiguration configuration, TypeMap
     }
     private Expression CheckReferencesCache(Expression valueBuilder)
     {
-        if(!_typeMap.PreserveReferences)
+        if (!_typeMap.PreserveReferences)
         {
             return valueBuilder;
         }
@@ -291,7 +292,7 @@ public ref struct TypeMapPlanBuilder(IGlobalConfiguration configuration, TypeMap
     {
         { CustomCtorFunction: LambdaExpression constructUsingFunc } => _configuration.ReplaceParameters(constructUsingFunc, GetParameters(second: ContextParameter)),
         { ConstructorMap: { CanResolve: true } constructorMap } => ConstructorMapping(constructorMap),
-        { DestinationType: { IsInterface: true } interfaceType } => Throw(Constant(new AutoMapperMappingException("Cannot create interface "+interfaceType, null, _typeMap)), interfaceType),
+        { DestinationType: { IsInterface: true } interfaceType } => Throw(Constant(new AutoMapperMappingException("Cannot create interface " + interfaceType, null, _typeMap)), interfaceType),
         _ => ObjectFactory.GenerateConstructorExpression(DestinationType, _configuration)
     };
     private Expression ConstructorMapping(ConstructorMap constructorMap)
@@ -577,7 +578,7 @@ public abstract class TypeConverter
 public class LambdaTypeConverter(LambdaExpression lambda) : TypeConverter
 {
     public LambdaExpression Lambda { get; } = lambda;
-    public override Expression GetExpression(IGlobalConfiguration configuration, ParameterExpression[] parameters) => 
+    public override Expression GetExpression(IGlobalConfiguration configuration, ParameterExpression[] parameters) =>
         configuration.ConvertReplaceParameters(Lambda, parameters);
 }
 public class ExpressionTypeConverter(LambdaExpression lambda) : LambdaTypeConverter(lambda)
@@ -595,6 +596,6 @@ public class ClassTypeConverter(Type converterType, Type converterInterface) : T
         var typeParams = (openMapConfig.SourceType.IsGenericTypeDefinition ? closedTypes.SourceType.GenericTypeArguments : [])
             .Concat(openMapConfig.DestinationType.IsGenericTypeDefinition ? closedTypes.DestinationType.GenericTypeArguments : []);
         var neededParameters = ConverterType.GenericParametersCount();
-        ConverterType = ConverterType.MakeGenericType([..typeParams.Take(neededParameters)]);
+        ConverterType = ConverterType.MakeGenericType([.. typeParams.Take(neededParameters)]);
     }
 }

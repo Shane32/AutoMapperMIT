@@ -12,7 +12,7 @@ public class ReverseMapWithStaticField : AutoMapperSpecBase
     {
         public Guid Id { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
         c.CreateMap<Destination, Source>().ForMember(src => src.Id, opt => opt.MapFrom(_ => Guid.Empty)).ReverseMap());
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
@@ -39,7 +39,7 @@ public class InvalidReverseMap : NonValidatingSpecBase
     {
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<One, Two>()
             .ForMember(d => d.Name, o => o.MapFrom(s => "name"))
@@ -112,7 +112,7 @@ public class MethodsWithReverse : AutoMapperSpecBase
         public int OrderItemsCount { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
         c.CreateMap<Order, OrderDto>().ReverseMap();
     });
@@ -159,10 +159,12 @@ public class ReverseForPath : AutoMapperSpecBase
     [Fact]
     public void Should_flatten()
     {
-        var model = new Order {
-            CustomerHolder = new CustomerHolder {
-                    Customer = new Customer { Name = "George Costanza", Total = 74.85m }
-                }
+        var model = new Order
+        {
+            CustomerHolder = new CustomerHolder
+            {
+                Customer = new Customer { Name = "George Costanza", Total = 74.85m }
+            }
         };
         var dto = Mapper.Map<OrderDto>(model);
         dto.CustomerName.ShouldBe("George Costanza");
@@ -300,8 +302,8 @@ public class ReverseDefaultFlatteningWithIgnoreMember : AutoMapperSpecBase
     {
         cfg.CreateMap<Order, OrderDto>()
             .ReverseMap()
-            .ForMember(d=>d.Customerholder, o=>o.Ignore())
-            .ForPath(d=>d.Customerholder.Customer.Total, o=>o.MapFrom(s=>s.CustomerholderCustomerTotal));
+            .ForMember(d => d.Customerholder, o => o.Ignore())
+            .ForPath(d => d.Customerholder.Customer.Total, o => o.MapFrom(s => s.CustomerholderCustomerTotal));
     });
 
     [Fact]
@@ -442,7 +444,7 @@ public class When_reverse_mapping_classes_with_simple_properties : AutoMapperSpe
     {
         _source.Value.ShouldBe(10);
     }
-    
+
     [Fact]
     public void Should_not_initialize_details_on_initial_mapping()
     {

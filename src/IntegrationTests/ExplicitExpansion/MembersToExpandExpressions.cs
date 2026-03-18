@@ -1,6 +1,6 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-public class MembersToExpandExpressions  : AutoMapperSpecBase, IAsyncLifetime
+public class MembersToExpandExpressions : AutoMapperSpecBase, IAsyncLifetime
 {
     public class SourceDeepInner
     {
@@ -14,7 +14,7 @@ public class MembersToExpandExpressions  : AutoMapperSpecBase, IAsyncLifetime
         public SourceDeepInner Deep { get; set; }
     }
     public class Source
-    {   
+    {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Desc { get; set; }
@@ -29,8 +29,8 @@ public class MembersToExpandExpressions  : AutoMapperSpecBase, IAsyncLifetime
     }
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         cfg.CreateProjection<Source, Dto>()
-            .ForMember(dto => dto.InnerDescFlattened, conf => { conf.ExplicitExpansion(); conf.MapFrom(_ => _.Inner     .Desc); })
-            .ForMember(dto => dto.     DeepFlattened, conf => { conf.ExplicitExpansion(); conf.MapFrom(_ => _.Inner.Deep.Desc); }));
+            .ForMember(dto => dto.InnerDescFlattened, conf => { conf.ExplicitExpansion(); conf.MapFrom(_ => _.Inner.Desc); })
+            .ForMember(dto => dto.DeepFlattened, conf => { conf.ExplicitExpansion(); conf.MapFrom(_ => _.Inner.Deep.Desc); }));
     public class TestContext : LocalDbContext
     {
         public DbSet<Source> Sources { get; set; }

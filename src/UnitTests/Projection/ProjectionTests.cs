@@ -10,7 +10,7 @@ public class NonNullableToNullable : AutoMapperSpecBase
     {
         public int? Id { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateProjection<Source, Destination>());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateProjection<Source, Destination>());
     [Fact]
     public void Should_project() => ProjectTo<Destination>(new[] { new Source() }.AsQueryable()).First().Id.ShouldBe(0);
 }

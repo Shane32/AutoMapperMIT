@@ -38,7 +38,7 @@ public class When_mapping_to_Existing_IEnumerable : AutoMapperSpecBase
 public class When_mapping_to_an_array_as_ICollection_with_MapAtRuntime : AutoMapperSpecBase
 {
     Destination _destination;
-    SourceItem[] _sourceItems = new [] { new SourceItem { Value = "1" }, new SourceItem { Value = "2" }, new SourceItem { Value = "3" } };
+    SourceItem[] _sourceItems = new[] { new SourceItem { Value = "1" }, new SourceItem { Value = "2" }, new SourceItem { Value = "3" } };
 
     public class Source
     {
@@ -60,9 +60,9 @@ public class When_mapping_to_an_array_as_ICollection_with_MapAtRuntime : AutoMap
         public string Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<Source, Destination>().ForMember(d=>d.Items, o=>o.MapAtRuntime());
+        c.CreateMap<Source, Destination>().ForMember(d => d.Items, o => o.MapAtRuntime());
         c.CreateMap<SourceItem, DestinationItem>();
     });
 
@@ -81,10 +81,10 @@ public class When_mapping_to_an_array_as_ICollection_with_MapAtRuntime : AutoMap
 
 public class When_mapping_an_array : AutoMapperSpecBase
 {
-    decimal[] _source = Enumerable.Range(1, 10).Select(i=>(decimal)i).ToArray();
+    decimal[] _source = Enumerable.Range(1, 10).Select(i => (decimal)i).ToArray();
     decimal[] _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(c =>{});
+    protected override MapperConfiguration CreateConfiguration() => new(c => { });
 
     protected override void Because_of()
     {
@@ -103,7 +103,7 @@ public class When_mapping_a_primitive_array : AutoMapperSpecBase
     int[] _source = Enumerable.Range(1, 10).ToArray();
     long[] _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(c =>{});
+    protected override MapperConfiguration CreateConfiguration() => new(c => { });
 
     protected override void Because_of()
     {
@@ -113,7 +113,7 @@ public class When_mapping_a_primitive_array : AutoMapperSpecBase
     [Fact]
     public void Should_return_a_copy()
     {
-        var source = new int[] {1, 2, 3, 4};
+        var source = new int[] { 1, 2, 3, 4 };
         var dest = new long[4];
         Array.Copy(source, dest, 4);
         dest[3].ShouldBe(4L);
@@ -140,7 +140,7 @@ public class When_mapping_a_primitive_array_with_custom_mapping_function : AutoM
     {
         for (var i = 0; i < _source.Length; i++)
         {
-            _destination[i].ShouldBe((i+1) * 1000);
+            _destination[i].ShouldBe((i + 1) * 1000);
         }
     }
 }
@@ -178,7 +178,7 @@ public class When_mapping_a_primitive_array_with_custom_object_mapper : AutoMapp
     }
 }
 
-public class When_mapping_null_list_to_array: AutoMapperSpecBase
+public class When_mapping_null_list_to_array : AutoMapperSpecBase
 {
     Destination _destination;
 
@@ -266,7 +266,7 @@ public class When_mapping_collections : AutoMapperSpecBase
 {
     Author mappedAuthor;
 
-    protected override MapperConfiguration CreateConfiguration() => new(delegate{});
+    protected override MapperConfiguration CreateConfiguration() => new(delegate { });
 
     protected override void Because_of()
     {
@@ -505,7 +505,7 @@ public class When_mapping_to_a_getter_only_existing_ienumerable : AutoMapperSpec
     public void Should_map_the_list_of_source_items()
     {
         _destination.Values.ShouldBe(new[] { 1, 2, 3, 4 });
-        _destination.Values2.ShouldBe(new[]{ "9", "8", "7", "6" });
+        _destination.Values2.ShouldBe(new[] { "9", "8", "7", "6" });
     }
 }
 

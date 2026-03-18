@@ -23,7 +23,7 @@
 
         public class GrandChildSource
         {
-            
+
         }
 
         public class Dest
@@ -41,7 +41,7 @@
 
         public class GrandChildDest
         {
-            
+
         }
 
         protected override MapperConfiguration Configuration { get; } = ConfigurationHelper.GetMapperConfiguration(cfg =>
@@ -94,7 +94,7 @@
         {
             _dests[0].Child3.ShouldNotBeNull();
         }
-        
+
         [Fact]
         public void Should_expand_full_path()
         {

@@ -15,7 +15,8 @@ public class CustomProjectionStringToString : IntegrationTest<CustomProjectionSt
             base.Seed(testContext);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(x => {
+    protected override MapperConfiguration CreateConfiguration() => new(x =>
+    {
         x.CreateProjection<string, string>().ConvertUsing(s => _niceGreeting);
         x.CreateProjection<Source, Target>();
         x.CreateProjection<SourceChild, TargetChild>();

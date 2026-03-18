@@ -37,7 +37,7 @@ public class ProjectEnumerableOfIntToList : IntegrationTest<ProjectEnumerableOfI
             {
                 FirstName = "Bob",
                 LastName = "Smith",
-                Items = new List<Item>(new[] { new Item(), new Item(), new Item()})
+                Items = new List<Item>(new[] { new Item(), new Item(), new Item() })
             });
 
             base.Seed(context);
@@ -46,13 +46,13 @@ public class ProjectEnumerableOfIntToList : IntegrationTest<ProjectEnumerableOfI
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d=>d.ItemsIds, o=>o.MapFrom(s=>s.Items.Select(i=>i.Id)));
+        cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.ItemsIds, o => o.MapFrom(s => s.Items.Select(i => i.Id)));
     });
 
     [Fact]
     public void Can_map_with_projection()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var customer = ProjectTo<CustomerViewModel>(context.Customers).Single();
             customer.ItemsIds.SequenceEqual(new int[] { 1, 2, 3 }).ShouldBeTrue();

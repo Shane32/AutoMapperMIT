@@ -174,7 +174,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests
             Assert.Equal("Columbia", result[0].StatsB.StatsBuilder.City);
         }
 
-        static MapperConfiguration GetConfigurationWiithoutIncludeMembers() 
+        static MapperConfiguration GetConfigurationWiithoutIncludeMembers()
             => ConfigurationHelper.GetMapperConfiguration(cfg =>
             {
                 cfg.AddExpressionMapping();

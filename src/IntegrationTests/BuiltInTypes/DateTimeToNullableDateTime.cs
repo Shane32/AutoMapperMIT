@@ -6,7 +6,7 @@ public class DateTimeToNullableDateTime : IntegrationTest<DateTimeToNullableDate
     {
         public int Id { get; set; }
         public int Value { get; set; }
-                
+
     }
     public class ParentDto
     {
@@ -15,7 +15,7 @@ public class DateTimeToNullableDateTime : IntegrationTest<DateTimeToNullableDate
     }
 
     private readonly DateTime _expected = new(2000, 1, 1);
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => 
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         cfg.CreateProjection<Parent, ParentDto>().ForMember(dto => dto.Date, opt => opt.MapFrom(src => _expected)));
     public class TestContext : LocalDbContext
     {
@@ -25,7 +25,7 @@ public class DateTimeToNullableDateTime : IntegrationTest<DateTimeToNullableDate
     {
         protected override void Seed(TestContext testContext)
         {
-            testContext.Parents.Add(new Parent{ Value = 5 });
+            testContext.Parents.Add(new Parent { Value = 5 });
             base.Seed(testContext);
         }
     }

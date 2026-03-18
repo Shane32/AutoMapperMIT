@@ -18,7 +18,7 @@ public class NullableTypeConverter : AutoMapperSpecBase
     {
         public DateTime? Convert(DateTimeOffset? source, DateTime? destination, ResolutionContext context)
         {
-            if(source.HasValue)
+            if (source.HasValue)
             {
                 return source.Value.DateTime;
             }
@@ -50,7 +50,7 @@ public class CustomConverters : AutoMapperSpecBase
     {
         public bool Convert(int? source, bool destination, ResolutionContext context)
         {
-            if(source == null)
+            if (source == null)
                 return false;
 
             return source == 1;

@@ -19,7 +19,7 @@ namespace AutoMapper.Mappers
         }
 
         private static readonly MethodInfo MapMethodInfo = typeof(ObjectToEquivalencyExpressionByEquivalencyExistingMapper).GetRuntimeMethods().First(_ => _.IsStatic);
-        
+
         public bool IsMatch(TypePair typePair)
         {
             var destExpressArgType = typePair.DestinationType.GetSinglePredicateExpressionArgumentType();

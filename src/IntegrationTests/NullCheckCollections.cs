@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
+
 public class NullCheckCollectionsFirstOrDefault : IntegrationTest<NullCheckCollectionsFirstOrDefault.DatabaseInitializer>
 {
     public class SourceType
@@ -128,7 +129,7 @@ public class NullCheckCollections : IntegrationTest<NullCheckCollections.Databas
     {
         protected override void Seed(Context context)
         {
-            context.Students.Add(new Student{ Name = "Bob" });
+            context.Students.Add(new Student { Name = "Bob" });
         }
     }
 

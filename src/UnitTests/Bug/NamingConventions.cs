@@ -34,7 +34,7 @@ public class DisableNamingConvention : NonValidatingSpecBase
         public string Name { get; set; }
         public string COMPANY_Name { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.DestinationMemberNamingConvention = ExactMatchNamingConvention.Instance;
         cfg.CreateMap<Source, Destination>();
@@ -88,7 +88,7 @@ public class When_mapping_with_lowercase_naming_conventions_two_ways_in_profiles
 
     protected override void Because_of()
     {
-        _dario = Mapper.Map<Neda, Dario>(new Neda {ja_se_zovem_imenom = "foo"});
+        _dario = Mapper.Map<Neda, Dario>(new Neda { ja_se_zovem_imenom = "foo" });
         _neda = Mapper.Map<Dario, Neda>(_dario);
     }
 

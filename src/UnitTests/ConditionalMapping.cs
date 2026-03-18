@@ -77,7 +77,7 @@ public class When_configuring_a_member_to_skip_based_on_the_property_value : Aut
     [Fact]
     public void Should_skip_the_mapping_when_the_condition_is_true()
     {
-        var destination = Mapper.Map<Source, Destination>(new Source {Value = -1});
+        var destination = Mapper.Map<Source, Destination>(new Source { Value = -1 });
 
         destination.Value.ShouldBe(0);
     }

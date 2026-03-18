@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class UsingEngineInsideMap : AutoMapperSpecBase
 {
     private Dest _dest;
@@ -26,13 +27,13 @@ public class UsingEngineInsideMap : AutoMapperSpecBase
                 opt =>
                     opt.MapFrom(
                         (src, dest, destMember, context) =>
-                            context.Mapper.Map(src, destMember, typeof (Source), typeof (ChildDest))));
+                            context.Mapper.Map(src, destMember, typeof(Source), typeof(ChildDest))));
         cfg.CreateMap<Source, ChildDest>();
     });
 
     protected override void Because_of()
     {
-        _dest = Mapper.Map<Source, Dest>(new Source {Foo = 5});
+        _dest = Mapper.Map<Source, Dest>(new Source { Foo = 5 });
     }
 
     [Fact]
@@ -54,8 +55,8 @@ public class When_mapping_null_with_context_mapper : AutoMapperSpecBase
         public string Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-        cfg.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom((s,d,dm, context)=>context.Mapper.Map<string>(null))));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
+        cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom((s, d, dm, context) => context.Mapper.Map<string>(null))));
 
     [Fact]
     public void Should_return_null() => Mapper.Map<Destination>(new Source()).Value.ShouldBeNull();

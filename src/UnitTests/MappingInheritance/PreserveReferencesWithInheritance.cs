@@ -73,7 +73,7 @@
     {
         List<Target.Member> _destination;
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         {
             cfg.CreateMap<Source.Instance, Target.Instance>()
               .Include<Source.Class, Target.Class>()
@@ -95,7 +95,7 @@
             var returnValue = new Source.Instance { Type = typeof(float), Definition = @class };
             @class.Definition = @class;
 
-            var source = new List<Source.Member> { new Source.Property { Name = "(return)", Definition = returnValue.Definition, Type = returnValue.Type }};
+            var source = new List<Source.Member> { new Source.Property { Name = "(return)", Definition = returnValue.Definition, Type = returnValue.Type } };
             _destination = Mapper.Map<List<Target.Member>>(source);
         }
     }

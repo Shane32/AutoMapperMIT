@@ -66,7 +66,7 @@ public class When_using_IMemberResolver_derived_interface : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(new Resolver(), s=>s.SValue));
+        cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(new Resolver(), s => s.SValue));
     });
 
     protected override void Because_of()
@@ -112,7 +112,7 @@ public class OpenGenericMapForMember : AutoMapperSpecBase
     {
         private readonly IEnumerable<TItem> _items;
 
-        public Pager(IEnumerable<TItem> items) :this(items, 0, 0, 0)
+        public Pager(IEnumerable<TItem> items) : this(items, 0, 0, 0)
         {
         }
         public Pager(IEnumerable<TItem> items,
@@ -153,7 +153,7 @@ public class OpenGenericMapForMember : AutoMapperSpecBase
     public void Should_map_ok()
     {
         _destination.Items.SequenceEqual(_items).ShouldBeTrue();
-    } 
+    }
 }
 
 public class IntToNullableIntConverter : AutoMapperSpecBase
@@ -164,7 +164,7 @@ public class IntToNullableIntConverter : AutoMapperSpecBase
     {
         public int? Convert(int source, int? destination, ResolutionContext context)
         {
-            if(source == default(int))
+            if (source == default(int))
             {
                 return null;
             }
@@ -187,7 +187,7 @@ public class IntToNullableIntConverter : AutoMapperSpecBase
         cfg.CreateMap<int, int?>().ConvertUsing<IntToNullableConverter>();
         cfg.CreateMap<Source, Destination>();
     });
-    
+
     protected override void Because_of()
     {
         _destination = Mapper.Map<Destination>(new Source());
@@ -261,7 +261,7 @@ public class When_throwing_NRE_from_MapFrom : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         string x = null;
-        cfg.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom(s=>x.ToString()));
+        cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(s => x.ToString()));
     });
 
     [Fact]
@@ -359,7 +359,7 @@ public class When_resolve_throws : NonValidatingSpecBase
     [Fact]
     public void Should_propagate_exception()
     {
-        new Action(()=>Mapper.Map<Destination>(new Source())).ShouldThrowException<AutoMapperMappingException>(e=>e.InnerException.ShouldBe(_ex));
+        new Action(() => Mapper.Map<Destination>(new Source())).ShouldThrowException<AutoMapperMappingException>(e => e.InnerException.ShouldBe(_ex));
     }
 }
 
@@ -459,7 +459,7 @@ public class When_mapping_from_object_to_string_with_use_value : AutoMapperSpecB
         public string Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => 
+    protected override MapperConfiguration CreateConfiguration() =>
         new(c => c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(src => new object())));
 
     protected override void Because_of()
@@ -489,7 +489,7 @@ public class When_mapping_from_object_to_string : AutoMapperSpecBase
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(c => c.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom(s=>s.ObjectValue)));
+        new(c => c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(s => s.ObjectValue)));
 
     protected override void Because_of()
     {
@@ -552,7 +552,7 @@ public class When_mapping_to_a_dto_member_with_custom_mapping : AutoMapperSpecBa
 
     protected override void Because_of()
     {
-        var model = new ModelObject {Value = 42, Value2fff = 42, Value3 = 42, Value4 = 42, Value5 = 42};
+        var model = new ModelObject { Value = 42, Value2fff = 42, Value3 = 42, Value4 = 42, Value5 = 42 };
         _result = Mapper.Map<ModelObject, ModelDto>(model);
     }
 
@@ -823,10 +823,10 @@ public class When_specifying_a_member_resolver_and_custom_constructor : AutoMapp
 
     protected override void Because_of()
     {
-            _source = new Source
-            {
-                Value = 10
-            };
+        _source = new Source
+        {
+            Value = 10
+        };
         _dest = Mapper.Map<Source, Destination>(_source);
     }
 
@@ -956,9 +956,9 @@ public class When_specifying_a_custom_translator_and_passing_in_the_destination_
         };
 
         _dest = new Destination
-                            {
-                                Value = 2
-                            };
+        {
+            Value = 2
+        };
     }
 
     [Fact]
@@ -1108,7 +1108,7 @@ public class When_specifying_a_custom_translator_with_mismatched_properties : Au
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<Source, Destination>()
-            .ConvertUsing(s => new Destination {Value2 = s.Value1 + 10});
+            .ConvertUsing(s => new Destination { Value2 = s.Value1 + 10 });
     });
 
     [Fact]
@@ -1252,7 +1252,8 @@ public class When_using_inheritance_with_value_resoluvers : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => {
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
+    {
         cfg.CreateMap<SourceDto, DestinationDto>()
             .ForMember(dest => dest.Ident, opt => opt.MapFrom(x => x.Id))
             .ForMember(dest => dest.Number, opt => opt.MapFrom<CustomResolver, string>(src => src.NumberValue))
@@ -1377,13 +1378,13 @@ public class When_specifying_a_custom_member_mapping_with_a_cast : NonValidating
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<Source, Destination>()
-            .ForMember(dest => ((ISomeInterface) dest).Name, opt => opt.MapFrom(src => src.MyName));
+            .ForMember(dest => ((ISomeInterface)dest).Name, opt => opt.MapFrom(src => src.MyName));
 
     });
 
     protected override void Because_of()
     {
-        _source = new Source {MyName = "jon"};
+        _source = new Source { MyName = "jon" };
         _dest = Mapper.Map<Source, Destination>(_source);
     }
 
@@ -1430,7 +1431,7 @@ public class When_destination_property_does_not_have_a_setter : AutoMapperSpecBa
 
     protected override void Because_of()
     {
-        _source = new Source {Name = "jon", Value = "value", Foo = "bar"};
+        _source = new Source { Name = "jon", Value = "value", Foo = "bar" };
         _dest = new Destination();
         _dest = Mapper.Map<Source, Destination>(_source);
     }

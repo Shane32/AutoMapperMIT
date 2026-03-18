@@ -1,6 +1,6 @@
 ﻿namespace OmmitedDTOModel3;
 
-public class EntityDTO17 :BaseEntity
+public class EntityDTO17 : BaseEntity
 {
     public EntityDTO17()
     {

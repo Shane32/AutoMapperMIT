@@ -44,7 +44,7 @@ public class ConstructorLetClause : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateProjection<Source, Destination>().ForCtorParam("item", o => o.MapFrom(s => s.Items.FirstOrDefault()));
-        cfg.CreateProjection<SourceItem, DestinationItem>().ForCtorParam("destinationValue", o=>o.MapFrom(s=>s.Values.FirstOrDefault()));
+        cfg.CreateProjection<SourceItem, DestinationItem>().ForCtorParam("destinationValue", o => o.MapFrom(s => s.Values.FirstOrDefault()));
         cfg.CreateProjection<SourceValue, DestinationValue>();
     });
     [Fact]
@@ -83,8 +83,8 @@ public class ConstructorMapFrom : AutoMapperSpecBase
     record Destination(bool Value)
     {
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => 
-        cfg.CreateProjection<Source, Destination>().ForCtorParam(nameof(Destination.Value), o=>o.MapFrom(s=>s.Value==5)));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
+        cfg.CreateProjection<Source, Destination>().ForCtorParam(nameof(Destination.Value), o => o.MapFrom(s => s.Value == 5)));
     [Fact]
     public void Should_construct_correctly() => new[] { new Source { Value = 5 } }.AsQueryable().ProjectTo<Destination>(Configuration).First().Value.ShouldBeTrue();
 }
@@ -139,13 +139,13 @@ public class ConstructorsWithCollections : AutoMapperSpecBase
         public int Id { get; set; }
         public AddressDto AddressDto { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateProjection<Users, UserDto>().ForMember(d => d.AddressDto, e => e.MapFrom(s => s.FkAddress));
         cfg.CreateProjection<Addresses, AddressDto>().ConstructUsing(a => new AddressDto(a.Id, a.Address));
     });
     [Fact]
-    public void Should_work() => ProjectTo<UserDto>(new[] { new Users { FkAddress = new Addresses { Address = "address" }  } }.AsQueryable()).First().AddressDto.Address.ShouldBe("address");
+    public void Should_work() => ProjectTo<UserDto>(new[] { new Users { FkAddress = new Addresses { Address = "address" } } }.AsQueryable()).First().AddressDto.Address.ShouldBe("address");
 }
 public class ConstructorTests : AutoMapperSpecBase
 {
@@ -160,7 +160,7 @@ public class ConstructorTests : AutoMapperSpecBase
     {
         public Dest()
         {
-            
+
         }
         public Dest(int other)
         {

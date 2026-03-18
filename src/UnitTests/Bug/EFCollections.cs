@@ -21,10 +21,10 @@ public class EFCollections : AutoMapperSpecBase
 
     public class Dest
     {
-        public ICollection<DestChild> Children { get; set; } 
+        public ICollection<DestChild> Children { get; set; }
     }
 
-    public class DestChild {}
+    public class DestChild { }
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {

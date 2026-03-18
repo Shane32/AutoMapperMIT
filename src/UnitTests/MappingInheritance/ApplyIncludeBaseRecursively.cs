@@ -35,7 +35,7 @@ public class ApplyIncludeBaseRecursively : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<ViewModel>(new SpecificEntity{ Map = true, Property1 = "Test" });
+        _destination = Mapper.Map<ViewModel>(new SpecificEntity { Map = true, Property1 = "Test" });
     }
 
     [Fact]

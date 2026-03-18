@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class CreateMapExpressionWithIgnoredPropertyBug
 {
     [Fact]

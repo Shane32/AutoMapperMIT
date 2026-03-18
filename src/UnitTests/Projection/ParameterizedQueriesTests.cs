@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ParameterizedQueriesTests_with_anonymous_object_and_factory : AutoMapperSpecBase
 {
     private Dest[] _dests;
@@ -89,7 +90,7 @@ public class ParameterizedQueriesTests_with_anonymous_object : AutoMapperSpecBas
     [Fact]
     public void Should_not_cache_parameter_value()
     {
-        var newDests = _sources.ProjectTo<Dest>(Configuration, new {value = 15}).ToArray();
+        var newDests = _sources.ProjectTo<Dest>(Configuration, new { value = 15 }).ToArray();
 
         newDests[0].Value.ShouldBe(20);
     }
@@ -125,7 +126,7 @@ public class ParameterizedQueriesTests_with_dictionary_object : AutoMapperSpecBa
             new Source()
         }.AsQueryable();
 
-        _dests = _sources.ProjectTo<Dest>(Configuration, new Dictionary<string, object>{{"value", 10}}).ToArray();
+        _dests = _sources.ProjectTo<Dest>(Configuration, new Dictionary<string, object> { { "value", 10 } }).ToArray();
     }
 
     [Fact]
@@ -140,7 +141,7 @@ public class ParameterizedQueriesTests_with_dictionary_object : AutoMapperSpecBa
         var newDests = _sources.ProjectTo<Dest>(Configuration, new Dictionary<string, object> { { "value", 15 } }).ToArray();
 
         newDests[0].Value.ShouldBe(20);
-    }  
+    }
 }
 
 public class ParameterizedQueriesTests_with_filter : AutoMapperSpecBase

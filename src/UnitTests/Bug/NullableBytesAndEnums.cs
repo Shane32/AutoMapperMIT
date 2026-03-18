@@ -27,7 +27,7 @@ public class NullableBytesAndEnums : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value = 2});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value = 2 });
     }
 
     [Fact]

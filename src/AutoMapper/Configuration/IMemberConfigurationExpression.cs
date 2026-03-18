@@ -25,7 +25,7 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember> 
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
     /// <typeparam name="TValueResolver">Value resolver type</typeparam>
     /// <typeparam name="TSourceMember">Source member to supply</typeparam>
-    void MapFrom<TValueResolver, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember) 
+    void MapFrom<TValueResolver, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember)
         where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>;
     /// <summary>
     /// Map destination member using a custom member value resolver supplied from a source member name
@@ -34,7 +34,7 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember> 
     /// <typeparam name="TValueResolver">Value resolver type</typeparam>
     /// <typeparam name="TSourceMember">Source member to supply</typeparam>
     /// <param name="sourceMemberName">Source member name</param>
-    void MapFrom<TValueResolver, TSourceMember>(string sourceMemberName) 
+    void MapFrom<TValueResolver, TSourceMember>(string sourceMemberName)
         where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>;
     /// <summary>
     /// Map destination member using a custom value resolver instance

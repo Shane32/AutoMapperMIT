@@ -1,11 +1,12 @@
 using System.Text.RegularExpressions;
 
 namespace AutoMapper.UnitTests.Tests;
+
 public class StubNamingConvention : INamingConvention
 {
     public Regex SplittingExpression { get; set; }
     public string SeparatorCharacter { get; set; }
-    public string[] Split(string input) => SplittingExpression.Matches(input).Select(m=>m.Value).ToArray();
+    public string[] Split(string input) => SplittingExpression.Matches(input).Select(m => m.Value).ToArray();
 }
 
 public class When_constructing_type_maps_with_matching_property_names : NonValidatingSpecBase
@@ -58,7 +59,7 @@ public class When_using_a_custom_source_naming_convention : AutoMapperSpecBase
     }
     private class TestProfile : Profile
     {
-        public TestProfile() => SourceMemberNamingConvention = new StubNamingConvention{ SeparatorCharacter = "__", SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)") };
+        public TestProfile() => SourceMemberNamingConvention = new StubNamingConvention { SeparatorCharacter = "__", SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)") };
     }
     protected override MapperConfiguration CreateConfiguration() => new(c => c.AddProfile<TestProfile>());
     [Fact]
@@ -80,7 +81,7 @@ public class When_using_a_custom_destination_naming_convention : AutoMapperSpecB
     }
     private class TestProfile : Profile
     {
-        public TestProfile() => DestinationMemberNamingConvention = new StubNamingConvention{ SeparatorCharacter = "__", SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)") };
+        public TestProfile() => DestinationMemberNamingConvention = new StubNamingConvention { SeparatorCharacter = "__", SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)") };
     }
     protected override MapperConfiguration CreateConfiguration() => new(c => c.AddProfile<TestProfile>());
     [Fact]
@@ -115,7 +116,7 @@ public class When_using_a_source_member_name_replacer : NonValidatingSpecBase
         });
 
         var mapper = config.CreateMapper();
-        var dest = mapper.Map<Destination>(new Source {Ävíator = 3, SubAirlinaFlight = 4, Value = 5});
+        var dest = mapper.Map<Destination>(new Source { Ävíator = 3, SubAirlinaFlight = 4, Value = 5 });
         dest.Aviator.ShouldBe(3);
         dest.SubAirlineFlight.ShouldBe(4);
         dest.Value.ShouldBe(5);

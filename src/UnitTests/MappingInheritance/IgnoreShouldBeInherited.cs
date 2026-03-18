@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
 {
     public class BaseDomain
@@ -34,12 +35,12 @@ public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
 public class IgnoreShouldBeInherited : AutoMapperSpecBase
 {
     public class BaseDomain
-    {            
+    {
     }
 
     public class SpecificDomain : BaseDomain
     {
-        public string SpecificProperty { get; set; }            
+        public string SpecificProperty { get; set; }
     }
 
     public class Dto
@@ -113,9 +114,9 @@ public class IgnoreOverrideShouldBeInherited : AutoMapperSpecBase
     }
     class Bar { public string FooText { get; set; } }
     class Boo : Bar { }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d=>d.Text, o=>o.MapFrom(s=>"")).Include<Bar, Foo>();
+        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s => "")).Include<Bar, Foo>();
         c.CreateMap<Bar, Foo>().ForMember(d => d.FooText, o => o.MapFrom(s => s.FooText)).Include<Boo, Foo>();
         c.CreateMap<Boo, Foo>();
     });
@@ -138,7 +139,7 @@ public class IgnoreOverrideShouldBeOverriden : AutoMapperSpecBase
     class Boo : Bar { }
     protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s=>"")).Include<Bar, Foo>();
+        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s => "")).Include<Bar, Foo>();
         c.CreateMap<Bar, Foo>().ForMember(d => d.FooText, o => o.MapFrom(s => s.FooText)).Include<Boo, Foo>();
         c.CreateMap<Boo, Foo>().ForMember(d => d.FooText, o => o.Ignore());
     });
@@ -161,7 +162,7 @@ public class IgnoreOverrideShouldBeInheritedIncludeBase : AutoMapperSpecBase
     class Boo : Bar { }
     protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s=>""));
+        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s => ""));
         c.CreateMap<Bar, Foo>().ForMember(d => d.FooText, o => o.MapFrom(s => s.FooText)).IncludeBase<object, Foo>();
         c.CreateMap<Boo, Foo>().IncludeBase<Bar, Foo>();
     });
@@ -184,7 +185,7 @@ public class IgnoreOverrideShouldBeOverridenIncludeBase : AutoMapperSpecBase
     class Boo : Bar { }
     protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s=>""));
+        c.CreateMap<object, Foo>().ForMember(d => d.FooText, o => o.Ignore()).ForMember(d => d.Text, o => o.MapFrom(s => ""));
         c.CreateMap<Bar, Foo>().ForMember(d => d.FooText, o => o.MapFrom(s => s.FooText)).IncludeBase<object, Foo>();
         c.CreateMap<Boo, Foo>().ForMember(d => d.FooText, o => o.Ignore()).IncludeBase<Bar, Foo>();
     });

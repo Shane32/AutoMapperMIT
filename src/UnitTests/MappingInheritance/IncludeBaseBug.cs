@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
+
 public class Include : AutoMapperSpecBase
 {
     public class From

@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class ForCtorParamValidation : AutoMapperSpecBase
 {
     record Source(float Value = 0);
@@ -21,14 +22,14 @@ public class ForCtorParam_MapFrom_String : AutoMapperSpecBase
         public string Key { get; }
         public string Value { get; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
         c.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
             .ForCtorParam("value1", o => o.MapFrom("Value"))
             .ForCtorParam("key1", o => o.MapFrom("Key")));
     [Fact]
     public void Should_map_ok()
     {
-        var destination = Map<Destination>(new KeyValuePair<int,int>(1,2));
+        var destination = Map<Destination>(new KeyValuePair<int, int>(1, 2));
         destination.Key.ShouldBe("1");
         destination.Value.ShouldBe("2");
     }
@@ -48,7 +49,7 @@ public class ForCtorParam_MapFrom_ProjectTo : AutoMapperSpecBase
     [Fact]
     public void Should_map_ok()
     {
-        var destination = ProjectTo<Destination>(new[] { new Source { Value1 = "Core" }}.AsQueryable()).Single();
+        var destination = ProjectTo<Destination>(new[] { new Source { Value1 = "Core" } }.AsQueryable()).Single();
         destination.Value.ShouldBe("Core");
     }
 }

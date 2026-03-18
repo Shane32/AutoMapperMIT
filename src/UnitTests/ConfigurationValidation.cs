@@ -1,4 +1,5 @@
 namespace AutoMapper.UnitTests.ConfigurationValidation;
+
 public class When_testing_a_dto_with_mismatched_member_names_and_mismatched_types : AutoMapperSpecBase
 {
     public class Source
@@ -92,7 +93,7 @@ public class ConstructorMappingValidation : NonValidatingSpecBase
     });
 
     [Fact]
-    public void Should_fail_validation() => new Action(AssertConfigurationIsValid).ShouldThrowException<AutoMapperConfigurationException>(ex=>
+    public void Should_fail_validation() => new Action(AssertConfigurationIsValid).ShouldThrowException<AutoMapperConfigurationException>(ex =>
         ex.MemberMap.ToString().ShouldBe("Void .ctor(ComplexType), parameter myComplexMember"));
 }
 
@@ -195,7 +196,7 @@ public class When_constructor_does_not_match_ForCtorParam : AutoMapperSpecBase
         public int Value { get; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Dest>().ForCtorParam("value", o=>o.MapFrom(s=>4)));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Dest>().ForCtorParam("value", o => o.MapFrom(s => 4)));
 
     [Fact]
     public void Should_map() => Mapper.Map<Dest>(new Source()).Value.ShouldBe(4);
@@ -375,7 +376,7 @@ public class ResolversWithSourceValidation : AutoMapperSpecBase
     {
         cfg.CreateMap<Source, Destination>(MemberList.Source)
             .ForMember(d => d.ResolvedDest, o => o.MapFrom<MemberResolver, int>("Resolved"))
-            .ForMember(d=>d.TypedResolvedDest, o => o.MapFrom<MemberResolver, int>(s => s.TypedResolved))
+            .ForMember(d => d.TypedResolvedDest, o => o.MapFrom<MemberResolver, int>(s => s.TypedResolved))
             .ForMember(d => d.ConvertedDest, o => o.ConvertUsing<ValueConverter, int>("Converted"))
             .ForMember(d => d.TypedConvertedDest, o => o.ConvertUsing<ValueConverter, int>(s => s.TypedConverted));
     });
@@ -400,8 +401,8 @@ public class NonMemberExpressionWithSourceValidation : NonValidatingSpecBase
     {
         public string OtherValue { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<Source, Destination>(MemberList.Source)
-        .ForMember(d=>d.OtherValue, o=>o.MapFrom(s=>s.Value ?? "")));
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>(MemberList.Source)
+        .ForMember(d => d.OtherValue, o => o.MapFrom(s => s.Value ?? "")));
     [Fact]
     public void Should_be_ignored() => new Action(AssertConfigurationIsValid)
         .ShouldThrow<AutoMapperConfigurationException>().Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Source.Value));
@@ -507,7 +508,7 @@ public class When_testing_a_dto_with_member_type_mapped_mappings : AutoMapperSpe
     {
         try
         {
-           AssertConfigurationIsValid();
+            AssertConfigurationIsValid();
         }
         catch (AutoMapperConfigurationException ex)
         {

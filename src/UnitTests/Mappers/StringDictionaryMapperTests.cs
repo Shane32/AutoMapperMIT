@@ -34,7 +34,7 @@ public class When_mapping_to_StringDictionary : NonValidatingSpecBase
         _destination["Bar"].ShouldBe("Bar");
     }
     [Fact]
-    public void Should_map_struct() => Map<StringDictionary>(new KeyValuePair<int, string>(1, "one")).ShouldBe(new StringDictionary { { "Key", 1 }, {"Value", "one"} });
+    public void Should_map_struct() => Map<StringDictionary>(new KeyValuePair<int, string>(1, "one")).ShouldBe(new StringDictionary { { "Key", 1 }, { "Value", "one" } });
 }
 public class When_mapping_from_StringDictionary : NonValidatingSpecBase
 {
@@ -97,7 +97,7 @@ public class When_mapping_struct_from_StringDictionary : NonValidatingSpecBase
     public void Should_map_non_generic()
     {
         var source = new StringDictionary() { { "Foo", "Foo" }, { "Bar", "Bar" } };
-        var destination = (Destination) Mapper.Map(source, null, typeof(Destination));
+        var destination = (Destination)Mapper.Map(source, null, typeof(Destination));
         destination.Foo.ShouldBe("Foo");
         destination.Bar.ShouldBe("Bar");
     }

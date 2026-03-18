@@ -95,7 +95,7 @@ public sealed class MapperConfigurationExpression : Profile, IGlobalConfiguratio
     /// Add an action to be called when validating the configuration.
     /// </summary>
     /// <param name="validator">the validation callback</param>
-    void IGlobalConfigurationExpression.Validator(Validator validator) => 
+    void IGlobalConfigurationExpression.Validator(Validator validator) =>
         _validators.Add(validator ?? throw new ArgumentNullException(nameof(validator)));
     /// <summary>
     /// How many levels deep should AutoMapper try to inline the execution plan for child classes.
@@ -167,8 +167,8 @@ public sealed class MapperConfigurationExpression : Profile, IGlobalConfiguratio
 
             foreach (var autoMapAttribute in type.GetCustomAttributes<AutoMapAttribute>())
             {
-                var mappingExpression = (MappingExpression) autoMapAttributeProfile.CreateMap(autoMapAttribute.SourceType, type);
-            
+                var mappingExpression = (MappingExpression)autoMapAttributeProfile.CreateMap(autoMapAttribute.SourceType, type);
+
                 foreach (var memberInfo in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
                 {
                     foreach (var memberConfigurationProvider in memberInfo.GetCustomAttributes().OfType<IMemberConfigurationProvider>())

@@ -16,7 +16,7 @@ public class RecognizeDestinationPostfixes : AutoMapperSpecBase
         public string NameV { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.RecognizeDestinationPostfixes("V");
         cfg.CreateMap<Person, PersonDto>().ForMember("AgeV", m => m.MapFrom("Age2"));

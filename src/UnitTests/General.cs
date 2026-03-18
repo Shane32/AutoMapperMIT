@@ -191,7 +191,7 @@ namespace AutoMapper.UnitTests
             {
                 var model = new ModelObject();
                 model.NullableDate = "Lorem Ipsum";
-                
+
                 typeof(AutoMapperMappingException).ShouldBeThrownBy(() => Mapper.Map<ModelObject, ModelDto>(model));
             }
         }
@@ -219,8 +219,8 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _model = new[] {new ModelObject {SomeValue = "First"}, new ModelObject {SomeValue = "Second"}};
-                _dto = (ModelDto[]) Mapper.Map(_model, typeof (ModelObject[]), typeof (ModelDto[]));
+                _model = new[] { new ModelObject { SomeValue = "First" }, new ModelObject { SomeValue = "Second" } };
+                _dto = (ModelDto[])Mapper.Map(_model, typeof(ModelObject[]), typeof(ModelDto[]));
             }
 
             [Fact]
@@ -260,8 +260,8 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _model = new List<ModelObject> {new ModelObject {SomeValue = "First"}, new ModelObject {SomeValue = "Second"}};
-                _dto = (ModelDto[]) Mapper.Map(_model, typeof (List<ModelObject>), typeof (ModelDto[]));
+                _model = new List<ModelObject> { new ModelObject { SomeValue = "First" }, new ModelObject { SomeValue = "Second" } };
+                _dto = (ModelDto[])Mapper.Map(_model, typeof(List<ModelObject>), typeof(ModelDto[]));
             }
 
             [Fact]
@@ -344,7 +344,7 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _model = new ModelObject {SomeValue = 2};
+                _model = new ModelObject { SomeValue = 2 };
                 _dto = Mapper.Map<ModelObject, ModelDto>(_model);
             }
 

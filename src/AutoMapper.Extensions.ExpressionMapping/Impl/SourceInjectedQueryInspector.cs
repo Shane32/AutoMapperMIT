@@ -8,7 +8,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.Impl
     {
         public SourceInjectedQueryInspector()
         {
-            SourceResult = (e,o) => { };
+            SourceResult = (e, o) => { };
             DestResult = o => { };
             StartQueryExecuteInterceptor = (t, e) => { };
         }

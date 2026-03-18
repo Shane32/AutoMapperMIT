@@ -75,7 +75,7 @@ public class When_the_destination_object_is_specified : AutoMapperSpecBase
         _originalDest.ShouldBeSameAs(_dest);
     }
 }
-   
+
 public class When_the_destination_object_is_specified_with_child_objects : AutoMapperSpecBase
 {
     private Source _source;

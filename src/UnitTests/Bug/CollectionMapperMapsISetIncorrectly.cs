@@ -28,9 +28,9 @@ public class CollectionMapperMapsIEnumerableToISetIncorrectly
         {
             Stuff = new[]
                         {
-                            new TypeWithStringProperty { Value = "Microphone" }, 
-                            new TypeWithStringProperty { Value = "Check" }, 
-                            new TypeWithStringProperty { Value = "1, 2" }, 
+                            new TypeWithStringProperty { Value = "Microphone" },
+                            new TypeWithStringProperty { Value = "Check" },
+                            new TypeWithStringProperty { Value = "1, 2" },
                             new TypeWithStringProperty { Value = "What is this?" }
                         }
         };

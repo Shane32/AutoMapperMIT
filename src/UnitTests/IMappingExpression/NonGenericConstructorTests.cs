@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class NonGenericConstructorTests : AutoMapperSpecBase
 {
     private Dest[] _dest;
@@ -12,7 +13,7 @@ public class NonGenericConstructorTests : AutoMapperSpecBase
     {
         public Dest()
         {
-            
+
         }
         public Dest(int other)
         {
@@ -27,7 +28,7 @@ public class NonGenericConstructorTests : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.AddIgnoreMapAttribute();
-        cfg.CreateMap(typeof (Source), typeof (Dest)).ConstructUsing(src => new Dest(((Source)src).Value + 10));
+        cfg.CreateMap(typeof(Source), typeof(Dest)).ConstructUsing(src => new Dest(((Source)src).Value + 10));
     });
 
     protected override void Because_of()

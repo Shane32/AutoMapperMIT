@@ -4,7 +4,7 @@ public class InterfaceSelfMappingBug
 {
     public interface IFoo
     {
-        int Value { get; set; } 
+        int Value { get; set; }
     }
 
     public class Bar : IFoo

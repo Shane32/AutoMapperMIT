@@ -35,10 +35,10 @@ namespace AutoMapper.Extensions.ExpressionMapping.Impl
         public SourceInjectedQueryInspector Inspector { get; set; }
         internal Action<IEnumerable<object>> EnumerationHandler { get; set; }
 
-        public IQueryable CreateQuery(Expression expression) 
+        public IQueryable CreateQuery(Expression expression)
             => new SourceSourceInjectedQuery<TSource, TDestination>(this, expression, EnumerationHandler, _exceptionHandler);
 
-        public IQueryable<TElement> CreateQuery<TElement>(Expression expression) 
+        public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
             => new SourceSourceInjectedQuery<TSource, TElement>(this, expression, EnumerationHandler, _exceptionHandler);
 
         public object Execute(Expression expression)
@@ -81,10 +81,10 @@ namespace AutoMapper.Extensions.ExpressionMapping.Impl
                     // in case of a projection, we need an IQueryable
                     var sourceResult = _dataSource.Provider.CreateQuery(sourceExpression);
                     Inspector.SourceResult(sourceExpression, sourceResult);
-                    
+
                     var queryExpressions = _mapper.ConfigurationProvider.Internal().ProjectionBuilder.GetProjection
                     (
-                        sourceResult.ElementType, 
+                        sourceResult.ElementType,
                         typeof(TDestination),
                         _parameters,
                         [.. _membersToExpand.Select
@@ -172,8 +172,8 @@ namespace AutoMapper.Extensions.ExpressionMapping.Impl
 
                         var queryExpressions = _mapper.ConfigurationProvider.Internal().ProjectionBuilder.GetProjection
                         (
-                            sourceResultType, 
-                            destResultType, 
+                            sourceResultType,
+                            destResultType,
                             _parameters,
                             [.. _membersToExpand.Select
                             (
@@ -288,7 +288,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.Impl
             return !searcher.ContainsElementOperator;
         }
 
-        private static bool IsProjection(Type resultType) 
+        private static bool IsProjection(Type resultType)
             => resultType.IsEnumerableType() && !resultType.IsQueryableType() && resultType != typeof(string);
 
         private static Type CreateSourceResultType(Type destResultType)

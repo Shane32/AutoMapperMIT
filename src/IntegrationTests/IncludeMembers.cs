@@ -44,16 +44,16 @@ public class IncludeMembers : IntegrationTest<IncludeMembers.DatabaseInitializer
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateProjection<Source, Destination>().IncludeMembers(s=>s.InnerSource, s=>s.OtherInnerSource);
+        cfg.CreateProjection<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
         cfg.CreateProjection<InnerSource, Destination>(MemberList.None);
         cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None);
     });
     [Fact]
     public void Should_flatten()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var projectTo = ProjectTo<Destination>(context.Sources);
             var result = projectTo.Single();
@@ -110,15 +110,15 @@ public class IncludeMembersExplicitExpansion : IntegrationTest<IncludeMembersExp
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateProjection<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-        cfg.CreateProjection<InnerSource, Destination>(MemberList.None).ForMember(d=>d.Description, o=>o.ExplicitExpansion());
-        cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None).ForMember(d=>d.Title, o=>o.ExplicitExpansion());
+        cfg.CreateProjection<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.ExplicitExpansion());
+        cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.ExplicitExpansion());
     });
     [Fact]
     public void Should_flatten()
     {
         using (var context = new Context())
         {
-            var projectTo = ProjectTo<Destination>(context.Sources, null, d=>d.Title);
+            var projectTo = ProjectTo<Destination>(context.Sources, null, d => d.Title);
             var result = projectTo.Single();
             result.Name.ShouldBe("name");
             result.Description.ShouldBeNull();
@@ -449,7 +449,7 @@ public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom : Integration
     }
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateProjection<Source, Destination>().IncludeMembers(s => s.InnerSourceWrappers.Select(s => s.InnerSource).FirstOrDefault(), s => s.OtherInnerSources.Select(s=>s).FirstOrDefault());
+        cfg.CreateProjection<Source, Destination>().IncludeMembers(s => s.InnerSourceWrappers.Select(s => s.InnerSource).FirstOrDefault(), s => s.OtherInnerSources.Select(s => s).FirstOrDefault());
         cfg.CreateProjection<InnerSource, Destination>(MemberList.None).ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails).FirstOrDefault()));
         cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSourceDetails.Select(s => s).FirstOrDefault()));
         cfg.CreateProjection<InnerSourceDetails, DestinationDetails>();
@@ -813,13 +813,13 @@ public class IncludeMembersWithMapFromExpression : IntegrationTest<IncludeMember
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateProjection<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-        cfg.CreateProjection<InnerSource, Destination>(MemberList.None).ForMember(d=>d.Description, o=>o.MapFrom(s=>s.Description1));
-        cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None).ForMember(d=>d.Title, o=>o.MapFrom(s=>s.Title1));
+        cfg.CreateProjection<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.MapFrom(s => s.Description1));
+        cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.MapFrom(s => s.Title1));
     });
     [Fact]
     public void Should_flatten_with_MapFrom()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var result = ProjectTo<Destination>(context.Sources).Single();
             result.Name.ShouldBe("name");
@@ -882,7 +882,7 @@ public class IncludeMembersWithNullSubstitute : IntegrationTest<IncludeMembersWi
     [Fact]
     public void Should_flatten()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var result = ProjectTo<Destination>(context.Sources).Single();
             result.Name.ShouldBe("name");
@@ -957,23 +957,23 @@ public class CascadedIncludeMembers : IntegrationTest<CascadedIncludeMembers.Dat
 {
     public class Source
     {
-        public int Id{ get; set; }
-        public Level1 FieldLevel1{ get; set; }
+        public int Id { get; set; }
+        public Level1 FieldLevel1 { get; set; }
     }
     public class Level1
     {
-        public int Id{ get; set; }
-        public Level2 FieldLevel2{ get; set; }
+        public int Id { get; set; }
+        public Level2 FieldLevel2 { get; set; }
     }
     public class Level2
     {
-        public int Id{ get; set; }
-        public long TheField{ get; set; }
+        public int Id { get; set; }
+        public long TheField { get; set; }
     }
     public class Destination
     {
-        public int Id{ get; set; }
-        public long TheField{ get; set; }
+        public int Id { get; set; }
+        public long TheField { get; set; }
     }
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
@@ -1618,7 +1618,7 @@ public class IncludeMembersFirstOrDefaultNoPolymorhism : IntegrationTest<Include
         cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSources.FirstOrDefault(), s => s.OtherInnerSources.FirstOrDefault())
             .Include<Source, DestinationB>()
             .Include<SourceA, Destination>();
-        cfg.CreateMap<SourceA, Destination>().ForMember(d=>d.Description, o=>o.MapFrom(s=>"descriptionA"));
+        cfg.CreateMap<SourceA, Destination>().ForMember(d => d.Description, o => o.MapFrom(s => "descriptionA"));
         cfg.CreateMap<Source, DestinationB>().ForMember(s => s.B, o => o.MapFrom(s => "b"));
         cfg.CreateMap<InnerSource, Destination>(MemberList.None);
         cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);

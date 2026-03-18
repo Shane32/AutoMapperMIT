@@ -53,7 +53,7 @@ public class ConvertUsingWithNullables : IntegrationTest<ConvertUsingWithNullabl
     [Fact]
     public void Should_project_ok()
     {
-        using(var context = new TestContext())
+        using (var context = new TestContext())
         {
             var results = ProjectTo<MyTableModel>(context.MyTable).ToList();
             results[0].Id.ShouldBe(1);

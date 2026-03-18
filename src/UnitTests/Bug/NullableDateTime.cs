@@ -83,7 +83,7 @@ public class NullableDateTime : AutoMapperSpecBase
     {
         cfg.CreateMap<Source, Destination>();
         cfg.CreateMap<DateTime, DateTime?>()
-            .ConvertUsing(source => source == new DateTime(1900, 1, 1) ? (DateTime?) null : source);
+            .ConvertUsing(source => source == new DateTime(1900, 1, 1) ? (DateTime?)null : source);
     });
 
     protected override void Because_of()

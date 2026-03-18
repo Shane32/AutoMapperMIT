@@ -16,6 +16,7 @@
     <PackageProjectUrl>https://automapper.org</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <WarningsAsErrors>true</WarningsAsErrors>
   </PropertyGroup>
 
 	<ItemGroup>

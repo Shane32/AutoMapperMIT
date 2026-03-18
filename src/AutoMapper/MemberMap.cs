@@ -65,22 +65,22 @@ public class MemberMap : IValueResolver
     }
     protected bool ApplyInheritedMap(MemberMap inheritedMap)
     {
-        if(Ignored || IsResolveConfigured)
+        if (Ignored || IsResolveConfigured)
         {
             return false;
         }
-        if(inheritedMap.Ignored)
+        if (inheritedMap.Ignored)
         {
             Ignored = true;
             return true;
         }
-        if(inheritedMap.IsResolveConfigured)
+        if (inheritedMap.IsResolveConfigured)
         {
             _sourceType = inheritedMap._sourceType;
             Resolver = inheritedMap.Resolver.CloseGenerics(TypeMap);
             return true;
         }
-        if(Resolver == null)
+        if (Resolver == null)
         {
             _sourceType = inheritedMap._sourceType;
             MapByConvention(inheritedMap.SourceMembers);
@@ -108,6 +108,6 @@ public static class ValueTransformerConfigurationExtensions
     /// <typeparam name="TValue">Value type to match and transform</typeparam>
     /// <param name="valueTransformers">Value transformer list</param>
     /// <param name="transformer">Transformation expression</param>
-    public static void Add<TValue>(this List<ValueTransformerConfiguration> valueTransformers, Expression<Func<TValue, TValue>> transformer) => 
+    public static void Add<TValue>(this List<ValueTransformerConfiguration> valueTransformers, Expression<Func<TValue, TValue>> transformer) =>
         valueTransformers.Add(new(typeof(TValue), transformer));
 }

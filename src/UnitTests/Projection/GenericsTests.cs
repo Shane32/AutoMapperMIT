@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class GenericsTests : AutoMapperSpecBase
 {
     private Dest<string>[] _dests;
@@ -15,7 +16,7 @@ public class GenericsTests : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap(typeof (Source<>), typeof (Dest<>));
+        cfg.CreateMap(typeof(Source<>), typeof(Dest<>));
     });
 
     protected override void Because_of()

@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class SeparateConfiguration : NonValidatingSpecBase
 {
     public class Source
@@ -21,7 +22,7 @@ public class SeparateConfiguration : NonValidatingSpecBase
     [Fact]
     public void Should_use_passed_in_configuration()
     {
-        var source = new Source {Value = 5};
+        var source = new Source { Value = 5 };
         var dest = Mapper.Map<Source, Dest>(source);
 
         dest.Value.ShouldBe(source.Value);

@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class NullArrayBug : AutoMapperSpecBase
 {
     private static Source _source;
@@ -9,7 +10,7 @@ public class NullArrayBug : AutoMapperSpecBase
         cfg.AllowNullCollections = false;
         cfg.CreateMap<Source, Destination>();
 
-        _source = new Source {Name = null, Data = null};
+        _source = new Source { Name = null, Data = null };
     });
 
     protected override void Because_of()

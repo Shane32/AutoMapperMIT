@@ -35,18 +35,18 @@ public class InheritForPath : AutoMapperSpecBase
         public string DescendantField { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<RootModel, DataModel>()
                         .ForMember(dest => dest.OtherID, opt => opt.MapFrom(src => src.Nested.NestedID))
                         .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Nested.NestedTitle))
                         .ForMember(dest => dest.Title2, opt => opt.MapFrom(src => src.Nested.NestedTitle2))
                         .ReverseMap()
-                        .ForPath(d=>d.Nested.NestedTitle2, o=>o.Ignore());
+                        .ForPath(d => d.Nested.NestedTitle2, o => o.Ignore());
 
         cfg.CreateMap<DerivedModel, DerivedDataModel>()
                         .IncludeBase<RootModel, DataModel>().ReverseMap()
-                        .ForPath(d=>d.Nested.NestedTitle, o=>o.Ignore())
+                        .ForPath(d => d.Nested.NestedTitle, o => o.Ignore())
                         .ForPath(d => d.Nested.NestedTitle2, opt => opt.MapFrom(src => src.Title2));
     });
 
@@ -88,7 +88,7 @@ public class ForPath : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<OrderDto, Order>()
-            .ForPath(o=>o.CustomerHolder.Customer.Name, o=>o.MapFrom(s=>s.CustomerName))
+            .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
             .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
     });
 
@@ -169,7 +169,7 @@ public class ForPathWithoutSettersShouldBehaveAsForMember : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<OrderDto, Order>()
-            .ForMember(o=>o.Value, o=>o.MapFrom(src => 9))
+            .ForMember(o => o.Value, o => o.MapFrom(src => 9))
             .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
             .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total));
     });
@@ -246,7 +246,7 @@ public class ForPathWithNullExpressionShouldFail
     {
         public string Name { get; set; }
     }
-    
+
     [Fact]
     public void Should_throw_exception()
     {

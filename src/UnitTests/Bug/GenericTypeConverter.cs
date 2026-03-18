@@ -4,7 +4,7 @@ public class GenericTypeConverterWithTwoArguments : AutoMapperSpecBase
 {
     List<object> _destination;
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap(typeof(List<>), typeof(List<>)).ConvertUsing(typeof(Converter<,>)));
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap(typeof(List<>), typeof(List<>)).ConvertUsing(typeof(Converter<,>)));
 
     protected override void Because_of()
     {
@@ -115,13 +115,13 @@ public class GenericTypeConverter : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap(typeof (Source<>), typeof (Destination<>)).ConvertUsing(typeof (Converter<>));
-        cfg.CreateMap(typeof (OtherSource<>), typeof (OtherDestination<>)).ConvertUsing(typeof (Converter<>));
-        cfg.CreateMap(typeof (Source<>), typeof (int)).ConvertUsing(typeof (Converter<>));
-        cfg.CreateMap(typeof (int), typeof (Destination<>)).ConvertUsing(typeof (Converter<>));
-        cfg.CreateMap(typeof (OtherSource<>), typeof (Destination<object>)).ConvertUsing(typeof (Converter<>));
+        cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ConvertUsing(typeof(Converter<>));
+        cfg.CreateMap(typeof(OtherSource<>), typeof(OtherDestination<>)).ConvertUsing(typeof(Converter<>));
+        cfg.CreateMap(typeof(Source<>), typeof(int)).ConvertUsing(typeof(Converter<>));
+        cfg.CreateMap(typeof(int), typeof(Destination<>)).ConvertUsing(typeof(Converter<>));
+        cfg.CreateMap(typeof(OtherSource<>), typeof(Destination<object>)).ConvertUsing(typeof(Converter<>));
         cfg.CreateMap(typeof(Source<object>), typeof(OtherDestination<>)).ConvertUsing(typeof(Converter<>));
-        cfg.CreateMap(typeof (Hashtable), typeof (IReadOnlyDictionary<,>)).ConvertUsing(typeof (Converter<,>));
+        cfg.CreateMap(typeof(Hashtable), typeof(IReadOnlyDictionary<,>)).ConvertUsing(typeof(Converter<,>));
     });
 
     protected override void Because_of()

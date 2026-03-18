@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class NullSubstitutes : AutoMapperSpecBase
 {
     private List<Dest> _dests;
@@ -10,7 +11,7 @@ public class NullSubstitutes : AutoMapperSpecBase
 
     public class Dest
     {
-        public int? Value { get; set; }            
+        public int? Value { get; set; }
     }
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
@@ -20,7 +21,7 @@ public class NullSubstitutes : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        var source = new[] {new Source()}.AsQueryable();
+        var source = new[] { new Source() }.AsQueryable();
 
         _dests = source.ProjectTo<Dest>(Configuration).ToList();
     }
@@ -43,7 +44,7 @@ public class NullSubstitutesWithMapFrom : AutoMapperSpecBase
 
     public class Dest
     {
-        public int? ValuePropertyNotMatching { get; set; }            
+        public int? ValuePropertyNotMatching { get; set; }
     }
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
@@ -57,7 +58,7 @@ public class NullSubstitutesWithMapFrom : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        var source = new[] {new Source()}.AsQueryable();
+        var source = new[] { new Source() }.AsQueryable();
 
         _dests = source.ProjectTo<Dest>(Configuration).ToList();
     }

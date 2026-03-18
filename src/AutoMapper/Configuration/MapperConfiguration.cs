@@ -1,4 +1,5 @@
 namespace AutoMapper;
+
 using Features;
 using Internal.Mappers;
 using QueryableExtensions.Impl;
@@ -58,13 +59,13 @@ public sealed class MapperConfiguration : IGlobalConfiguration
     private readonly List<Type> _typesInheritance = [];
     public MapperConfiguration(MapperConfigurationExpression configurationExpression)
     {
-        _configurationExpression=configurationExpression;
+        _configurationExpression = configurationExpression;
         var configuration = (IGlobalConfigurationExpression)configurationExpression;
         if (configuration.MethodMappingEnabled != false)
         {
             configuration.IncludeSourceExtensionMethods(typeof(Enumerable));
         }
-        _mappers = [..configuration.Mappers];
+        _mappers = [.. configuration.Mappers];
         _executionPlans = new(CompileExecutionPlan);
         _projectionBuilder = new(CreateProjectionBuilder);
         Configuration = new((IProfileConfiguration)configuration);
@@ -155,14 +156,14 @@ public sealed class MapperConfiguration : IGlobalConfiguration
             return executionPlan.Compile(); // breakpoint here to inspect all execution plans
         }
     }
-    public MapperConfiguration(Action<IMapperConfigurationExpression> configure) : this(Build(configure)){}
+    public MapperConfiguration(Action<IMapperConfigurationExpression> configure) : this(Build(configure)) { }
     static MapperConfigurationExpression Build(Action<IMapperConfigurationExpression> configure)
     {
         MapperConfigurationExpression expr = new();
         configure(expr);
         return expr;
     }
-    public void AssertConfigurationIsValid() => Validator().AssertConfigurationExpressionIsValid([.._configuredMaps.Values]);
+    public void AssertConfigurationIsValid() => Validator().AssertConfigurationExpressionIsValid([.. _configuredMaps.Values]);
     ConfigurationValidator Validator() => new(this);
     public IMapper CreateMapper() => new Mapper(this);
     public IMapper CreateMapper(Func<Type, object> serviceCtor) => new Mapper(this, serviceCtor);
@@ -227,7 +228,7 @@ public sealed class MapperConfiguration : IGlobalConfiguration
         }
     }
     internal IGlobalConfigurationExpression ConfigurationExpression => _configurationExpression;
-    ProjectionBuilder CreateProjectionBuilder() => new(this, [..ConfigurationExpression.ProjectionMappers]);
+    ProjectionBuilder CreateProjectionBuilder() => new(this, [.. ConfigurationExpression.ProjectionMappers]);
     IProjectionBuilder IGlobalConfiguration.ProjectionBuilder => _projectionBuilder.Value;
     Func<Type, object> IGlobalConfiguration.ServiceCtor => ConfigurationExpression.ServiceCtor;
     bool IGlobalConfiguration.EnableNullPropagationForQueryMapping => ConfigurationExpression.EnableNullPropagationForQueryMapping.GetValueOrDefault();
@@ -333,10 +334,10 @@ public sealed class MapperConfiguration : IGlobalConfiguration
         GetTypeInheritance(typesInheritance, initialTypes.SourceType);
         var sourceTypesLength = typesInheritance.Count;
         GetTypeInheritance(typesInheritance, initialTypes.DestinationType);
-        for(int destinationIndex = sourceTypesLength; destinationIndex < typesInheritance.Count; destinationIndex++)
+        for (int destinationIndex = sourceTypesLength; destinationIndex < typesInheritance.Count; destinationIndex++)
         {
             var destinationType = typesInheritance[destinationIndex];
-            for(int sourceIndex = 0; sourceIndex < sourceTypesLength; sourceIndex++)
+            for (int sourceIndex = 0; sourceIndex < sourceTypesLength; sourceIndex++)
             {
                 var sourceType = typesInheritance[sourceIndex];
                 if (sourceType == initialTypes.SourceType && destinationType == initialTypes.DestinationType)
@@ -346,7 +347,7 @@ public sealed class MapperConfiguration : IGlobalConfiguration
                 TypePair types = new(sourceType, destinationType);
                 if (_resolvedMaps.TryGetValue(types, out typeMap))
                 {
-                    if(typeMap == null)
+                    if (typeMap == null)
                     {
                         continue;
                     }

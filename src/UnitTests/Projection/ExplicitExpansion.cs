@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ExplicitExpansion : AutoMapperSpecBase
 {
     private Dest[] _dests;
@@ -12,7 +13,7 @@ public class ExplicitExpansion : AutoMapperSpecBase
 
     public class ChildSource
     {
-        
+
     }
 
     public class Dest
@@ -34,7 +35,7 @@ public class ExplicitExpansion : AutoMapperSpecBase
             ;
         cfg.CreateProjection<ChildSource, ChildDest>();
     });
-        
+
 
     protected override void Because_of()
     {

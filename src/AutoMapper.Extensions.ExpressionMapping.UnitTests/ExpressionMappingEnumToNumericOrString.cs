@@ -74,23 +74,23 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests
                     config.AddExpressionMapping();
                     config.CreateMap<Entity<byte>, EntityDto<SimpleEnumByte>>()
                     .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
-                    .ReverseMap();                    
-                    
+                    .ReverseMap();
+
                     config.CreateMap<Entity<sbyte>, EntityDto<SimpleEnumSByte>>()
                     .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
-                    .ReverseMap();                    
+                    .ReverseMap();
                     config.CreateMap<Entity<short>, EntityDto<SimpleEnumShort>>()
                     .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
-                    .ReverseMap();                    
+                    .ReverseMap();
                     config.CreateMap<Entity<ushort>, EntityDto<SimpleEnumUShort>>()
                     .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
-                    .ReverseMap();                    
+                    .ReverseMap();
                     config.CreateMap<Entity<int>, EntityDto<SimpleEnumInt>>()
                     .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
                     .ReverseMap();
-                     config.CreateMap<Entity<int?>, EntityDto<SimpleEnumInt>>()
-                    .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
-                    .ReverseMap();
+                    config.CreateMap<Entity<int?>, EntityDto<SimpleEnumInt>>()
+                   .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
+                   .ReverseMap();
                     config.CreateMap<Entity<uint>, EntityDto<SimpleEnumUInt>>()
                     .ForMember(dest => dest.Value, config => config.MapFrom(src => src.Value))
                     .ReverseMap();

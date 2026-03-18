@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class NonGenericProjectEnumTest
 {
     private MapperConfiguration _config;
@@ -55,8 +56,8 @@ public class NonGenericProjectAndMapEnumTest
     {
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap(typeof (Customer), typeof (CustomerDto));
-            cfg.CreateMap(typeof (CustomerType), typeof (string)).ConvertUsing(ct => ct.ToString().ToUpper());
+            cfg.CreateMap(typeof(Customer), typeof(CustomerDto));
+            cfg.CreateMap(typeof(CustomerType), typeof(string)).ConvertUsing(ct => ct.ToString().ToUpper());
         });
         _mapper = config.CreateMapper();
     }
@@ -100,7 +101,7 @@ public class NonGenericProjectionOverrides : AutoMapperSpecBase
 {
     public class Source
     {
-        
+
     }
 
     public class Dest
@@ -110,7 +111,7 @@ public class NonGenericProjectionOverrides : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap(typeof (Source), typeof (Dest)).ConvertUsing(src => new Dest {Value = 10});
+        cfg.CreateMap(typeof(Source), typeof(Dest)).ConvertUsing(src => new Dest { Value = 10 });
     });
     [Fact]
     public void Validate() => AssertConfigurationIsValid();

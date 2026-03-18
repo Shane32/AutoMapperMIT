@@ -42,8 +42,8 @@ namespace AutoMapper.UnitTests
         public List<ProductTypeDto> Types { get; set; }
     }
     public abstract class ProductTypeDto { }
-    public class ProdTypeA : ProductTypeDto {}
-    public class ProdTypeB : ProductTypeDto {}
+    public class ProdTypeA : ProductTypeDto { }
+    public class ProdTypeB : ProductTypeDto { }
 
     public class ProductTypeConverter : ITypeConverter<ProductType, ProductTypeDto>
     {
@@ -176,12 +176,12 @@ namespace AutoMapper.UnitTests
             _extendedProducts[0].BOM.Count.ShouldBe(1);
             _extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldBe(5);
         }
-           
+
         [Fact]
         public void Should_use_extension_methods()
         {
 
-                
+
             var queryable = _products.AsQueryable();
 
             var simpleProducts = queryable.ProjectTo<SimpleProductDto>(_config).ToList();

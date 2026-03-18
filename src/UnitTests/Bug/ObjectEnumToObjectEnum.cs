@@ -29,7 +29,7 @@ public class ObjectEnumToObjectEnum : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         var parentMapping = cfg.CreateMap<Source, Target>();
-        parentMapping.ForMember(dest => dest.Value, opt => opt.MapFrom(s => (TargetEnumValue) s.Value));
+        parentMapping.ForMember(dest => dest.Value, opt => opt.MapFrom(s => (TargetEnumValue)s.Value));
     });
 
     protected override void Because_of()

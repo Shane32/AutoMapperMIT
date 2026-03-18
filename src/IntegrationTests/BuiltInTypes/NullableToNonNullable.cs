@@ -98,7 +98,7 @@ public class NullableIntToLong : IntegrationTest<NullableIntToLong.DatabaseIniti
     [Fact]
     public void Can_map_with_projection()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             var model = ProjectTo<CustomerViewModel>(context.Customers).Single();
             model.Id.ShouldBe(1);

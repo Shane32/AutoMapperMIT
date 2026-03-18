@@ -35,7 +35,7 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _result = Mapper.Map<Model, Dto>(new Model {Value = 5});
+                _result = Mapper.Map<Model, Dto>(new Model { Value = 5 });
             }
 
             [Fact]

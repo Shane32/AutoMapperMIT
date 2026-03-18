@@ -38,7 +38,7 @@
             public void Should_skip_the_mapping_when_the_condition_is_false()
             {
                 var src = new Source();
-                src.Value.Add(new SubSource {SubValue = "x"});
+                src.Value.Add(new SubSource { SubValue = "x" });
                 var destination = Mapper.Map<Source, Destination>(src);
 
                 destination.Value.ShouldBeNull();
@@ -48,8 +48,8 @@
             public void Should_execute_the_mapping_when_the_condition_is_true()
             {
                 var src = new Source();
-                src.Value.Add(new SubSource {SubValue = "x"});
-                src.Value.Add(new SubSource {SubValue = "x"});
+                src.Value.Add(new SubSource { SubValue = "x" });
+                src.Value.Add(new SubSource { SubValue = "x" });
                 var destination = Mapper.Map<Source, Destination>(src);
 
                 destination.Value.ShouldBe("x");
@@ -138,7 +138,7 @@
             [Fact]
             public void Should_execute_the_mapping_when_the_condition_property_is_true()
             {
-                var src = new Source {BasePrice = 15};
+                var src = new Source { BasePrice = 15 };
                 var dest = Mapper.Map<Source, Destination>(src);
 
                 dest.BasePrice.ShouldBe(src.BasePrice);
@@ -171,15 +171,15 @@
             public void Should_map_value_when_null()
             {
                 var destination = new Dest();
-                Mapper.Map(new Source {Value = 5}, destination);
+                Mapper.Map(new Source { Value = 5 }, destination);
                 destination.Value.ShouldBe(5);
             }
 
             [Fact]
             public void Should_not_map_value_when_not_null()
             {
-                var destination = new Dest { Value = 6};
-                Mapper.Map(new Source {Value = 5}, destination);
+                var destination = new Dest { Value = 6 };
+                Mapper.Map(new Source { Value = 5 }, destination);
                 destination.Value.ShouldBe(6);
             }
         }

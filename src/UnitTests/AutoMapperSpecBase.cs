@@ -1,4 +1,5 @@
 namespace AutoMapper.UnitTests;
+
 public abstract class AutoMapperSpecBase : NonValidatingSpecBase
 {
     protected override void OnConfig(MapperConfiguration mapperConfiguration) => mapperConfiguration.AssertConfigurationIsValid();
@@ -28,7 +29,7 @@ public abstract class NonValidatingSpecBase
     protected void AssertConfigurationIsValid(Type sourceType, Type destinationType) => Configuration.AssertConfigurationIsValid(Configuration.FindTypeMapFor(sourceType, destinationType));
     public void AssertConfigurationIsValid(string profileName) => Configuration.AssertConfigurationIsValid(profileName);
     public void AssertConfigurationIsValid<TProfile>() where TProfile : Profile, new() => Configuration.AssertConfigurationIsValid<TProfile>();
-    protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, object parameters = null, params Expression<Func<TDestination, object>>[] membersToExpand) => 
+    protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, object parameters = null, params Expression<Func<TDestination, object>>[] membersToExpand) =>
         Mapper.ProjectTo(source, parameters, membersToExpand);
     protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, IDictionary<string, object> parameters, params string[] membersToExpand) =>
         Mapper.ProjectTo<TDestination>(source, parameters, membersToExpand);
@@ -52,7 +53,7 @@ static class Utils
     public static IReadOnlyCollection<TypeMap> GetAllTypeMaps(this IConfigurationProvider configurationProvider) => configurationProvider.Internal().GetAllTypeMaps();
     public static TypeMap ResolveTypeMap(this IConfigurationProvider configurationProvider, Type sourceType, Type destinationType) => configurationProvider.Internal().ResolveTypeMap(sourceType, destinationType);
     public static void ForAllMaps(this IMapperConfigurationExpression configurationProvider, Action<TypeMap, IMappingExpression> configuration) => configurationProvider.Internal().ForAllMaps(configuration);
-    public static void ForAllPropertyMaps(this IMapperConfigurationExpression configurationProvider, Func<PropertyMap, bool> condition, Action<PropertyMap, IMemberConfigurationExpression> memberOptions) => 
+    public static void ForAllPropertyMaps(this IMapperConfigurationExpression configurationProvider, Func<PropertyMap, bool> condition, Action<PropertyMap, IMemberConfigurationExpression> memberOptions) =>
         configurationProvider.Internal().ForAllPropertyMaps(condition, memberOptions);
     public static void AddIgnoreMapAttribute(this IMapperConfigurationExpression configuration)
     {
@@ -63,7 +64,7 @@ static class Utils
                 memberOptions.Ignore();
             }
         }));
-        configuration.ForAllPropertyMaps(propertyMap => propertyMap.SourceMember?.Has<IgnoreMapAttribute>() == true, 
+        configuration.ForAllPropertyMaps(propertyMap => propertyMap.SourceMember?.Has<IgnoreMapAttribute>() == true,
             (_, memberOptions) => memberOptions.Ignore());
     }
 }

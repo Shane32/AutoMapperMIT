@@ -1,4 +1,5 @@
 namespace AutoMapper.UnitTests.BeforeAfterMapping;
+
 public class When_configuring_before_and_after_methods
 {
     public class Source
@@ -167,7 +168,7 @@ public class When_using_a_class_to_do_before_after_mappings : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value = 4});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value = 4 });
     }
 
     [Fact]

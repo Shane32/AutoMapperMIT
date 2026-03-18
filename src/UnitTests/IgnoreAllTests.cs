@@ -70,8 +70,8 @@ public class IgnoreAllTests
             cfg.CreateMap<Source, Destination>()
                 .ForMember(dest => dest.AnotherString_ShouldBeNullAfterwards, opt => opt.Ignore());
         });
-        
-        config.CreateMapper().Map<Source, Destination>(new Source{ShouldBeMapped = "true"});
+
+        config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
         config.AssertConfigurationIsValid();
     }
 
@@ -83,8 +83,8 @@ public class IgnoreAllTests
             cfg.AddGlobalIgnore("StartingWith");
             cfg.AddProfile<FooProfile>();
         });
-        
-        config.CreateMapper().Map<Source, Destination>(new Source{ShouldBeMapped = "true"});
+
+        config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
         config.AssertConfigurationIsValid();
     }
 

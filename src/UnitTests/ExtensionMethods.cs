@@ -50,7 +50,7 @@ public class When_an_extension_method_is_for_a_base_class : AutoMapperSpecBase
     {
         public int Value { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
         c.IncludeSourceExtensionMethods(typeof(BarExtensions));
         c.CreateMap<Source, Destination>();
@@ -63,7 +63,7 @@ public static class BarExtensions
     public static int GetValue(this object obj) => 12;
     public static string GetSimpleName(this When_null_is_passed_to_an_extension_method.Bar source)
     {
-        if(source == null)
+        if (source == null)
             throw new ArgumentNullException("source");
         return "SimpleName";
     }
@@ -90,7 +90,7 @@ public class When_null_is_passed_to_an_extension_method : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.IncludeSourceExtensionMethods(typeof(BarExtensions));
-        cfg.CreateMap<Foo, FooDto>().ForMember(d=>d.Value, o=>o.MapFrom(s=>Guid.NewGuid()));
+        cfg.CreateMap<Foo, FooDto>().ForMember(d => d.Value, o => o.MapFrom(s => Guid.NewGuid()));
     });
 
     [Fact]
@@ -281,7 +281,7 @@ public class When_a_static_method_has_first_parameter_null : AutoMapperSpecBase
         public LastName Last;
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<CombinedNames, FullName>()
             .ForMember(dst => dst.Name, o => o.MapFrom(src => string.Concat(src.First.Name, src.Last.Name)));

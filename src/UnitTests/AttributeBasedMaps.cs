@@ -25,7 +25,7 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_map()
             {
-                var source = new Source {Value = 5};
+                var source = new Source { Value = 5 };
                 var dest = Mapper.Map<Dest>(source);
 
                 dest.Value.ShouldBe(5);
@@ -59,7 +59,7 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_reverse_map()
             {
-                var dest = new Dest {Value = 5};
+                var dest = new Dest { Value = 5 };
                 var source = Mapper.Map<Source>(dest);
 
                 source.Value.ShouldBe(5);

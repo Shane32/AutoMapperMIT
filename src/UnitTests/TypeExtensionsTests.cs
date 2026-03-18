@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class TypeExtensionsTests
 {
     public class Foo
@@ -14,12 +15,12 @@ public class TypeExtensionsTests
         protected string Value3 { get; set; }
         private string Value4 { get; set; }
         public string Value5 => "ASDf";
-        public string Value6 {  set { Value4 = value; } }
+        public string Value6 { set { Value4 = value; } }
 
         [Fact]
         public void Should_recognize_public_members()
         {
-//                typeof(Foo).GetProperties().Length.ShouldBe(4);
+            //                typeof(Foo).GetProperties().Length.ShouldBe(4);
         }
-    } 
+    }
 }

@@ -83,7 +83,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
 
             if (memberMap is ConstructorParameterMap constructorMap)
                 return constructorMap.Parameter.Name;
-            
+
             throw new ArgumentException("Invalid member map type.", nameof(memberMap));
         }
 

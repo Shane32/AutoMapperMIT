@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 using AutoMapper.UnitTests;
 namespace AutoMapper.Tests;
+
 public class CreateProjectionEnum : AutoMapperSpecBase
 {
     public class Source
@@ -26,9 +27,9 @@ public class CreateProjectionEnum : AutoMapperSpecBase
 }
 public class InvalidStringToEnum : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(_=> { });
+    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
     [Fact]
-    public void Should_throw() => new Action(()=>Map<ConsoleColor>("d")).ShouldThrow<AutoMapperMappingException>().InnerException.Message.ShouldBe(
+    public void Should_throw() => new Action(() => Map<ConsoleColor>("d")).ShouldThrow<AutoMapperMappingException>().InnerException.Message.ShouldBe(
         "Requested value 'd' was not found.");
 }
 public class DefaultEnumValueToString : AutoMapperSpecBase
@@ -133,9 +134,9 @@ public class EnumMappingFixture
         var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDto>());
 
         var order = new Order
-            {
-                Status = Status.InProgress
-            };
+        {
+            Status = Status.InProgress
+        };
 
         var mapper = config.CreateMapper();
         var dto = mapper.Map<Order, OrderDto>(order);
@@ -144,10 +145,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapToUnderlyingType() {
+    public void ShouldMapToUnderlyingType()
+    {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoInt>());
 
-        var order = new Order {
+        var order = new Order
+        {
             Status = Status.InProgress
         };
 
@@ -158,10 +161,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapToStringType() {
+    public void ShouldMapToStringType()
+    {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoString>());
 
-        var order = new Order {
+        var order = new Order
+        {
             Status = Status.InProgress
         };
 
@@ -172,10 +177,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapFromUnderlyingType() {
+    public void ShouldMapFromUnderlyingType()
+    {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderDtoInt, Order>());
 
-        var order = new OrderDtoInt {
+        var order = new OrderDtoInt
+        {
             Status = 1
         };
 
@@ -186,10 +193,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapFromStringType() {
+    public void ShouldMapFromStringType()
+    {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderDtoString, Order>());
 
-        var order = new OrderDtoString {
+        var order = new OrderDtoString
+        {
             Status = "InProgress"
         };
 
@@ -198,16 +207,16 @@ public class EnumMappingFixture
 
         dto.Status.ShouldBe(Status.InProgress);
     }
-    
+
     [Fact]
     public void ShouldMapEnumByMatchingNames()
     {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>());
 
         var order = new Order
-            {
-                Status = Status.InProgress
-            };
+        {
+            Status = Status.InProgress
+        };
 
         var mapper = config.CreateMapper();
         var dto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -221,9 +230,9 @@ public class EnumMappingFixture
         var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>());
 
         var order = new Order
-            {
-                Status = Status.InProgress
-            };
+        {
+            Status = Status.InProgress
+        };
 
         var mapper = config.CreateMapper();
         var dto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -232,11 +241,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapSharedNullableEnum() 
+    public void ShouldMapSharedNullableEnum()
     {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithNullableStatus>());
 
-        var order = new OrderWithNullableStatus {
+        var order = new OrderWithNullableStatus
+        {
             Status = Status.InProgress
         };
 
@@ -247,11 +257,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapNullableEnumByMatchingValues() 
+    public void ShouldMapNullableEnumByMatchingValues()
     {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>());
 
-        var order = new OrderWithNullableStatus {
+        var order = new OrderWithNullableStatus
+        {
             Status = Status.InProgress
         };
 
@@ -262,7 +273,7 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapNullableEnumToNullWhenSourceEnumIsNullAndDestinationWasNotNull() 
+    public void ShouldMapNullableEnumToNullWhenSourceEnumIsNullAndDestinationWasNotNull()
     {
         var config = new MapperConfiguration(cfg =>
         {
@@ -287,11 +298,12 @@ public class EnumMappingFixture
     }
 
     [Fact]
-    public void ShouldMapNullableEnumToNullWhenSourceEnumIsNull() 
+    public void ShouldMapNullableEnumToNullWhenSourceEnumIsNull()
     {
         var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>());
 
-        var order = new OrderWithNullableStatus {
+        var order = new OrderWithNullableStatus
+        {
             Status = null
         };
 
@@ -308,9 +320,9 @@ public class EnumMappingFixture
             .ForMember(dto => dto.Status, options => options.MapFrom<DtoStatusValueResolver>()));
 
         var order = new Order
-            {
-                Status = Status.InProgress
-            };
+        {
+            Status = Status.InProgress
+        };
 
         var mapper = config.CreateMapper();
         var mappedDto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -325,9 +337,9 @@ public class EnumMappingFixture
             .ForMember(dto => dto.Status, options => options.MapFrom<EnumValueResolver<Status, StatusForDto>, Status>(m => m.Status)));
 
         var order = new Order
-            {
-                Status = Status.InProgress
-            };
+        {
+            Status = Status.InProgress
+        };
 
         var mapper = config.CreateMapper();
         var mappedDto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -375,11 +387,13 @@ public class EnumMappingFixture
         public Status Status { get; set; }
     }
 
-    public class OrderDtoInt {
+    public class OrderDtoInt
+    {
         public int Status { get; set; }
     }
 
-    public class OrderDtoString {
+    public class OrderDtoString
+    {
         public string Status { get; set; }
     }
 
@@ -388,17 +402,17 @@ public class EnumMappingFixture
         public StatusForDto Status { get; set; }
     }
 
-    public class OrderWithNullableStatus 
+    public class OrderWithNullableStatus
     {
         public Status? Status { get; set; }
     }
 
-    public class OrderDtoWithNullableStatus 
+    public class OrderDtoWithNullableStatus
     {
         public Status? Status { get; set; }
     }
 
-    public class OrderDtoWithOwnNullableStatus 
+    public class OrderDtoWithOwnNullableStatus
     {
         public StatusForDto? Status { get; set; }
     }

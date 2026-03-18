@@ -1,4 +1,5 @@
 namespace AutoMapper.UnitTests.NullBehavior;
+
 public class NullDestinationType : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() => new(c => { });
@@ -8,7 +9,7 @@ public class NullDestinationType : AutoMapperSpecBase
         Mapper.Map("", "", null, null).ShouldBe("");
         Mapper.Map("", null, null, typeof(string)).ShouldBe("");
         Mapper.Map("", "", null, null, _ => { }).ShouldBe("");
-        Mapper.Map("", null, null, typeof(string), _=>{ }).ShouldBe("");
+        Mapper.Map("", null, null, typeof(string), _ => { }).ShouldBe("");
         Mapper.Map<string>("").ShouldBe("");
         Mapper.Map("", default(string)).ShouldBe("");
         Mapper.Map<string>("", _ => { }).ShouldBe("");
@@ -49,8 +50,8 @@ public class NullToExistingValue : AutoMapperSpecBase
     }
     protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-    	c.CreateMap<PersonModel, Person>();
-    	c.CreateMap<AddressModel, Address>();
+        c.CreateMap<PersonModel, Person>();
+        c.CreateMap<AddressModel, Address>();
     });
     [Fact]
     public void Should_overwrite() => Mapper.Map(new PersonModel(), new Person()).TheAddress.ShouldBeNull();
@@ -65,7 +66,7 @@ public class NullCheckDefault : AutoMapperSpecBase
     {
         public int Length { get; set; } = 42;
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
         c.CreateMap<Source, Destination>().ForMember(d => d.Length, o => o.MapFrom(s => s.Value.Length)));
     [Fact]
     public void Should_be_default() => Map<Destination>(new Source()).Length.ShouldBe(0);
@@ -127,7 +128,7 @@ public class When_mappping_null_with_AllowNull : AutoMapperSpecBase
     }
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap<Source, Destination>().ForAllMembers(o=>o.AllowNull());
+        cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
         cfg.CreateMap<InnerSource, InnerDestination>();
         cfg.AllowNullDestinationValues = false;
         cfg.AllowNullCollections = false;
@@ -226,13 +227,13 @@ public class When_mappping_null_with_DoNotAllowNull_and_inheritance : AutoMapper
 }
 public class When_mappping_null_collection_with_AllowNullCollections_false : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => {});
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
 
     [Fact]
     public void Should_map_to_non_null()
     {
         Mapper.Map<int[]>(null).ShouldNotBeNull();
-        Mapper.Map<int[]>(null, _=> { }).ShouldNotBeNull();
+        Mapper.Map<int[]>(null, _ => { }).ShouldNotBeNull();
     }
 }
 
@@ -282,7 +283,7 @@ public class When_mappping_null_array_to_IEnumerable_with_MapAtRuntime : AutoMap
         public IEnumerable<int> Collection { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Destination>().ForMember(d=>d.Collection, o=>o.MapAtRuntime()));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Destination>().ForMember(d => d.Collection, o => o.MapAtRuntime()));
 
     [Fact]
     public void Should_map_to_non_null()
@@ -779,7 +780,7 @@ public class When_using_a_custom_resolver_and_the_source_value_is_null : NonVali
     {
         public string Resolve(Source s, Destination d, string source, string dest, ResolutionContext context)
         {
-            if(source == null)
+            if (source == null)
                 return "jon";
             return "fail";
         }
@@ -863,9 +864,9 @@ public class When_specifying_a_resolver_for_a_nullable_type : AutoMapperSpecBase
     {
         public string Convert(bool? source, string destination, ResolutionContext context)
         {
-            if(source.HasValue)
+            if (source.HasValue)
             {
-                if(source.Value)
+                if (source.Value)
                     return "Yes";
                 else
                     return "No";
@@ -1006,7 +1007,7 @@ public class When_overriding_collection_null_behavior_in_profile_with_MapAtRunti
     {
         cfg.CreateProfile("MyProfile", p =>
         {
-            p.CreateMap<Source, Dest>().ForAllMembers(o=>o.MapAtRuntime());
+            p.CreateMap<Source, Dest>().ForAllMembers(o => o.MapAtRuntime());
             p.AllowNullCollections = true;
         });
     });

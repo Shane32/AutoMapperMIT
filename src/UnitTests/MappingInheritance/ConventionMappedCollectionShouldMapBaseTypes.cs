@@ -3,22 +3,22 @@
 public class ConventionMappedCollectionShouldMapBaseTypes
 {
 
-    public class ItemBase{}
-    public class GeneralItem : ItemBase {}
-    public class SpecificItem : ItemBase {}
+    public class ItemBase { }
+    public class GeneralItem : ItemBase { }
+    public class SpecificItem : ItemBase { }
 
     public class Container
     {
-        public Container ()
+        public Container()
         {
             Items = new List<ItemBase>();
         }
         public List<ItemBase> Items { get; private set; }
     }
 
-    public class ItemDto {}
-    public class GeneralItemDto :ItemDto {}
-    public class SpecificItemDto :ItemDto {}
+    public class ItemDto { }
+    public class GeneralItemDto : ItemDto { }
+    public class SpecificItemDto : ItemDto { }
 
     public class ContainerDto
     {
@@ -45,13 +45,13 @@ public class ConventionMappedCollectionShouldMapBaseTypes
         });
 
         var dto = config.CreateMapper().Map<Container, ContainerDto>(new Container
-                                                {
-                                                    Items =
+        {
+            Items =
                                                         {
                                                             new GeneralItem(),
                                                             new SpecificItem()
                                                         }
-                                                });
+        });
 
         dto.Items[0].ShouldBeOfType<GeneralItemDto>();
         dto.Items[1].ShouldBeOfType<SpecificItemDto>();

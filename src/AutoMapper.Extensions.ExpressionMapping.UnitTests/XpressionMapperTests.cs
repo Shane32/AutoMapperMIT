@@ -41,7 +41,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests
             ICollection<Expression<Func<UserModel, object>>> selections = [s => s.AccountModel.Bal, s => s.AccountName];
 
             //Act
-            List<Expression<Func<User, object>>> selectionsMapped = [.. mapper.MapExpressionList<Expression < Func<UserModel, object>>, Expression <Func<User, object>>>(selections)];
+            List<Expression<Func<User, object>>> selectionsMapped = [.. mapper.MapExpressionList<Expression<Func<UserModel, object>>, Expression<Func<User, object>>>(selections)];
             List<object> accounts = [.. Users.Select(selectionsMapped[0])];
             List<object> branches = [.. Users.Select(selectionsMapped[1])];
 

@@ -79,7 +79,7 @@ public class NavigationPropertySO : IntegrationTest<NavigationPropertySO.Databas
     [Fact]
     public void Can_map_with_projection()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             _destination = ProjectTo<CustomerDTO>(context.Customers).Single();
             _destination.Id.ShouldBe(1);

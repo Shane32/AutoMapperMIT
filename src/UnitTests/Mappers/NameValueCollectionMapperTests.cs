@@ -27,7 +27,7 @@ public class NameValueCollectionMapperTests
 
             var result = mapper.Map(new NameValueCollection(), (NameValueCollection)null);
 
-            result.ShouldBeEmpty(); 
+            result.ShouldBeEmpty();
         }
 
         [Fact]
@@ -44,5 +44,5 @@ public class NameValueCollectionMapperTests
             "bar".ShouldBe(result["foo"]);
         }
     }
-    
+
 }

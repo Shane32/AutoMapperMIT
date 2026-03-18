@@ -4,7 +4,7 @@ public class RecursiveMappingWithStruct : AutoMapperSpecBase
 {
     private ParentDto _dto;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => 
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<ParentModel, ParentDto>();
         cfg.CreateMap<ChildModel, ChildDto>();
@@ -255,7 +255,7 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
         public ParentDto Convert(int source, ParentDto destination, ResolutionContext resolutionContext)
         {
             ParentModel parentModel = _parentModels[source];
-            return (ParentDto) resolutionContext.Mapper.Map(parentModel, destination, typeof(ParentModel), typeof(ParentDto));
+            return (ParentDto)resolutionContext.Mapper.Map(parentModel, destination, typeof(ParentModel), typeof(ParentDto));
         }
     }
 
@@ -312,12 +312,12 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_on
     protected override void Because_of()
     {
         var foo = new Foo
+        {
+            Bar = new Bar
             {
-                Bar = new Bar
-                    {
-                        Value = "something"
-                    }
-            };
+                Value = "something"
+            }
+        };
         foo.Bar.Foo = foo;
         _dto = Mapper.Map<Foo, FooDto>(foo);
     }
@@ -475,8 +475,8 @@ public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Child)) return false;
-            return Equals((Child) obj);
+            if (obj.GetType() != typeof(Child)) return false;
+            return Equals((Child)obj);
         }
 
         public override int GetHashCode()

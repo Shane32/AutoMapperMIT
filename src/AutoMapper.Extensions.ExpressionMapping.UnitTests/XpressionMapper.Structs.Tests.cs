@@ -74,7 +74,8 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests
         public void Replace_operator_when_operands_change()
         {
             // Arrange
-            var config = ConfigurationHelper.GetMapperConfiguration(cfg => {
+            var config = ConfigurationHelper.GetMapperConfiguration(cfg =>
+            {
                 cfg.AddExpressionMapping();
                 cfg.CreateMap<Source, Dest>().ReverseMap();
             });

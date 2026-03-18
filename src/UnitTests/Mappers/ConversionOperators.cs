@@ -54,7 +54,7 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_d
         _bar.OtherValue.ShouldBe("Hello");
     }
 }
-    
+
 public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_source
 {
     private Bar _bar;

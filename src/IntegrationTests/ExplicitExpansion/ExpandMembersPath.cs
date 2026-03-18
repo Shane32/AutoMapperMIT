@@ -38,9 +38,9 @@ public class ExpandMembersPath : IntegrationTest<ExpandMembersPath.DatabaseIniti
     public void Should_expand_all_members_in_path()
     {
         Class1DTO[] dtos;
-        using(TestContext context = new TestContext())
+        using (TestContext context = new TestContext())
         {
-            dtos = ProjectTo<Class1DTO>(context.Class1Set, null, r => r.Class2DTO.Class3DTO).ToArray();                
+            dtos = ProjectTo<Class1DTO>(context.Class1Set, null, r => r.Class2DTO.Class3DTO).ToArray();
         }
         Check(dtos);
     }
@@ -49,7 +49,7 @@ public class ExpandMembersPath : IntegrationTest<ExpandMembersPath.DatabaseIniti
     public void Should_expand_all_members_in_path_with_strings()
     {
         Class1DTO[] dtos;
-        using(TestContext context = new TestContext())
+        using (TestContext context = new TestContext())
         {
             dtos = ProjectTo<Class1DTO>(context.Class1Set, null, "Class2DTO.Class3DTO").ToArray();
         }

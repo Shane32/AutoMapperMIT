@@ -31,7 +31,7 @@ public class MemberListSourceAndForPath : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        var input = new Input() {Source = "Hello World!"};
+        var input = new Input() { Source = "Hello World!" };
         var output = Mapper.Map<TargetOuter>(input);
 
         _equal = output.Inner.MyProp == input.Source;

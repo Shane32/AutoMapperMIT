@@ -9,7 +9,7 @@ public class IgnoreShouldBeInheritedIfConventionCannotMap
 
     public class StandardDomain : BaseDomain
     {
-        
+
     }
 
     public class SpecificDomain : StandardDomain
@@ -18,7 +18,7 @@ public class IgnoreShouldBeInheritedIfConventionCannotMap
 
     public class MoreSpecificDomain : SpecificDomain
     {
-        
+
     }
 
     public class Dto

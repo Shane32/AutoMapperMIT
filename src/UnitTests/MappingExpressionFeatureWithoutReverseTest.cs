@@ -88,7 +88,7 @@ public class MappingExpressionFeatureWithoutReverseTest
         typeMapReverse.Features.Count.ShouldBe(0);
 
         Validate<TypeMapFeatureA>(featureA);
-        
+
         void Validate<TFeature>(MappingExpressionFeatureBase feature)
             where TFeature : TypeMapFeatureBase
         {

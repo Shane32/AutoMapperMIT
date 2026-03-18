@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Internal.Mappers;
 using System.Globalization;
 namespace AutoMapper.UnitTests.Mappers;
+
 using static TypeDescriptor;
 public class When_specifying_mapping_with_the_BCL_type_converter_class : NonValidatingSpecBase
 {
@@ -17,7 +18,7 @@ public class When_specifying_mapping_with_the_BCL_type_converter_class : NonVali
     public class CustomTypeConverter : TypeConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) => destinationType == typeof(Destination);
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) => 
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) =>
             new Destination { OtherValue = ((Source)value).Value + 10 };
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(Destination);
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) =>
@@ -26,7 +27,7 @@ public class When_specifying_mapping_with_the_BCL_type_converter_class : NonVali
     [Fact]
     public void Should_convert_from_type_using_the_custom_type_converter() => Mapper.Map<Source, Destination>(new Source { Value = 5 }).OtherValue.ShouldBe(15);
     [Fact]
-    public void Should_convert_to_type_using_the_custom_type_converter() => Mapper.Map<Destination, Source>(new Destination{ OtherValue = 15 }).Value.ShouldBe(5);
+    public void Should_convert_to_type_using_the_custom_type_converter() => Mapper.Map<Destination, Source>(new Destination { OtherValue = 15 }).Value.ShouldBe(5);
     public class TypeConverterMapper : ObjectMapper<object, object>
     {
         public override bool IsMatch(TypePair context) =>

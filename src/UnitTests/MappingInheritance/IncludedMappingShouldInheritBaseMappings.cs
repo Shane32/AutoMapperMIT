@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class IncludeBaseIndirectBase : AutoMapperSpecBase
 {
     public class FooBaseBase
@@ -35,8 +36,8 @@ public class ReadonlyCollectionPropertiesOverride : AutoMapperSpecBase
     {
         cfg.CreateMap<SourceBase, DestinationBase>()
             .Include<Source, Destination>()
-            .ForMember(d=>d.CodeList, o => o.UseDestinationValue());
-        cfg.CreateMap<Source, Destination>().ForMember(d=>d.CodeList, o => o.DoNotUseDestinationValue());
+            .ForMember(d => d.CodeList, o => o.UseDestinationValue());
+        cfg.CreateMap<Source, Destination>().ForMember(d => d.CodeList, o => o.DoNotUseDestinationValue());
     });
     public class SourceBase
     {
@@ -57,7 +58,7 @@ public class ReadonlyCollectionPropertiesOverride : AutoMapperSpecBase
 }
 public class ReadonlyCollectionProperties : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<DomainModelBase, ModelBase>()
             .ForMember(d => d.CodeList, o => o.MapFrom(s => s.CodeList))
@@ -260,15 +261,15 @@ public class IncludedBaseMappingShouldInheritBaseMappings : NonValidatingSpecBas
         });
         var mapper = config.CreateMapper();
         var dto = mapper.Map<DtoSubObject>(new ModelSubObject
-                                                               {
-                                                                   DifferentBaseString = "123",
-                                                                   SubString = "456"
-                                                               });
+        {
+            DifferentBaseString = "123",
+            SubString = "456"
+        });
 
         "789".ShouldBe(dto.BaseString);
         "456".ShouldBe(dto.SubString);
     }
-    
+
     [Fact]
     public void more_specific_map_should_override_base_mapping()
     {
@@ -283,10 +284,10 @@ public class IncludedBaseMappingShouldInheritBaseMappings : NonValidatingSpecBas
         });
         var mapper = config.CreateMapper();
         var dto = mapper.Map<ModelSubObject, DtoSubObject>(new ModelSubObject
-                                                               {
-                                                                   DifferentBaseString = "123",
-                                                                   SubString = "456"
-                                                               });
+        {
+            DifferentBaseString = "123",
+            SubString = "456"
+        });
 
         "789".ShouldBe(dto.BaseString);
         "456".ShouldBe(dto.SubString);
@@ -313,7 +314,7 @@ public class IncludedBaseMappingShouldInheritBaseMappings : NonValidatingSpecBas
 
         dto.ShouldBeOfType<DtoSubObject>();
     }
-    
+
     [Fact]
     public void include_should_allow_automapper_to_select_more_specific_included_type()
     {

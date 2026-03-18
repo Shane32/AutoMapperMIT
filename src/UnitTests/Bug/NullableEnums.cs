@@ -18,5 +18,5 @@ public class NullableEnums : AutoMapperSpecBase
         var d = Mapper.Map(new Src { A = null }, new Dst { A = EnumType.One });
 
         d.A.ShouldBeNull();
-    } 
+    }
 }

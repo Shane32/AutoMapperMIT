@@ -1,5 +1,6 @@
 ﻿using AutoMapper.QueryableExtensions.Impl;
 namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectionMappers : AutoMapperSpecBase
 {
     class Source

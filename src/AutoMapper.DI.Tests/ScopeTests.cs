@@ -10,7 +10,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         public void Can_depend_on_scoped_services_as_transient_default()
         {
             var services = new ServiceCollection();
-            services.AddAutoMapper(new [] { typeof(Source).Assembly });
+            services.AddAutoMapper(new[] { typeof(Source).Assembly });
             services.AddScoped<ISomeService, MutableService>();
 
             var provider = services.BuildServiceProvider();
@@ -22,7 +22,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
 
-                var dest = mapper.Map<Dest2>(new Source2 {ConvertedValue = 5});
+                var dest = mapper.Map<Dest2>(new Source2 { ConvertedValue = 5 });
 
                 dest.ConvertedValue.ShouldBe(15);
             }
@@ -32,7 +32,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         public void Can_depend_on_scoped_services_as_scoped()
         {
             var services = new ServiceCollection();
-            services.AddAutoMapper(new [] { typeof(Source).Assembly }, ServiceLifetime.Scoped);
+            services.AddAutoMapper(new[] { typeof(Source).Assembly }, ServiceLifetime.Scoped);
             services.AddScoped<ISomeService, MutableService>();
 
             var provider = services.BuildServiceProvider();
@@ -44,7 +44,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
 
-                var dest = mapper.Map<Dest2>(new Source2 {ConvertedValue = 5});
+                var dest = mapper.Map<Dest2>(new Source2 { ConvertedValue = 5 });
 
                 dest.ConvertedValue.ShouldBe(15);
             }
@@ -54,7 +54,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         public void Cannot_correctly_resolve_scoped_services_as_singleton()
         {
             var services = new ServiceCollection();
-            services.AddAutoMapper(new [] { typeof(Source).Assembly }, ServiceLifetime.Singleton);
+            services.AddAutoMapper(new[] { typeof(Source).Assembly }, ServiceLifetime.Singleton);
             services.AddScoped<ISomeService, MutableService>();
 
             var provider = services.BuildServiceProvider();
@@ -66,7 +66,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
 
-                var dest = mapper.Map<Dest2>(new Source2 {ConvertedValue = 5});
+                var dest = mapper.Map<Dest2>(new Source2 { ConvertedValue = 5 });
 
                 dest.ConvertedValue.ShouldBe(5);
             }

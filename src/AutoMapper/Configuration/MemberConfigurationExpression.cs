@@ -1,4 +1,5 @@
 namespace AutoMapper.Configuration;
+
 public interface IPropertyMapConfiguration
 {
     void Configure(TypeMap typeMap);
@@ -47,7 +48,7 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>(Membe
         MapFromFunc((src, dest, destMember, ctxt) => mappingFunction(src, dest, destMember));
     public void MapFrom<TResult>(Func<TSource, TDestination, TMember, ResolutionContext, TResult> mappingFunction) =>
         MapFromFunc((src, dest, destMember, ctxt) => mappingFunction(src, dest, destMember, ctxt));
-    private void MapFromFunc<TResult>(Expression<Func<TSource, TDestination, TMember, ResolutionContext, TResult>> expr) => 
+    private void MapFromFunc<TResult>(Expression<Func<TSource, TDestination, TMember, ResolutionContext, TResult>> expr) =>
         SetResolver(new FuncResolver(expr));
     public void MapFrom<TSourceMember>(Expression<Func<TSource, TSourceMember>> mapExpression) => MapFromExpression(mapExpression);
     internal void MapFromExpression(LambdaExpression sourceExpression)
@@ -64,7 +65,7 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>(Membe
         ConditionCore((src, dest, srcMember, destMember, ctxt) => condition(src, dest, srcMember, destMember, ctxt));
     public void Condition(Func<TSource, TDestination, TMember, TMember, bool> condition) =>
         ConditionCore((src, dest, srcMember, destMember, ctxt) => condition(src, dest, srcMember, destMember));
-    public void Condition(Func<TSource, TDestination, TMember, bool> condition) => 
+    public void Condition(Func<TSource, TDestination, TMember, bool> condition) =>
         ConditionCore((src, dest, srcMember, destMember, ctxt) => condition(src, dest, srcMember));
     public void Condition(Func<TSource, TDestination, bool> condition) => ConditionCore((src, dest, srcMember, destMember, ctxt) => condition(src, dest));
     public void Condition(Func<TSource, bool> condition) => ConditionCore((src, dest, srcMember, destMember, ctxt) => condition(src));
@@ -98,16 +99,16 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>(Membe
     public void UseDestinationValue() => SetUseDestinationValue(true);
     private void SetUseDestinationValue(bool value) => PropertyMapActions.Add(pm => pm.UseDestinationValue = value);
     public void SetMappingOrder(int mappingOrder) => PropertyMapActions.Add(pm => pm.MappingOrder = mappingOrder);
-    public void ConvertUsing<TValueConverter, TSourceMember>() where TValueConverter : IValueConverter<TSourceMember, TMember> => 
+    public void ConvertUsing<TValueConverter, TSourceMember>() where TValueConverter : IValueConverter<TSourceMember, TMember> =>
         ConvertUsingCore<TValueConverter, TSourceMember>();
-    public void ConvertUsing<TValueConverter, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember) where TValueConverter : IValueConverter<TSourceMember, TMember> => 
+    public void ConvertUsing<TValueConverter, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember) where TValueConverter : IValueConverter<TSourceMember, TMember> =>
         ConvertUsingCore<TValueConverter, TSourceMember>(sourceMember);
-    public void ConvertUsing<TValueConverter, TSourceMember>(string sourceMemberName) where TValueConverter : IValueConverter<TSourceMember, TMember> => 
+    public void ConvertUsing<TValueConverter, TSourceMember>(string sourceMemberName) where TValueConverter : IValueConverter<TSourceMember, TMember> =>
         ConvertUsingCore<TValueConverter, TSourceMember>(null, sourceMemberName);
     public void ConvertUsing<TSourceMember>(IValueConverter<TSourceMember, TMember> valueConverter) => ConvertUsingCore(valueConverter);
     public void ConvertUsing<TSourceMember>(IValueConverter<TSourceMember, TMember> valueConverter, Expression<Func<TSource, TSourceMember>> sourceMember) =>
         ConvertUsingCore(valueConverter, sourceMember);
-    public void ConvertUsing<TSourceMember>(IValueConverter<TSourceMember, TMember> valueConverter, string sourceMemberName)  =>
+    public void ConvertUsing<TSourceMember>(IValueConverter<TSourceMember, TMember> valueConverter, string sourceMemberName) =>
         ConvertUsingCore(valueConverter, null, sourceMemberName);
     private void ConvertUsingCore<TValueConverter, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember = null, string sourceMemberName = null) =>
         ConvertUsingCore(new(typeof(TValueConverter), typeof(IValueConverter<TSourceMember, TMember>), sourceMemberName)
@@ -124,7 +125,7 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>(Membe
     public void Configure(TypeMap typeMap)
     {
         var destMember = DestinationMember;
-        if(destMember.DeclaringType.ContainsGenericParameters)
+        if (destMember.DeclaringType.ContainsGenericParameters)
         {
             destMember = Array.Find(typeMap.DestinationTypeDetails.ReadAccessors, m => m.MetadataToken == destMember.MetadataToken);
         }
@@ -133,7 +134,7 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>(Membe
     }
     private void Apply(PropertyMap propertyMap)
     {
-        foreach(var action in PropertyMapActions)
+        foreach (var action in PropertyMapActions)
         {
             action(propertyMap);
         }

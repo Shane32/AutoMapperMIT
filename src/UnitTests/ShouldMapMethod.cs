@@ -26,18 +26,19 @@ public class ShouldMapMethodInstanceMethods : NonValidatingSpecBase
         private int _someValue;
         private int _anotherValue;
 
-        public Source(int someValue, int anotherValue) 
+        public Source(int someValue, int anotherValue)
         {
             _someValue = someValue;
             anotherValue = _anotherValue;
         }
 
-        public int SomeNumber() 
+        public int SomeNumber()
         {
             return _someValue;
         }
 
-        public int AnotherNumber() {
+        public int AnotherNumber()
+        {
             return _anotherValue;
         }
     }
@@ -63,7 +64,7 @@ public class ShouldMapMethodInstanceMethods : NonValidatingSpecBase
     public void Should_report_unmapped_property()
     {
         new Action(AssertConfigurationIsValid)
-            .ShouldThrowException<AutoMapperConfigurationException>(ex => 
+            .ShouldThrowException<AutoMapperConfigurationException>(ex =>
             {
                 ex.Errors.ShouldNotBeNull();
                 ex.Errors.ShouldNotBeEmpty();
@@ -74,7 +75,7 @@ public class ShouldMapMethodInstanceMethods : NonValidatingSpecBase
     }
 
     [Fact]
-    public void Should_not_map_another_number_method() 
+    public void Should_not_map_another_number_method()
     {
         _destination.SomeNumber.ShouldBe(SomeValue);
         _destination.AnotherNumber.ShouldNotBe(AnotherValue);
@@ -82,55 +83,55 @@ public class ShouldMapMethodInstanceMethods : NonValidatingSpecBase
 }
 
 
-static class SourceExtensions 
+static class SourceExtensions
 {
-    public static int SomeNumber(this ShouldMapMethodExtensionMethods.Source source) 
+    public static int SomeNumber(this ShouldMapMethodExtensionMethods.Source source)
     {
         return source.SomeValue;
     }
 
-    public static int AnotherNumber(this ShouldMapMethodExtensionMethods.Source source) 
+    public static int AnotherNumber(this ShouldMapMethodExtensionMethods.Source source)
     {
         return source.AnotherValue;
     }
 }
 
-public class ShouldMapMethodExtensionMethods : NonValidatingSpecBase 
+public class ShouldMapMethodExtensionMethods : NonValidatingSpecBase
 {
     public int SomeValue = 4698;
     public int AnotherValue = 2374;
 
     private Destination _destination;
 
-    public class Source 
+    public class Source
     {
         public int SomeValue { get; set; }
         public int AnotherValue { get; set; }
     }
 
-    public class Destination 
+    public class Destination
     {
         public int SomeNumber { get; set; }
         public int AnotherNumber { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => 
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.IncludeSourceExtensionMethods(typeof(SourceExtensions));
         cfg.ShouldMapMethod = (m => m.Name != nameof(SourceExtensions.AnotherNumber));
         cfg.CreateMap<Source, Destination>();
     });
 
-    protected override void Because_of() 
+    protected override void Because_of()
     {
         _destination = Mapper.Map<Source, Destination>(new Source { SomeValue = SomeValue, AnotherValue = AnotherValue });
     }
 
     [Fact]
-    public void Should_report_unmapped_property() 
+    public void Should_report_unmapped_property()
     {
         new Action(AssertConfigurationIsValid)
-            .ShouldThrowException<AutoMapperConfigurationException>(ex => 
+            .ShouldThrowException<AutoMapperConfigurationException>(ex =>
             {
                 ex.Errors.ShouldNotBeNull();
                 ex.Errors.ShouldNotBeEmpty();
@@ -141,7 +142,7 @@ public class ShouldMapMethodExtensionMethods : NonValidatingSpecBase
     }
 
     [Fact]
-    public void Should_not_map_another_number_method() 
+    public void Should_not_map_another_number_method()
     {
         _destination.SomeNumber.ShouldBe(SomeValue);
         _destination.AnotherNumber.ShouldNotBe(AnotherValue);

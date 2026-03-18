@@ -70,7 +70,7 @@ namespace AutoMapper.UnitTests
                 public int Value { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg => 
+            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
             {
                 cfg.CreateMap<Source, Destination>();
                 cfg.CreateMap<SourceValue, DestinationValue>();
@@ -79,13 +79,13 @@ namespace AutoMapper.UnitTests
             protected override void Because_of()
             {
                 var source = new Source
-                    {
-                        Values = new Dictionary<string, SourceValue>
+                {
+                    Values = new Dictionary<string, SourceValue>
                             {
                                 {"Key1", new SourceValue {Value = 5}},
                                 {"Key2", new SourceValue {Value = 10}},
                             }
-                    };
+                };
 
                 _result = Mapper.Map<Source, Destination>(source);
             }
@@ -133,13 +133,13 @@ namespace AutoMapper.UnitTests
             protected override void Because_of()
             {
                 var source = new Source
-                    {
-                        Values = new Dictionary<string, SourceValue>
+                {
+                    Values = new Dictionary<string, SourceValue>
                             {
                                 {"Key1", new SourceValue {Value = 5}},
                                 {"Key2", new SourceValue {Value = 10}},
                             }
-                    };
+                };
 
                 _result = Mapper.Map<Source, Destination>(source);
             }
@@ -405,7 +405,7 @@ namespace AutoMapper.UnitTests
 
         }
 
-        public class When_mapping_from_a_list_of_object_to_generic_dictionary : AutoMapperSpecBase    
+        public class When_mapping_from_a_list_of_object_to_generic_dictionary : AutoMapperSpecBase
         {
             private FooObject _result;
 

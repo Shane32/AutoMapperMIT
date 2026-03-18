@@ -33,9 +33,9 @@ public class IncludeAllDerived : AutoMapperSpecBase
     [Fact]
     public void Should_apply_configuration_to_all_derived()
     {
-        Mapper.Map<ADto>(new A {Value = 10}).Value.ShouldBe(5);
-        Mapper.Map<BDto>(new B {Value = 10}).Value.ShouldBe(5);
-        Mapper.Map<CDto>(new C {Value = 10}).Value.ShouldBe(5);
-        Mapper.Map<DDto>(new D {Value = 10}).Value.ShouldBe(5);
+        Mapper.Map<ADto>(new A { Value = 10 }).Value.ShouldBe(5);
+        Mapper.Map<BDto>(new B { Value = 10 }).Value.ShouldBe(5);
+        Mapper.Map<CDto>(new C { Value = 10 }).Value.ShouldBe(5);
+        Mapper.Map<DDto>(new D { Value = 10 }).Value.ShouldBe(5);
     }
 }

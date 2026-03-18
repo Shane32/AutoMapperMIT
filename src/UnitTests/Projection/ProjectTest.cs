@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectWithFields : AutoMapperSpecBase
 {
     public class Foo
@@ -26,7 +27,7 @@ public class ProjectWithFields : AutoMapperSpecBase
         p2.ShouldBe(p1);
         var profile = Configuration.Internal().Profiles[0];
         profile.CreateTypeDetails(typeof(DateTime)).ShouldBe(profile.CreateTypeDetails(typeof(DateTime)));
-    } 
+    }
 }
 
 public class ProjectTest

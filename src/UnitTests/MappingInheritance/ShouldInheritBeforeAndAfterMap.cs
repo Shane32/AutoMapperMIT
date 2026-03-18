@@ -20,7 +20,7 @@ public class ShouldInheritBeforeAndAfterMapOnlyOnce : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap<BaseBaseSource, BaseBaseDest>().AfterMap((s, d) => afterMapCount++).BeforeMap((s, d)=>beforeMapCount++).Include<Source, Dest>().Include<BaseSource, BaseDest>();
+        cfg.CreateMap<BaseBaseSource, BaseBaseDest>().AfterMap((s, d) => afterMapCount++).BeforeMap((s, d) => beforeMapCount++).Include<Source, Dest>().Include<BaseSource, BaseDest>();
         cfg.CreateMap<BaseSource, BaseDest>().Include<Source, Dest>();
         cfg.CreateMap<Source, Dest>();
     });
@@ -81,20 +81,20 @@ public class ShouldInheritBeforeAndAfterMap
     public class BaseClass
     {
         public string Prop { get; set; }
-    } 
-    public class Class : BaseClass {}
+    }
+    public class Class : BaseClass { }
 
     public class BaseDto
     {
-        public string DifferentProp { get; set; }            
+        public string DifferentProp { get; set; }
     }
-    public class Dto : BaseDto {}
+    public class Dto : BaseDto { }
 
     [Fact]
     public void should_inherit_base_beforemap()
     {
         // arrange
-        var source = new Class{ Prop = "test" };
+        var source = new Class { Prop = "test" };
         var configurationProvider = new MapperConfiguration(cfg =>
         {
             cfg

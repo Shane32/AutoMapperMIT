@@ -1,6 +1,7 @@
 using System.Collections.Specialized;
 using System.Collections.Immutable;
 namespace AutoMapper.UnitTests;
+
 public class UnsupportedCollection : AutoMapperSpecBase
 {
     class Source
@@ -17,7 +18,7 @@ public class UnsupportedCollection : AutoMapperSpecBase
     }
     protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>());
     [Fact]
-    public void ThrowsAtMapTime() => new Action(()=>Map<Destination>(new Source())).ShouldThrow<AutoMapperMappingException>()
+    public void ThrowsAtMapTime() => new Action(() => Map<Destination>(new Source())).ShouldThrow<AutoMapperMappingException>()
         .InnerException.ShouldBeOfType<NotSupportedException>().Message.ShouldBe($"Unknown collection. Consider a custom type converter from {typeof(MyList<DateTime>)} to {typeof(MyList<int>)}.");
 }
 public class When_mapping_interface_to_interface_readonly_set : AutoMapperSpecBase
@@ -68,7 +69,7 @@ public class NonPublicEnumeratorCurrent : AutoMapperSpecBase
     }
     class MyJObject : List<int>
     {
-	        public new MyEnumerator GetEnumerator() => new(base.GetEnumerator());
+        public new MyEnumerator GetEnumerator() => new(base.GetEnumerator());
     }
     class MyEnumerator : IEnumerator
     {
@@ -81,8 +82,8 @@ public class NonPublicEnumeratorCurrent : AutoMapperSpecBase
         public bool MoveNext() => _enumerator.MoveNext();
         public void Reset() => _enumerator.Reset();
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
-        c.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom(_=>new MyJObject { 1, 2, 3 })));
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
+        c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(_ => new MyJObject { 1, 2, 3 })));
     [Fact]
     public void Should_work() => Map<Destination>(new Source()).Value.ShouldBe(new[] { 1, 2, 3 });
 }
@@ -96,8 +97,8 @@ public class ImmutableCollection : AutoMapperSpecBase
     {
         public ImmutableArray<int> Value { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
-        c.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom(_=>ImmutableArray.Create<int>())));
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
+        c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(_ => ImmutableArray.Create<int>())));
     [Fact]
     public void Should_work() => Map<Destination>(new Source()).Value.ShouldBeOfType<ImmutableArray<int>>();
 }
@@ -115,8 +116,8 @@ public class AssignableCollection : AutoMapperSpecBase
     {
         public IEnumerator GetEnumerator() => throw new NotImplementedException();
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
-        c.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom(_=>new MyJObject())));
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
+        c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(_ => new MyJObject())));
     [Fact]
     public void Should_work() => Map<Destination>(new Source()).Value.ShouldBeOfType<MyJObject>();
 }
@@ -130,9 +131,9 @@ public class RecursiveCollection : AutoMapperSpecBase
     {
         public MyJObject Value { get; set; }
     }
-    class MyJObject : List<MyJObject>{}
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
-        c.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom(_=>new MyJObject())));
+    class MyJObject : List<MyJObject> { }
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
+        c.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(_ => new MyJObject())));
     [Fact]
     public void Should_work() => Map<Destination>(new Source()).Value.ShouldBeOfType<MyJObject>();
 }
@@ -446,7 +447,7 @@ public class When_mapping_to_existing_observable_collection : AutoMapperSpecBase
     public void Should_map_ok()
     {
         var ch = new CollectionHolderDto();
-        var list = new List<int>{ 5, 6 };
+        var list = new List<int> { 5, 6 };
         ch.Observable.Add(list);
         var mapped = Mapper.Map<CollectionHolder>(ch);
         mapped.Observable.Single().ShouldBe(list);
@@ -479,7 +480,7 @@ public class When_mapping_to_member_typed_as_IEnumerable : AutoMapperSpecBase
         public IEnumerable<DestItem> Items { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<SourceA, DestA>();
         cfg.CreateMap<SourceB, DestB>();
@@ -495,7 +496,7 @@ public class When_mapping_to_member_typed_as_IEnumerable : AutoMapperSpecBase
 
 public class When_mapping_to_existing_collection_typed_as_IEnumerable : AutoMapperSpecBase
 {
-    protected override MapperConfiguration CreateConfiguration() => new(_=>{ });
+    protected override MapperConfiguration CreateConfiguration() => new(_ => { });
 
     [Fact]
     public void Should_map_ok()
@@ -598,7 +599,7 @@ public class When_mapping_to_readonly_property_as_IEnumerable : AutoMapperSpecBa
         public IEnumerable<string> MyCollection => _myCollection;
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => 
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         cfg.CreateMap<Source, Destination>().ForMember(m => m.MyCollection, opt =>
             {
                 opt.MapFrom(src => src.MyCollection);
@@ -619,7 +620,7 @@ public class When_mapping_from_struct_collection : AutoMapperSpecBase
     {
         public IEnumerator<int> GetEnumerator()
         {
-            for(int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 yield return i;
             }
@@ -702,7 +703,7 @@ public class When_mapping_to_unknown_collection_type : NonValidatingSpecBase
         public MyCollection ShipsTo { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => 
+    protected override MapperConfiguration CreateConfiguration() =>
         new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<SourceItem, DestItem>();
@@ -716,7 +717,7 @@ public class When_mapping_to_unknown_collection_type : NonValidatingSpecBase
             ex.MemberMap.SourceMember.ShouldBe(typeof(SourceItem).GetProperty("ShipsTo"));
             ex.Types.Value.ShouldBe(new TypePair(typeof(SourceItem), typeof(DestItem)));
         });
-    } 
+    }
 }
 
 public class When_mapping_collections_with_inheritance : AutoMapperSpecBase
@@ -1091,7 +1092,8 @@ public class CollectionMapping
     }
 
     [Fact]
-    public void Should_map_to_NameValueCollection() {
+    public void Should_map_to_NameValueCollection()
+    {
         var c = new NameValueCollection();
         var config = new MapperConfiguration(cfg => { });
         var mappedCollection = config.CreateMapper().Map<NameValueCollection, NameValueCollection>(c);

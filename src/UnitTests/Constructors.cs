@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Constructors;
+
 public class RecordConstructorValidation : AutoMapperSpecBase
 {
     record Destination(int Value) { }
@@ -9,7 +10,7 @@ public class RecordConstructorValidation : AutoMapperSpecBase
 }
 public class RecordConstructorValidationForCtorParam : AutoMapperSpecBase
 {
-    record Destination(int Value, int Other){}
+    record Destination(int Value, int Other) { }
     protected override MapperConfiguration CreateConfiguration() => new(c =>
         c.CreateMap<string, Destination>().ForCtorParam(nameof(Destination.Value), o => o.MapFrom(s => 0)));
     [Fact]
@@ -27,8 +28,8 @@ public class ConstructorValidation : AutoMapperSpecBase
         public int Value { get; set; }
         public int OtherValue { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => 
-        c.CreateMap<Source, Destination>().ForCtorParam("otherValue", o=>o.MapFrom(s=>0)));
+    protected override MapperConfiguration CreateConfiguration() => new(c =>
+        c.CreateMap<Source, Destination>().ForCtorParam("otherValue", o => o.MapFrom(s => 0)));
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }
@@ -48,7 +49,7 @@ public class Nullable_enum_default_value : AutoMapperSpecBase
             this.Enum = Enum;
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>cfg.CreateMap<Source, Target>());
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Target>());
     [Fact]
     public void Should_work() => Mapper.Map<Target>(new Source { Enum = SourceEnum.B }).Enum.ShouldBe(TargetEnum.B);
 }
@@ -189,7 +190,7 @@ public class Constructor_mapping_without_preserve_references : AutoMapperSpecBas
             get => _idChild;
             set
             {
-                if(_idChild != 0)
+                if (_idChild != 0)
                 {
                     throw new Exception("Set IdChild again.");
                 }
@@ -209,7 +210,7 @@ public class Constructor_mapping_without_preserve_references : AutoMapperSpecBas
     public void Should_work()
     {
         var parentDto = new ParentDTO { IdParent = 1 };
-        for(var i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
         }
@@ -254,7 +255,7 @@ public class Preserve_references_with_constructor_mapping : AutoMapperSpecBase
             get => _idChild;
             set
             {
-                if(_idChild != 0)
+                if (_idChild != 0)
                 {
                     throw new Exception("Set IdChild again.");
                 }
@@ -264,7 +265,7 @@ public class Preserve_references_with_constructor_mapping : AutoMapperSpecBase
         public ParentModel Parent { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap<ParentDTO, ParentModel>().PreserveReferences();
         cfg.CreateMap<ChildDTO, ChildModel>().ForMember(c => c.Parent, o => o.Ignore()).PreserveReferences();
@@ -274,7 +275,7 @@ public class Preserve_references_with_constructor_mapping : AutoMapperSpecBase
     public void Should_work()
     {
         var parentDto = new ParentDTO { IdParent = 1 };
-        for(var i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
         }
@@ -374,7 +375,7 @@ public class When_mapping_to_an_abstract_type : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<Source, Destination>());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>());
 
     [Fact]
     public void Should_throw()
@@ -411,7 +412,7 @@ public class When_a_constructor_with_extra_parameters_doesnt_match : AutoMapperS
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<PersonSource, PersonTarget>());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<PersonSource, PersonTarget>());
 
     protected override void Because_of()
     {
@@ -457,7 +458,7 @@ public class When_renaming_class_constructor_parameter : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(c =>
     {
-        c.CreateMap<Source, Destination>().ForCtorParam("inner", o=>o.MapFrom(s=>s.InnerSource));
+        c.CreateMap<Source, Destination>().ForCtorParam("inner", o => o.MapFrom(s => s.InnerSource));
         c.CreateMap<InnerSource, InnerDestination>();
     });
 
@@ -578,7 +579,7 @@ public class When_constructor_matches_but_is_overriden_by_ConstructUsing : AutoM
         public string Name { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Person, PersonDto>().ConstructUsing(p=>new PersonDto()));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Person, PersonDto>().ConstructUsing(p => new PersonDto()));
 
     protected override void Because_of()
     {
@@ -858,7 +859,7 @@ public class When_mapping_an_optional_GUID_constructor : AutoMapperSpecBase
         public Guid Id { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<Source, Destination>());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>());
 
     protected override void Because_of()
     {
@@ -931,7 +932,7 @@ public class When_the_destination_has_a_matching_constructor_with_optional_extra
             get { return _foo; }
         }
 
-        public string Bar { get;}
+        public string Bar { get; }
 
         public Destination(int foo, string bar = "bar")
         {
@@ -1435,7 +1436,7 @@ public class When_mapping_to_an_object_with_a_constructor_with_multiple_optional
             get { return _str; }
         }
 
-        public DestinationFoo(DestinationBar bar=null,string str="hello")
+        public DestinationFoo(DestinationBar bar = null, string str = "hello")
         {
             _bar = bar;
             _str = str;
@@ -1588,7 +1589,7 @@ public class When_mapping_to_an_object_with_a_constructor_with_string_optional_a
             get { return _c; }
         }
 
-        public DestinationFoo(string a = "a",string b="b", int c = 3)
+        public DestinationFoo(string a = "a", string b = "b", int c = 3)
         {
             _a = a;
             _b = b;
@@ -1657,7 +1658,7 @@ public class When_configuring_ctor_param_members : AutoMapperSpecBase
     [Fact]
     public void Should_redirect_value()
     {
-        var dest = Mapper.Map<Source, Dest>(new Source {Value = 5});
+        var dest = Mapper.Map<Source, Dest>(new Source { Value = 5 });
 
         dest.Value1.ShouldBe(5);
     }
@@ -1708,7 +1709,7 @@ public class When_configuring_ctor_param_members_without_source_property_1 : Aut
 
     public class Dest
     {
-        public string Result{ get; }
+        public string Result { get; }
         public dynamic Details { get; }
 
         public Dest(string result, DestInner1 inner1)
@@ -1773,7 +1774,7 @@ public class When_configuring_ctor_param_members_without_source_property_2 : Aut
 
     public class Dest
     {
-        public string Result{ get; }
+        public string Result { get; }
         public dynamic Details { get; }
 
         public Dest(string result, DestInner1 inner1)

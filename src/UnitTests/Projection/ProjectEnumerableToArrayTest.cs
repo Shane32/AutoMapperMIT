@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectEnumerableToArrayTest
 {
     private MapperConfiguration _config;
@@ -15,7 +16,7 @@ public class ProjectEnumerableToArrayTest
     [Fact]
     public void EnumerablesAreMappedToArrays()
     {
-        var movies = 
+        var movies =
             new List<Movie>() {
             new Movie() { Actors = new Actor[] { new Actor() { Name = "Actor 1" }, new Actor() { Name = "Actor 2" } } },
             new Movie() { Actors = new Actor[] { new Actor() { Name = "Actor 3" }, new Actor() { Name = "Actor 4" } } }

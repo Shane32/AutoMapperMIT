@@ -64,8 +64,8 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests
 
             //act
             Expression<Func<ShapeHolder, bool>> whereMapped = mapper.MapExpression<Expression<Func<ShapeHolder, bool>>>(where);
-            var list = new List<ShapeHolder> 
-            { 
+            var list = new List<ShapeHolder>
+            {
                 new() { Shape = new Circle() },
                 new() { Shape = new Triangle()  }
             }
@@ -158,7 +158,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests
 
             //act
             Expression<Func<Shape, bool>> whereMapped = mapper.MapExpression<Expression<Func<Shape, bool>>>(where);
-            var list = new List<Shape> { new Circle(), new Triangle()}.AsQueryable().Where(whereMapped).ToList();
+            var list = new List<Shape> { new Circle(), new Triangle() }.AsQueryable().Where(whereMapped).ToList();
 
             //assert
             Assert.Single(list);

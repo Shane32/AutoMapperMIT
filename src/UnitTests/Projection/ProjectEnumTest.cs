@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectEnumTest
 {
     private MapperConfiguration _config;
@@ -51,7 +52,7 @@ public class ProjectionOverrides : AutoMapperSpecBase
 {
     public class Source
     {
-        
+
     }
 
     public class Dest
@@ -62,7 +63,7 @@ public class ProjectionOverrides : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateProjection<Source, Dest>()
-            .ConvertUsing(src => new Dest {Value = 10});
+            .ConvertUsing(src => new Dest { Value = 10 });
     });
     [Fact]
     public void Validate() => AssertConfigurationIsValid();

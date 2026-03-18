@@ -122,7 +122,7 @@ public class ProjectAndAllowNullCollections : IntegrationTest<ProjectAndAllowNul
     [Fact]
     public void Should_work()
     {
-        using(var context = new MyContext())
+        using (var context = new MyContext())
         {
             var foos = ProjectTo<FooDto>(context.Foos.AsNoTracking(), null, m => m.Bars).ToList();
 

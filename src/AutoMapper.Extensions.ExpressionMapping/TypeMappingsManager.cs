@@ -19,7 +19,7 @@ namespace AutoMapper.Extensions.ExpressionMapping
             ConfigurationProvider = configurationProvider;
             InfoDictionary = new MapperInfoDictionary(new ParameterExpressionEqualityComparer());
             TypeMappings = [];
-            
+
             AddTypeMappingsFromDelegates(typeSourceFunc, typeDestFunc);
         }
 

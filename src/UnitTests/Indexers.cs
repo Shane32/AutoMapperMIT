@@ -14,7 +14,7 @@ namespace AutoMapper.UnitTests
             public class Destination
             {
                 public string Value { get; set; }
-                public string this[string key] { get { return null; }}
+                public string this[string key] { get { return null; } }
             }
 
             protected override MapperConfiguration CreateConfiguration() => new(cfg =>
@@ -24,7 +24,7 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _result = Mapper.Map<Source, Destination>(new Source {Value = "Bob"});
+                _result = Mapper.Map<Source, Destination>(new Source { Value = "Bob" });
             }
 
             [Fact]

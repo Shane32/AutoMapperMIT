@@ -42,7 +42,7 @@ public class When_multiple_source_members_match : AutoMapperSpecBase
         public int Value { get; set; }
         public int OtherValue { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<Source, Destination>());
+    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>());
     [Fact]
     public void Should_prefer_the_property()
     {
@@ -91,7 +91,7 @@ public class When_mapping_derived_classes_in_arrays : AutoMapperSpecBase
             new ModelObject {BaseString = "Base1"},
             new ModelSubObject {BaseString = "Base2", SubString = "Sub2"}
         };
-        _result = (DtoObject[]) Mapper.Map(model, typeof (ModelObject[]), typeof (DtoObject[]));
+        _result = (DtoObject[])Mapper.Map(model, typeof(ModelObject[]), typeof(DtoObject[]));
     }
 
     [Fact]
@@ -105,8 +105,8 @@ public class When_mapping_derived_classes_in_arrays : AutoMapperSpecBase
     [Fact]
     public void Should_map_to_the_correct_respective_dto_types()
     {
-        _result[0].ShouldBeOfType(typeof (DtoObject));
-        _result[1].ShouldBeOfType(typeof (DtoSubObject));
+        _result[0].ShouldBeOfType(typeof(DtoObject));
+        _result[1].ShouldBeOfType(typeof(DtoSubObject));
     }
 }
 
@@ -195,7 +195,7 @@ public class When_mapping_derived_classes_from_intefaces_to_abstract : AutoMappe
         {
             new ModelSubObject {BaseString = "Base2", SubString = "Sub2"}
         };
-        _result = (DtoObject[]) Mapper.Map(model, typeof (IModelObject[]), typeof (DtoObject[]));
+        _result = (DtoObject[])Mapper.Map(model, typeof(IModelObject[]), typeof(DtoObject[]));
         base.Because_of();
     }
 
@@ -209,8 +209,8 @@ public class When_mapping_derived_classes_from_intefaces_to_abstract : AutoMappe
     [Fact]
     public void Should_map_to_the_correct_respective_dto_types()
     {
-        _result[0].ShouldBeOfType(typeof (DtoSubObject));
-        ((DtoSubObject) _result[0]).SubString.ShouldBe("Sub2");
+        _result[0].ShouldBeOfType(typeof(DtoSubObject));
+        ((DtoSubObject)_result[0]).SubString.ShouldBe("Sub2");
     }
 }
 
@@ -263,16 +263,16 @@ public class When_mapping_derived_classes_as_property_of_top_object : AutoMapper
     public void Should_map_object_to_sub_object()
     {
         var model = new Model
-            {
-                Object = new ModelSubObject {BaseString = "Base2", SubString = "Sub2"}
-            };
+        {
+            Object = new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+        };
 
         _result = Mapper.Map<Model, DtoModel>(model);
         _result.Object.ShouldNotBeNull();
         _result.Object.ShouldBeOfType<DtoSubObject>();
         _result.Object.ShouldBeOfType<DtoSubObject>();
         _result.Object.BaseString.ShouldBe("Base2");
-        ((DtoSubObject) _result.Object).SubString.ShouldBe("Sub2");
+        ((DtoSubObject)_result.Object).SubString.ShouldBe("Sub2");
     }
 }
 
@@ -407,7 +407,7 @@ public class When_mapping_dto_with_only_fields : AutoMapperSpecBase
         public string Sub2ProperName;
         public string SubWithExtraNameProperName;
         public string SubSubSubIAmACoolProperty;
-        public string SubMissingSubSubIAmACoolProperty;            
+        public string SubMissingSubSubIAmACoolProperty;
     }
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
@@ -481,32 +481,32 @@ public class When_mapping_dto_with_fields_and_properties : AutoMapperSpecBase
 
     public class ModelObject
     {
-        public DateTime BaseDate { get; set;}
+        public DateTime BaseDate { get; set; }
         public ModelSubObject Sub;
-        public ModelSubObject Sub2 { get; set;}
+        public ModelSubObject Sub2 { get; set; }
         public ModelSubObject SubWithExtraName;
         public ModelSubObject SubMissing { get; set; }
     }
 
     public class ModelSubObject
     {
-        public string ProperName { get; set;}
+        public string ProperName { get; set; }
         public ModelSubSubObject SubSub;
     }
 
     public class ModelSubSubObject
     {
-        public string IAmACoolProperty { get; set;}
+        public string IAmACoolProperty { get; set; }
     }
 
     public class ModelDto
     {
         public DateTime BaseDate;
         public string SubProperName;
-        public string Sub2ProperName { get; set;}
+        public string Sub2ProperName { get; set; }
         public string SubWithExtraNameProperName;
         public string SubSubSubIAmACoolProperty;
-        public string SubMissingSubSubIAmACoolProperty { get; set;}
+        public string SubMissingSubSubIAmACoolProperty { get; set; }
     }
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
@@ -612,7 +612,7 @@ public class When_ignoring_a_dto_property_during_configuration : AutoMapperSpecB
     [Fact]
     public void Should_map_successfully()
     {
-        var destination = Mapper.Map<Source, Destination>(new Source {Value = "foo"});
+        var destination = Mapper.Map<Source, Destination>(new Source { Value = "foo" });
         destination.Value.ShouldBe("foo");
         destination.Ignored.ShouldBeTrue();
     }
@@ -1039,17 +1039,17 @@ public class When_mapping_using_custom_member_mappings_without_generics : AutoMa
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap(typeof (Order), typeof (OrderDTO))
+        cfg.CreateMap(typeof(Order), typeof(OrderDTO))
             .ForMember("CurrentState", map => map.MapFrom("Status"))
             .ForMember("Contact", map => map.MapFrom(new StringCAPS(), "Customer"))
-            .ForMember("Tracking", map => map.MapFrom(typeof (StringLower), "ShippingCode"))
+            .ForMember("Tracking", map => map.MapFrom(typeof(StringLower), "ShippingCode"))
             .ForMember("Postal", map => map.MapFrom(new StringPadder(6), "Zip"));
 
     });
 
     protected override void Because_of()
     {
-            var order = new Order
+        var order = new Order
         {
             Id = 7,
             Status = "Pending",
@@ -1091,7 +1091,7 @@ public class When_mapping_using_custom_member_mappings_without_generics : AutoMa
     }
 
 }
-    
+
 public class When_mapping_to_a_top_level_camelCased_destination_member : AutoMapperSpecBase
 {
     private Destination _result;
@@ -1113,7 +1113,7 @@ public class When_mapping_to_a_top_level_camelCased_destination_member : AutoMap
 
     protected override void Because_of()
     {
-        var source = new Source {SomeValueWithPascalName = 5};
+        var source = new Source { SomeValueWithPascalName = 5 };
         _result = Mapper.Map<Source, Destination>(source);
     }
 
@@ -1179,7 +1179,7 @@ public class When_mapping_to_a_self_referential_object : AutoMapperSpecBase
         _result.Children[1].Children.Length.ShouldBe(4);
     }
 }
-    
+
 public class When_mapping_to_types_in_a_non_generic_manner : AutoMapperSpecBase
 {
     private Destination _result;
@@ -1196,12 +1196,12 @@ public class When_mapping_to_types_in_a_non_generic_manner : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap(typeof (Source), typeof (Destination));
+        cfg.CreateMap(typeof(Source), typeof(Destination));
     });
 
     protected override void Because_of()
     {
-        _result = Mapper.Map<Source, Destination>(new Source {Value = 5});
+        _result = Mapper.Map<Source, Destination>(new Source { Value = 5 });
     }
 
     [Fact]
@@ -1239,7 +1239,7 @@ public class When_matching_source_and_destination_members_with_underscored_membe
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {some_source = new SubSource {value = 8}});
+        _destination = Mapper.Map<Source, Destination>(new Source { some_source = new SubSource { value = 8 } });
     }
 
     [Fact]
@@ -1279,7 +1279,7 @@ public class When_source_members_configured_in_a_root_profile_contain_prefixes :
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.RecognizePrefixes("Foo");
-        cfg.AddProfile<ChildProfile>();                
+        cfg.AddProfile<ChildProfile>();
     });
 
     protected override void Because_of()
@@ -1307,9 +1307,9 @@ public class When_source_members_contain_prefixes : AutoMapperSpecBase
     public class Source
     {
         public int FooValue { get; set; }
-        public int GetOtherValue() 
+        public int GetOtherValue()
         {
-            return 10; 
+            return 10;
         }
     }
 
@@ -1327,7 +1327,7 @@ public class When_source_members_contain_prefixes : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {FooValue = 5});
+        _destination = Mapper.Map<Source, Destination>(new Source { FooValue = 5 });
     }
 
     [Fact]
@@ -1548,7 +1548,7 @@ public class When_source_member_names_match_with_underscores : AutoMapperSpecBas
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {I_amaCraAZZEE____Name = 5});
+        _destination = Mapper.Map<Source, Destination>(new Source { I_amaCraAZZEE____Name = 5 });
     }
 
     [Fact]
@@ -1580,7 +1580,7 @@ public class When_recognizing_explicit_member_aliases : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Foo = 5});
+        _destination = Mapper.Map<Source, Destination>(new Source { Foo = 5 });
     }
 
     [Fact]
@@ -1660,7 +1660,7 @@ public class When_destination_type_has_private_members : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source {Value = 5});
+        _destination = Mapper.Map<Source, Destination>(new Source { Value = 5 });
     }
 
     [Fact]

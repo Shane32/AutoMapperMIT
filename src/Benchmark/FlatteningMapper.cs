@@ -307,12 +307,12 @@ public class ManualComplexTypeMapper : IObjectToObjectMapper
             IntArr = new int[_foo.IntArr.Length],
             Ints = _foo.Ints.ToArray(),
         };
-        foreach(var foo in _foo.Foos)
+        foreach (var foo in _foo.Foos)
         {
             dest.Foos.Add(new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt });
         }
         ;
-        for(int index = 0; index < _foo.Foos.Count; index++)
+        for (int index = 0; index < _foo.Foos.Count; index++)
         {
             var foo = _foo.Foos[index];
             dest.FooArr[index] = new InnerFooDest { Name = foo.Name, Int64 = foo.Int64, NullInt = foo.NullInt };

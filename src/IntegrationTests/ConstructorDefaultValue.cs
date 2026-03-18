@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
+
 public class ConstructorDefaultValue : IntegrationTest<ConstructorDefaultValue.DatabaseInitializer>
 {
     public class Customer

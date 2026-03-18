@@ -17,7 +17,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 
             var mapper = serviceProvider.GetService<IMapper>();
 
-            var source = new Source3 {Value = 3};
+            var source = new Source3 { Value = 3 };
 
             var dest = mapper.Map<Dest3>(source);
 

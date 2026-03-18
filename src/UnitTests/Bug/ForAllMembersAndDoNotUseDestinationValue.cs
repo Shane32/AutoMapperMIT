@@ -15,7 +15,7 @@ public class ForAllMembersAndResolveUsing : AutoMapperSpecBase
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
-        cfg.CreateMap<Source, Destination>().ForAllMembers(opt => opt.MapFrom(s=>12));
+        cfg.CreateMap<Source, Destination>().ForAllMembers(opt => opt.MapFrom(s => 12));
     });
 
     protected override void Because_of()

@@ -180,7 +180,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
                         new User { UserId = 2, Account = new Account(){ Id = 4,Things = {new Thing(){Bar = "Bar"}, new Thing(){ Bar ="Bar 2"}}}},
                         new User { UserId = 1, Account = new Account(){ Id = 3,Things = {new Thing(){Bar = "Bar 3"}, new Thing(){ Bar ="Bar 4"}}}},
                     ];
-        
+
         [Fact]
         public void Map_select_method()
         {
@@ -468,7 +468,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
             detail.Master.ShouldNotBeNull();
             master.Details.ShouldNotBeEmpty();
             detail.Master.Id.ShouldBe(master.Id);
-            
+
             dto.Master.Details.Single().Id.ShouldBe(dto.Id, "Dto was not added to inner collection");
             //dto.GetHashCode().ShouldBe(dto.Master.Details.Single().GetHashCode()); // "Underlying provider always creates two distinct instances"
         }
@@ -491,7 +491,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
 
             // Act
             var result = source.UseAsDataSource(mapper).For<DestWithParams>(new Dictionary<string, object> { { "value", 10 } }).ToArray();
-            
+
             // Assert
             result.ShouldNotBeNull();
             result.ShouldNotBeEmpty();
@@ -579,8 +579,8 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
 
             var query = factoryFunc(sources)
                 .UseAsDataSource(mapper)
-                .For<ResourceDto>(new {userId = 4});
-                
+                .For<ResourceDto>(new { userId = 4 });
+
             // Act
             var results = query.ToList();
 
@@ -627,7 +627,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
             // Arrange
             var mapper = SetupAutoMapper();
             var source = new NotSingleQueryingEnumerable<Detail>();
-            
+
             // Act
             _ = source.AsQueryable()
                 .UseAsDataSource(mapper).For<DetailDto>()
@@ -689,7 +689,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
             });
 
 
-           return config.CreateMapper();
+            return config.CreateMapper();
         }
 
     }
@@ -786,7 +786,7 @@ namespace AutoMapper.Extensions.ExpressionMapping.UnitTests.Impl
         public MasterDto Master { get; set; }
     }
 
-    
+
     public class MasterCyclicDto
     {
         public MasterCyclicDto()

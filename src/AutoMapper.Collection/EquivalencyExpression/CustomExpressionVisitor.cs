@@ -30,7 +30,7 @@ namespace AutoMapper.EquivalencyExpression
                 if (matchPM == null)
                     throw new Exception("No matching PropertyMap");
                 var memberGetters = matchPM.SourceMembers;
-                
+
                 var memberExpression = Expression.Property(Visit(node.Expression), memberGetters.First() as PropertyInfo);
 
                 foreach (var memberGetter in memberGetters.Skip(1))

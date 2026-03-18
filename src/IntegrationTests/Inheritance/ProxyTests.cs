@@ -5,7 +5,8 @@ public class ProxyTests : IAsyncLifetime
     [Fact]
     public void Test()
     {
-        var config = new MapperConfiguration(cfg => {
+        var config = new MapperConfiguration(cfg =>
+        {
             cfg.CreateMap<TrainingCourse, TrainingCourseDto>().Include<TrainingCourse, ParentTrainingCourseDto>();
             cfg.CreateMap<TrainingCourse, ParentTrainingCourseDto>();
             cfg.CreateMap<TrainingContent, TrainingContentDto>();

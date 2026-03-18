@@ -133,7 +133,7 @@ public class ValueConverters
         protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Dest>()
                 .ForMember(d => d.ValueFoo1, opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()));
         [Fact]
-        public void Should_report_error() => new Action(()=>Map<Dest>(new Source())).ShouldThrow<AutoMapperMappingException>().InnerException.Message.ShouldBe(
+        public void Should_report_error() => new Action(() => Map<Dest>(new Source())).ShouldThrow<AutoMapperMappingException>().InnerException.Message.ShouldBe(
             "Cannot find a source member to pass to the value converter of type AutoMapper.UnitTests.ValueConverters+When_specifying_value_converter_with_no_source+EightDigitIntToStringConverter. Configure a source member to map from.");
     }
 
@@ -634,7 +634,7 @@ public class ValueConverters
             cfg.CreateMap<Source, Dest>();
             cfg.CreateMap<OtherSource, OtherDest>();
             cfg.ForAllPropertyMaps
-                (pm => pm.SourceType == typeof(int) && pm.DestinationType == typeof(string), 
+                (pm => pm.SourceType == typeof(int) && pm.DestinationType == typeof(string),
                 (pm, opt) => opt.ConvertUsing(new EightDigitIntToStringConverter()));
         });
 

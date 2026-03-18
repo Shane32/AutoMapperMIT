@@ -18,7 +18,7 @@ public class BenchEngine
 
         var timer = Stopwatch.StartNew();
 
-        for(int i = 0; i < 1_000_000; i++)
+        for (int i = 0; i < 1_000_000; i++)
         {
             _mapper.Map();
         }

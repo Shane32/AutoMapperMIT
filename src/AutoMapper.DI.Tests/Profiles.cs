@@ -4,12 +4,12 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 {
     public class Source
     {
-        
+
     }
 
     public class Dest
     {
-        
+
     }
 
     public class Source2
@@ -99,7 +99,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         public void Process(object source, object destination, ResolutionContext context) { }
     }
 
-    internal class FooValueResolver: IValueResolver<object, object, object>
+    internal class FooValueResolver : IValueResolver<object, object, object>
     {
         public object Resolve(object source, object destination, object destMember, ResolutionContext context)
         {
@@ -131,8 +131,8 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
     public class EnumDescriptorTypeConverter<TSource> : ITypeConverter<Enum, EnumDescriptor<TSource>>
         where TSource : Enum
     {
-        public EnumDescriptor<TSource> Convert(Enum source, EnumDescriptor<TSource> destination, ResolutionContext context) => 
-            new EnumDescriptor<TSource>{ Value = int.MaxValue };
+        public EnumDescriptor<TSource> Convert(Enum source, EnumDescriptor<TSource> destination, ResolutionContext context) =>
+            new EnumDescriptor<TSource> { Value = int.MaxValue };
     }
 
     internal class FooValueConverter : IValueConverter<int, int>

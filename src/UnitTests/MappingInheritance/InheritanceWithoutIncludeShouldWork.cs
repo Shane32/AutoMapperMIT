@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
+
 public class InheritanceWithoutIncludeShouldWork : AutoMapperSpecBase
 {
     public class FooBase { }

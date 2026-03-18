@@ -20,7 +20,7 @@ public class Self_referencing_existing_destination_without_PreserveReferences : 
         public BaseTypeDto SelfReference { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=> cfg.CreateMap<BaseType, BaseTypeDto>());
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<BaseType, BaseTypeDto>());
     [Fact]
     public void Should_work()
     {
@@ -70,8 +70,10 @@ public class WithoutPreserveReferencesSameDestination : AutoMapperSpecBase
     public void Should_use_the_right_map()
     {
         var source =
-                new EntityOne {
-                    Two = new EntityTwo {
+                new EntityOne
+                {
+                    Two = new EntityTwo
+                    {
                         Ones = new List<EntityOne> {
                             new EntityOne {
                                 Two = new EntityTwo { Ones = new List<EntityOne>() }

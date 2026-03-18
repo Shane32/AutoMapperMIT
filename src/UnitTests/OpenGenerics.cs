@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class ForPathGenericsSource : AutoMapperSpecBase
 {
     class Source<T>
@@ -105,7 +106,7 @@ public class OpenGenerics_With_Struct : AutoMapperSpecBase
     public struct Id<T>
     {
     }
-    protected override MapperConfiguration CreateConfiguration() => new(mapper => mapper.CreateMap(typeof(Id<>), typeof(long)).ConvertUsing((_,__)=>(long)42));
+    protected override MapperConfiguration CreateConfiguration() => new(mapper => mapper.CreateMap(typeof(Id<>), typeof(long)).ConvertUsing((_, __) => (long)42));
     [Fact]
     public void Should_work() => Map<long>(new Id<string>()).ShouldBe(42);
 }
@@ -160,7 +161,7 @@ public class GenericMapsPriority : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
         cfg.CreateMap(typeof(Source<>), typeof(Destination<string>));
-        cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ForAllMembers(o=>o.Ignore());
+        cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ForAllMembers(o => o.Ignore());
         cfg.CreateMap(typeof(Source<string>), typeof(Destination<>)).ForAllMembers(o => o.Ignore());
         cfg.CreateMap(typeof(Source<int>), typeof(Destination<>));
     });
@@ -181,7 +182,7 @@ public class GenericMapWithUntypedMap : AutoMapperSpecBase
     {
         public T Value;
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
     [Fact]
     public void Should_work() => new Action(() => Mapper.Map(new Source<int>(), null, typeof(Destination<>)))
         .ShouldThrow<ArgumentException>().Message.ShouldStartWith($"Type {typeof(Destination<>).FullName}[T] is a generic type definition");
@@ -196,7 +197,7 @@ public class GenericValueResolverTypeMismatch : AutoMapperSpecBase
     {
         public string Value;
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
+    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
         cfg.CreateMap(typeof(Source<>), typeof(Destination)).ForMember("Value", o => o.MapFrom(typeof(ValueResolver<>))));
     class ValueResolver<T> : IValueResolver<Source<T>, Destination, object>
     {
@@ -244,7 +245,7 @@ public class GenericValueResolver : AutoMapperSpecBase
         cfg.CreateMap(typeof(Source), typeof(Destination<>))
             .ForMember("MyValues", o => o.MapFrom(typeof(ValuesResolver<>)));
         cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
-            .ForMember("MyValues", o => o.MapFrom(typeof(ValuesResolver<,>)));				
+            .ForMember("MyValues", o => o.MapFrom(typeof(ValuesResolver<,>)));
     });
     private class KeyResolver<TKey> : IValueResolver<KeyValuePair<TKey, int>, Destination, string>
     {
@@ -291,7 +292,7 @@ public class GenericValueResolver : AutoMapperSpecBase
     [Fact]
     public void Should_map_non_generic_destination()
     {
-        var destination = Map<Destination>(new KeyValuePair<int, int>(1,2));
+        var destination = Map<Destination>(new KeyValuePair<int, int>(1, 2));
         destination.MyKey.ShouldBe("1");
         destination.MyValue.ShouldBe("2");
     }
@@ -461,7 +462,7 @@ public class OpenGenericsProfileValidationNonGenericMembers : NonValidatingSpecB
 
     [Fact]
     public void Should_report_unmapped_property() =>
-        new Action(()=> AssertConfigurationIsValid<MyProfile>())
+        new Action(() => AssertConfigurationIsValid<MyProfile>())
             .ShouldThrow<AutoMapperConfigurationException>()
             .Errors.Single().UnmappedPropertyNames.Single().ShouldBe("A");
 }
@@ -568,7 +569,8 @@ public class OpenGenerics_With_MemberConfiguration : AutoMapperSpecBase
         public int D { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(mapper => {
+    protected override MapperConfiguration CreateConfiguration() => new(mapper =>
+    {
         mapper.CreateMap(typeof(Foo<>), typeof(Bar<>))
         .ForMember("C", to => to.MapFrom("A"))
         .ForMember("D", to => to.MapFrom("B"));
@@ -602,7 +604,8 @@ public class OpenGenerics_With_UntypedMapFrom : AutoMapperSpecBase
         public T Value2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(mapper => {
+    protected override MapperConfiguration CreateConfiguration() => new(mapper =>
+    {
         mapper.CreateMap(typeof(Foo<>), typeof(Bar<>)).ForMember("Value2", to => to.MapFrom("Value1"));
     });
 
@@ -626,7 +629,8 @@ public class OpenGenerics_With_UntypedMapFromStructs : AutoMapperSpecBase
         public T Value2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(mapper => {
+    protected override MapperConfiguration CreateConfiguration() => new(mapper =>
+    {
         mapper.CreateMap(typeof(Foo<>), typeof(Bar<>)).ForMember("Value2", to => to.MapFrom("Value1"));
     });
 

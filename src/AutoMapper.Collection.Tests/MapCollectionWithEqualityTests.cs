@@ -187,14 +187,14 @@ namespace AutoMapper.Collection
                     .ForMember(x => x.DtoId, m => m.Ignore())
                     .EqualityComparison((ClientDto src, Client dest) => dest.DtoId == 0 ? src.Code == dest.Code : src.Id == dest.DtoId);
             });
-            
+
             var dto = new ClientDto
             {
                 Code = "abc",
                 Id = 1
             };
-            var entity = new Client {Code = dto.Code, Id = 42};
-            var entityCollection = new List<Client> {entity};
+            var entity = new Client { Code = dto.Code, Id = 42 };
+            var entityCollection = new List<Client> { entity };
 
             mapper.Map(new[] { dto }, entityCollection);
 
