@@ -15,9 +15,7 @@
 *.png 	binary
 *.gif 	binary
 
-core.eol crlf
-
-*.cs diff=csharp 
+*.cs diff=csharp
 
 *.csproj merge=union 
 *.vbproj merge=union 
