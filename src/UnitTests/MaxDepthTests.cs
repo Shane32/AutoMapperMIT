@@ -112,7 +112,7 @@ public class MaxDepthTests
 
         var root = new Circular();
         var current = root;
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 100000; i++)
         {
             current.Self = new Circular();
             current = current.Self;
