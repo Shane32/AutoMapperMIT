@@ -22,6 +22,8 @@
 
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" Visible="False" />
+    <None Include="$(MSBuildThisFileDirectory)LICENSE.txt" Pack="true" PackagePath="" Visible="False" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="False" />
     <None Include="$(MSBuildThisFileDirectory)README.AutoMapper.md" Pack="true" PackagePath="" Visible="False" />
     <None Include="$(MSBuildThisFileDirectory)README.Collection.md" Pack="true" PackagePath="" Visible="False" />
     <None Include="$(MSBuildThisFileDirectory)README.EFCore.md" Pack="true" PackagePath="" Visible="False" />
