@@ -98,4 +98,46 @@ public class MaxDepthTests
             }
         }
     }
+
+    public class Circular
+    {
+        public Circular Self { get; set; }
+    }
+
+    [Fact]
+    public void Deeply_nested_self_referential_should_not_stackoverflow()
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<Circular, Circular>());
+        var mapper = config.CreateMapper();
+
+        var root = new Circular();
+        var current = root;
+        for (int i = 0; i < 1000; i++)
+        {
+            current.Self = new Circular();
+            current = current.Self;
+        }
+
+        // Should not throw StackOverflowException
+        var result = mapper.Map<Circular>(root);
+        result.ShouldNotBeNull();
+    }
+
+    [Fact]
+    public void Truly_circular_self_referential_should_not_stackoverflow()
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<Circular, Circular>());
+        var mapper = config.CreateMapper();
+
+        // Create a truly circular reference: a -> b -> a
+        var a = new Circular();
+        var b = new Circular();
+        a.Self = b;
+        b.Self = a;
+
+        // Should not throw StackOverflowException
+        var result = mapper.Map<Circular>(a);
+        result.ShouldNotBeNull();
+        result.Self.ShouldNotBeNull();
+    }
 }
