@@ -1,10 +1,6 @@
 ![AutoMapper](https://s3.amazonaws.com/automapper/logo.png)
 
-[![CI](https://github.com/automapper/automapper/workflows/CI/badge.svg)](https://github.com/AutoMapper/AutoMapper/actions?query=workflow%3ACI)
-[![NuGet](http://img.shields.io/nuget/vpre/AutoMapper.svg?label=NuGet)](https://www.nuget.org/packages/AutoMapper/)
-[![MyGet (dev)](https://img.shields.io/myget/automapperdev/vpre/AutoMapper.svg?label=MyGet)](https://myget.org/feed/automapperdev/package/nuget/AutoMapper)
-[![Documentation Status](https://readthedocs.org/projects/automapper/badge/?version=stable)](https://docs.automapper.org/en/stable/?badge=stable)
-
+[![NuGet](https://img.shields.io/nuget/v/AutoMapperMIT.svg)](https://www.nuget.org/packages/AutoMapperMIT)
 
 ### What is AutoMapper?
 
@@ -46,19 +42,17 @@ Check out the [getting started guide](https://automapper.readthedocs.io/en/lates
 
 ### Where can I get it?
 
-First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [AutoMapper](https://www.nuget.org/packages/AutoMapper/) from the package manager console:
+First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [AutoMapperMIT](https://www.nuget.org/packages/AutoMapperMIT/) from the package manager console:
 
 ```
-PM> Install-Package AutoMapper
+PM> Install-Package AutoMapperMIT
 ```
 Or from the .NET CLI as:
 ```
-dotnet add package AutoMapper
+dotnet add package AutoMapperMIT
 ```
 
 ### Do you have an issue?
-
-First check if it's already fixed by trying the [MyGet build](https://automapper.readthedocs.io/en/latest/The-MyGet-build.html).
 
 You might want to know exactly what [your mapping does](https://automapper.readthedocs.io/en/latest/Understanding-your-mapping.html) at runtime.
 

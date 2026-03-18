@@ -7,17 +7,12 @@
     <AssemblyName>AutoMapper.Collection</AssemblyName>
     <RootNamespace>AutoMapper.Collection</RootNamespace>
     <PackageId>AutoMapperMIT.Collection</PackageId>
-    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/AutoMapper/Automapper.Collection</PackageProjectUrl>
+    <PackageReadmeFile>README.Collection.md</PackageReadmeFile>
     <AssemblyOriginatorKeyFile>../Key.snk</AssemblyOriginatorKeyFile>
-    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <SignAssembly>true</SignAssembly>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\..\icon.png" Pack="true" PackagePath="" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapperMIT.csproj" />

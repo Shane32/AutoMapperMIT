@@ -1,0 +1,17 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    uses: Shane32/SharedWorkflows/.github/workflows/publish-nuget.yml@v2
+    permissions:
+      contents: write
+    with:
+      dotnet_folder: '.'
+    secrets:
+      NUGET_AUTH_TOKEN: ${{ secrets.NUGET_AUTH_TOKEN }}

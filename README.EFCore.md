@@ -4,7 +4,7 @@
 
 `Automapper.Collection.EntityFrameworkCore` will help you when mapping an EntityFramework Core DbContext-object.
 
-[![NuGet](http://img.shields.io/nuget/v/Automapper.Collection.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Automapper.Collection.EntityFrameworkCore/)
+[![NuGet](https://img.shields.io/nuget/v/AutoMapperMIT.Collection.EntityFrameworkCore.svg)](https://www.nuget.org/packages/AutoMapperMIT.Collection.EntityFrameworkCore)
 
 ## Configuration examples
 
@@ -48,5 +48,5 @@ How to get it
 Use NuGet Package Manager to install the package or use any of the following commands in NuGet Package Manager Console.
 
 ```	
-PM> Install-Package AutoMapper.Collection.EntityFrameworkCore
+PM> Install-Package AutoMapperMIT.Collection.EntityFrameworkCore
 ```

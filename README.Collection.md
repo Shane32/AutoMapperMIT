@@ -5,7 +5,9 @@ Adds ability to map collections to existing collections without re-creating the 
 
 Will Add/Update/Delete items from a preexisting collection object based on user defined equivalency between the collection's generic item type from the source collection and the destination collection.
 
-[![NuGet](http://img.shields.io/nuget/v/AutoMapper.Collection.svg)](https://www.nuget.org/packages/AutoMapper.Collection/)
+[![NuGet](https://img.shields.io/nuget/v/AutoMapperMIT.Collection.svg)](https://www.nuget.org/packages/AutoMapperMIT.Collection)
+[![NuGet](https://img.shields.io/nuget/v/AutoMapperMIT.Collection.EntityFramework.svg?label=AutoMapperMIT.Collection.EntityFramework)](https://www.nuget.org/packages/AutoMapperMIT.Collection.EntityFramework)
+[![NuGet](https://img.shields.io/nuget/v/AutoMapperMIT.Collection.LinqToSQL.svg?label=AutoMapperMIT.Collection.LinqToSQL)](https://www.nuget.org/packages/AutoMapperMIT.Collection.LinqToSQL)
 
 ## How to add to AutoMapper?
 Call AddCollectionMappers when configuring
@@ -70,24 +72,24 @@ Persist doesn't call submit changes automatically
 
 ## Where can I get it?
 
-First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [AutoMapper.Collection](https://www.nuget.org/packages/AutoMapper.Collection/) from the package manager console:
+First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [AutoMapperMIT.Collection](https://www.nuget.org/packages/AutoMapperMIT.Collection/) from the package manager console:
 ```
-PM> Install-Package AutoMapper.Collection
+PM> Install-Package AutoMapperMIT.Collection
 ```
 
 ### Additional packages
 
 #### AutoMapper Collection for Entity Framework
 ```
-PM> Install-Package AutoMapper.Collection.EntityFramework
+PM> Install-Package AutoMapperMIT.Collection.EntityFramework
 ```
 
 #### AutoMapper Collection for Entity Framework Core
 ```
-PM> Install-Package AutoMapper.Collection.EntityFrameworkCore
+PM> Install-Package AutoMapperMIT.Collection.EntityFrameworkCore
 ```
 
 #### AutoMapper Collection for LinqToSQL
 ```
-PM> Install-Package AutoMapper.Collection.LinqToSQL
+PM> Install-Package AutoMapperMIT.Collection.LinqToSQL
 ```

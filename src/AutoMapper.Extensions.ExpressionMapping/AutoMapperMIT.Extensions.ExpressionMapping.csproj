@@ -3,26 +3,18 @@
   <PropertyGroup>
     <Summary>Expression mapping (OData) extensions for AutoMapper</Summary>
     <Description>Expression mapping (OData) extensions for AutoMapper</Description>
-		<TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
     <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <RootNamespace>AutoMapper.Extensions.ExpressionMapping</RootNamespace>
     <PackageId>AutoMapperMIT.Extensions.ExpressionMapping</PackageId>
-		<PackageIcon>icon.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageReleaseNotes>Marking obsolete methods and classes.</PackageReleaseNotes>
+    <PackageReleaseNotes>Marking obsolete methods and classes.</PackageReleaseNotes>
     <PackageProjectUrl>https://automapper.org</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <PackageReadmeFile>README.ExpressionMapping.md</PackageReadmeFile>
     <WarningsAsErrors>true</WarningsAsErrors>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
-
-	<ItemGroup>
-		<None Include="..\..\icon.png" Pack="true" PackagePath="" />
-		<None Include="..\..\README.md" Pack="true" PackagePath="" />
-	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapperMIT.csproj" />
