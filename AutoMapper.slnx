@@ -8,7 +8,14 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="global.json" />
     <File Path="icon.png" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.AutoMapper.md" />
+    <File Path="README.Collection.md" />
+    <File Path="README.EFCore.md" />
+    <File Path="README.ExpressionMapping.md" />
     <File Path="README.md" />
   </Folder>
   <Project Path="src/AutoMapper.Collection.EntityFramework.Tests/AutoMapperMIT.Collection.EntityFramework.Tests.csproj" />
