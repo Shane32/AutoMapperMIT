@@ -13,3 +13,4 @@ jobs:
     with:
       dotnet_folder: '.'
       data_collector: ''
+      coverage_report: false
