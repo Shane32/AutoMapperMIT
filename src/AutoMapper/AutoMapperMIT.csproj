@@ -6,9 +6,6 @@
     <TargetFrameworks>net6.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     <AssemblyName>AutoMapper</AssemblyName>
     <RootNamespace>AutoMapper</RootNamespace>
-    <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>AutoMapperMIT</PackageId>
     <PackageReadmeFile>README.AutoMapper.md</PackageReadmeFile>
     <IsPackable>true</IsPackable>

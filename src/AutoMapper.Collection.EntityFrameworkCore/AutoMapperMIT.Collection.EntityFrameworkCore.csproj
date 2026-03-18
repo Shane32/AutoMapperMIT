@@ -8,8 +8,6 @@
     <RootNamespace>AutoMapper.Collection.EntityFrameworkCore</RootNamespace>
     <PackageId>AutoMapperMIT.Collection.EntityFrameworkCore</PackageId>
     <PackageReadmeFile>README.EFCore.md</PackageReadmeFile>
-    <AssemblyOriginatorKeyFile>../Key.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

@@ -18,6 +18,8 @@
     <DebugType>embedded</DebugType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IsPackable>false</IsPackable>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)src/Key.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
