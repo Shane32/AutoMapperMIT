@@ -17,7 +17,7 @@ public class StackTraceNullReference : NonValidatingSpecBase
         cfg.CreateMap<Source, Destination>());
 
     [Fact]
-    public void StackTrace_throws_NullReferenceException_when_exception_was_never_thrown()
+    public void StackTrace_does_not_throw_when_exception_was_never_thrown()
     {
         // AssertConfigurationIsValid produces an AggregateException with two inner exceptions:
         // [0] AutoMapperConfigurationException created via new(badTypeMaps) — never directly thrown
@@ -27,8 +27,7 @@ public class StackTraceNullReference : NonValidatingSpecBase
         inner.Errors.ShouldNotBeNull();
 
         // base.StackTrace is null because the exception was added to a list but never thrown.
-        // The StackTrace override calls base.StackTrace.Split(...) without a null check,
-        // which throws NullReferenceException.
-        new Action(() => _ = inner.StackTrace).ShouldThrow<NullReferenceException>();
+        // The StackTrace override must guard against null rather than calling null.Split(...).
+        inner.StackTrace.ShouldBeNull();
     }
 }

@@ -185,7 +185,7 @@ public class AutoMapperConfigurationException : Exception
         get
         {
             if (Errors != null)
-                return string.Join(Environment.NewLine,
+                return base.StackTrace == null ? null : string.Join(Environment.NewLine,
                     base.StackTrace
                         .Split([Environment.NewLine], StringSplitOptions.None)
                         .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
