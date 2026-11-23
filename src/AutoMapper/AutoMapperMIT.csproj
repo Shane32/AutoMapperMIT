@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Summary>A convention-based object-object mapper.</Summary>
     <Description>A convention-based object-object mapper.</Description>
-    <TargetFrameworks>net6.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net6.0;net8.0;net10.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     <AssemblyName>AutoMapper</AssemblyName>
     <RootNamespace>AutoMapper</RootNamespace>
     <PackageId>AutoMapperMIT</PackageId>
@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.32" Condition="'$(TargetFramework)' == 'netstandard2.1'" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.1" Condition="'$(TargetFramework)' == 'net6.0'" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.15" Condition="'$(TargetFramework)' == 'net10.0'" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
